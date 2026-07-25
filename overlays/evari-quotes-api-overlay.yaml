@@ -1,0 +1,73 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for the Evari Quotes API
+  version: 1.0.0
+extends: openapi/evari-quotes-api-openapi.yml
+x-apievangelist:
+  generated: '2026-07-25'
+  method: generated
+  source: openapi/evari-quotes-api-openapi.yml
+  note: |
+    Captures API Evangelist enhancements to the Swagger 2.0 document Evari published
+    inside the evari-quotes-api npm tarball. The harvested spec is never mutated. The
+    document ships with no host, no basePath, no schemes, no tags, no operation
+    summaries and no failure responses; these actions add provenance, the only
+    documented API root, and the internal/public surface split as tags.
+actions:
+- target: $.info
+  update:
+    x-apievangelist-provenance:
+      harvested_from: https://registry.npmjs.org/evari-quotes-api/-/evari-quotes-api-0.1.0.tgz
+      path_in_package: dist/swagger.yaml
+      published: '2020-12-01'
+      publisher: Evari Insure (npm user "evari", brack@evari.insure)
+      generator: typescript-rest-swagger
+    x-apievangelist-status: |
+      No public developer portal, no API reference and no self-serve access. The spec
+      is a build artefact of a closed, tenant-scoped microservice.
+- target: $
+  update:
+    host: api.cloudstream.evari.tech
+    schemes: [https]
+    x-apievangelist-host-note: |
+      The published document declares no host, basePath or schemes. The only Evari API
+      root named in a first-party build config is
+      https://api.cloudstream.evari.tech/api (REACT_APP_API_ROOT in the CloudStream
+      SPA). That host returns nginx 404 on every path unauthenticated, including
+      /api/quotes/health, so this binding is INFERRED and UNVERIFIED — treat it as
+      the documented root, not a confirmed live endpoint for this service.
+- target: $
+  update:
+    tags:
+    - name: quotes
+      description: Internal broker/underwriter quote lifecycle — create, read, patch,
+        validate, price, PDF, confirm.
+    - name: public
+      description: Customer-facing mirror under /api/quotes/public/**, including the
+        two SMS confirmation operations that exist only on this surface.
+    - name: questions
+      description: Product questions and per-quote question sets.
+    - name: endorsements
+      description: Mid-term change pricing and the first-class diff model.
+    - name: referred-quotes
+      description: Referral out of straight-through processing to a human underwriter,
+        with notes and cover price overrides.
+    - name: attachments
+      description: Document upload and download against the quoting flow.
+    - name: health
+      description: Liveness and per-dependency readiness diagnostics.
+- target: $.securityDefinitions
+  update:
+    x-apievangelist-note: |
+      The single security scheme is keyed "undefined" — a typescript-rest-swagger
+      generator artefact. It is an apiKey carried in the Authorization header. See
+      authentication/evari-authentication.yml.
+- target: $.paths
+  update:
+    x-apievangelist-gaps:
+    - No operation carries a summary; 56 of 56 have an empty or absent description.
+    - No 4xx or 5xx response is documented on any operation (48 x 200, 6 x 204,
+      2 x 202) — there is no error contract to catalogue.
+    - No request or response examples anywhere in the document.
+    - No tags on any operation as published.
+    - Swagger 2.0 rather than OpenAPI 3.x.

@@ -1,0 +1,64 @@
+generated: '2026-07-25'
+method: derived
+source: openapi/evari-quotes-api-openapi.yml
+searched: https://evari.tech/pricing, https://evari.tech/legal, https://evari.tech/trust
+versioning:
+  scheme: none
+  current: null
+  docs: null
+  evidence: |
+    Paths are /api/quotes/** with no version segment, no version header and no
+    version query parameter. The Swagger info.version "0.1.0" is the npm package
+    version of the service, not an API version contract. Evari publishes no
+    versioning policy.
+deprecation:
+  policy_url: null
+  sunset_header: false
+  deprecation_header: false
+  evidence: No deprecation policy, no RFC 8594 Sunset/Deprecation header support, and
+    no operation in the spec carries deprecated:true.
+deprecated_operations: []
+sla:
+  url: https://evari.tech/pricing
+  uptime_target: null
+  evidence: |
+    Every platform subscription tier lists an "Uptime SLA" as an included feature
+    (Small and Growth), with a "Custom SLA" on the Scale tier. No numeric uptime
+    target, credit schedule or SLA document is published; the Security Addendum and
+    Terms of Service at https://evari.tech/legal are the only contractual documents
+    on the public site.
+  incident_commitments:
+    breach_notification: within 72 hours (Trust Center)
+    monitoring: 24/7 security event monitoring (Trust Center)
+    critical_patches: applied within 24 hours (Trust Center)
+    incident_response_plan: formal plan, reviewed annually (Trust Center)
+status_page: null
+status_page_probe:
+  - {url: 'https://status.evari.tech/', status: 0, note: DNS does not resolve}
+  - {url: 'https://status.quiva.ai/', status: 404, note: platform partner; no status
+      page either}
+changelog: null
+changelog_probe:
+  - {url: 'https://evari.tech/changelog', status: 200, note: 'catch-all — byte-identical
+      to the 74,025-byte homepage, not a changelog'}
+roadmap_probe:
+  - {url: 'https://evari.tech/roadmap', status: 200, note: 'catch-all — byte-identical
+      to the homepage, not a roadmap'}
+data_retention:
+  source: https://evari.tech/trust
+  account_data: deleted within 30 days of account closure
+  billing_records: retained 7 years (legal requirement)
+  log_data: retained 90 days
+  backups: purged within 35 days of deletion
+  assistant_activity_logs: 90 days on Pro and Team plans, longer on Enterprise
+service_history:
+  - {phase: 'evari.insure (2016-2021)', note: 'Digital small-business and trades
+      insurance brand, Lloyd''s coverholder. The evari-quotes-api microservice and
+      its Swagger document date from this era (published 2020-12-01).'}
+  - {phase: 'CloudStream (2021-2025)', note: 'Cloud-native policy administration
+      platform — quote/bind/issue, endorsement, renewal, cancellation. Tenant-scoped
+      at api.cloudstream.evari.tech; api.envest.evari.tech is a decommissioned
+      tenant backend returning 502/504.'}
+  - {phase: 'Evari Services UK Ltd (2025-)', note: 'Repositioned as insurance AI
+      operations sprints on the third-party QuivaWorks platform. evari.insure now
+      returns a Webflow 404; evari.tech is the live site.'}

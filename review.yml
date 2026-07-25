@@ -224,12 +224,95 @@ sources:
     type: Archive
     note: 301 from evari.com.au to https://evari.insure, establishing the original company domain.
 actions:
-  openapiHarvested: false
-  specsSaved: 0
-  apisYmlEntries: 0
+  openapiHarvested: true
+  specsSaved: 2
+  apisYmlEntries: 1
   reason: |
-    No real, public, self-serve API surface exists to record. apis[] is
-    deliberately empty. Recording the absence accurately - a core-systems
-    insurance vendor whose only integration path is a sales-led,
-    tenant-scoped deployment behind a login wall, with no ACORD posture at
-    all - is the finding.
+    No public, self-serve API surface exists - but a real first-party
+    machine-readable contract does, published off-portal. See
+    enrichment2026-07-25 below. apis[] now carries one entry for the Evari
+    Quotes API, grounded in the harvested Swagger document. The rest of the
+    finding stands: a core-systems insurance vendor whose only integration
+    path is a sales-led, tenant-scoped deployment behind a login wall, with
+    no ACORD posture at all.
+enrichment2026-07-25:
+  headline: |
+    The 2026-07-25 review concluded "no spec" after probing every developer,
+    docs and API host. That was correct for the WEB surface and wrong for the
+    company: Evari published its own Quotes microservice to the public npm
+    registry, and the tarball ships the generated Swagger document. The spec
+    was never on a portal - it was in a package.
+  find:
+    registry: npm
+    package: evari-quotes-api
+    version: 0.1.0
+    published: '2020-12-01'
+    author: Evari Insure (https://evari.insure/)
+    maintainer: brack@evari.insure (co-founder Brack Norris)
+    npm_user: evari
+    tarball: https://registry.npmjs.org/evari-quotes-api/-/evari-quotes-api-0.1.0.tgz
+    license: UNLICENSED
+    repository: git://github.com/myevari/evari-quotes-api.git (HTTP 404 - private
+      or removed, though the myevari org itself is public with 11 repos)
+    generator: typescript-rest + typescript-rest-swagger
+    harvested:
+    - {file: dist/swagger.yaml, saved_as: openapi/evari-quotes-api-openapi.yml,
+       spec: Swagger 2.0, paths: 49, operations: 56, definitions: 70}
+    - {file: dist/swagger.json, saved_as: openapi/_original/evari-quotes-api-swagger.json,
+       note: the same document as published, byte-for-byte}
+    - {file: dist/types.json, saved_as: json-schema/evari-contracts-types.json,
+       spec: JSON Schema draft-07, definitions: 369, source_package: '@evari/contracts
+         (private, 404 on npm)'}
+  what_the_spec_reveals: |
+    The document is the strongest evidence available of what Evari's closed
+    platform actually does. It splits into an internal broker/underwriter
+    surface (/api/quotes/**, 38 operations) and a customer-facing mirror
+    (/api/quotes/public/**, 18 operations) with two SMS-confirmation
+    operations that exist only on the public side. Quote lifecycle, product
+    questions, validation, pricing, quote options by duplicateGroupId, PDF
+    issue, attachments, mid-term endorsements with a first-class structured
+    diff model (AnswerDiff/CoverDiff/LimitDiff/InterestedPartyDiff/DateDiff),
+    and referral to a human underwriter with notes and per-cover price
+    overrides. Pricing failure is modelled as DATA (priceErrors on a 200), not
+    as an HTTP error - which is consistent with the spec documenting zero 4xx
+    or 5xx responses on any of its 56 operations. The wider 369-definition
+    @evari/contracts type set additionally exposes a full claims domain,
+    agents, billing and cancellation that have no published HTTP surface at
+    all.
+  gaps_in_the_harvested_spec:
+  - Swagger 2.0, not OpenAPI 3.x
+  - no host, basePath or schemes - the baseURL in apis.yml is INFERRED from the
+    CloudStream SPA build config and is unverified (that host 404s anonymously)
+  - no operation summaries; 56 of 56 descriptions empty
+  - no tags on any operation
+  - no examples anywhere
+  - no 4xx/5xx responses, so there is no error contract to catalogue - no
+    errors/ artifact was emitted rather than an empty one
+  - securityDefinitions key is literally "undefined" (generator artefact)
+  still_absent:
+    developer_portal: none
+    api_reference: none
+    self_serve_signup: none - the help centre directs account creation to
+      quiva.ai (QuivaWorks), the third-party platform partner
+    sdks: none - the one public package is the service itself, not a client
+      library; the @evari npm scope is private
+    mcp_server: none of Evari's own; MCP appears in the help centre only as a
+      QuivaWorks Marketplace capability
+    asyncapi_or_webhooks: none
+    graphql: none
+    oauth_or_scopes: none - single apiKey in the Authorization header
+    status_page: none (status.evari.tech does not resolve)
+    changelog_or_roadmap: none (/changelog and /roadmap are catch-alls serving
+      the homepage byte-for-byte)
+    postman: none
+    acord_al3_ivans: still zero matches - the entity model (Quote, Cover,
+      CoverLimit, InterestedParty, Endorsement, ReferredQuote) is proprietary
+  compliance_note: |
+    The Trust Center publishes ISO 27001 (independently audited annually) and
+    UK/EU GDPR, with a named sub-processor list (Anthropic, Google, GCP,
+    Stripe, Google Analytics). SOC 2 is asserted exactly once, in a
+    pricing-page FAQ, and appears nowhere on the Trust Center - recorded as an
+    unverified marketing claim. The Trust Center also says primary data sits in
+    EU/UK Google Cloud regions while the help centre says AU/NZ customers are
+    on AWS ap-southeast-2 - two different infrastructure stories, most likely
+    the CloudStream-era AWS estate versus the current QuivaWorks-era GCP one.

@@ -1,0 +1,678 @@
+generated: '2026-07-25'
+method: generated
+source: openapi/evari-quotes-api-openapi.yml
+description: Recommended x-agentic-access execution contracts, classified heuristically from
+  the OpenAPI. A governance starting point for exposing this API to AI agents — review and bind
+  audience per deployment. See research/curity/agentic-governance/.
+summary:
+  operations: 56
+  by_action_class:
+    connected: 39
+    acting: 17
+  by_consequence:
+    read: 39
+    write: 17
+  human_in_the_loop_required: 0
+operations:
+- path: /api/quotes/health/diagnostics
+  method: get
+  operationId: HealthDiagnostics
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/quotes/health
+  method: get
+  operationId: HealthHealthCheck
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/quotes/search/quotes
+  method: get
+  operationId: QuoteSearch
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/quotes/products/{productId}/quotes/count
+  method: get
+  operationId: QuoteCount
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/quotes/quotes/{id}
+  method: get
+  operationId: QuoteGet
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/quotes/quotes/{id}
+  method: patch
+  operationId: QuotePatch
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/quotes/quotes
+  method: get
+  operationId: QuoteGetAll
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/quotes/quotes
+  method: post
+  operationId: QuotePost
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/quotes/products/{productId}/quotes
+  method: get
+  operationId: QuoteGetByProduct
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/quotes/customers/{id}/quotes
+  method: get
+  operationId: QuoteGetAllForCustomer
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/quotes/quote-options/{duplicateGroupId}
+  method: get
+  operationId: QuoteGetQuoteOptions
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/quotes/quotes/{id}/updatebyinternalkey
+  method: patch
+  operationId: QuotePatchByInternalKey
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/quotes/quotes/{id}/validate
+  method: get
+  operationId: QuoteValidate
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/quotes/quotes/{id}/price
+  method: get
+  operationId: QuoteGetPrice
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/quotes/quotes/{id}/pdf
+  method: get
+  operationId: QuotePdf
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/quotes/quotes/confirm/{code}
+  method: get
+  operationId: QuoteConfirm
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/quotes/quotes/{id}/confirmed
+  method: get
+  operationId: QuoteConfirmed
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/quotes/quotes/{id}/reconfirm
+  method: post
+  operationId: QuoteReconfirm
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/quotes/public/quotes/{id}
+  method: get
+  operationId: PublicQuoteGet
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/quotes/public/quotes/{id}
+  method: patch
+  operationId: PublicQuotePatch
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/quotes/public/quotes
+  method: post
+  operationId: PublicQuotePost
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/quotes/public/quotes/{id}/updatebyinternalkey
+  method: patch
+  operationId: PublicQuotePatchByInternalKey
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/quotes/public/quotes/{id}/validate
+  method: get
+  operationId: PublicQuoteValidate
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/quotes/public/quotes/{id}/price
+  method: get
+  operationId: PublicQuoteGetPrice
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/quotes/public/quotes/{id}/pdf
+  method: get
+  operationId: PublicQuotePdf
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/quotes/public/quotes/confirm/{code}
+  method: get
+  operationId: PublicQuoteConfirm
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/quotes/public/quotes/{id}/confirmed
+  method: get
+  operationId: PublicQuoteConfirmed
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/quotes/public/quotes/{id}/reconfirm
+  method: post
+  operationId: PublicQuoteReconfirm
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/quotes/public/quotes/{id}/confirmSMS
+  method: post
+  operationId: PublicQuoteConfirmSMS
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/quotes/public/quotes/{id}/confirmSMS/{requestId}
+  method: post
+  operationId: PublicQuoteConfirmSMSCode
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/quotes/questions/{id}
+  method: get
+  operationId: QuestionGet
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/quotes/public/questions/{id}
+  method: get
+  operationId: QuestionGetPublicQuestions
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/quotes/quotes/{id}/questions
+  method: get
+  operationId: QuestionGetByQuote
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/quotes/public/quotes/{id}/questions
+  method: get
+  operationId: QuestionGetPublicQuestionsByQuote
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/quotes/attachments
+  method: post
+  operationId: AttachmentPost
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/quotes/attachments/{attachmentId}/download
+  method: get
+  operationId: AttachmentGet
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/quotes/endorsements/{id}
+  method: get
+  operationId: EndorsementGet
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/quotes/endorsements/{id}
+  method: patch
+  operationId: EndorsementPatch
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/quotes/endorsements/{id}/price
+  method: get
+  operationId: EndorsementGetPrice
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/quotes/endorsements/{id}/diff
+  method: get
+  operationId: EndorsementGetDiff
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/quotes/referred-quotes
+  method: get
+  operationId: ReferredQuoteGetAll
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/quotes/products/{productId}/referred-quotes
+  method: get
+  operationId: ReferredQuoteGetAllByProduct
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/quotes/search/referred-quotes
+  method: get
+  operationId: ReferredQuoteSearch
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/quotes/referred-quotes/{id}
+  method: get
+  operationId: ReferredQuoteGet
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/quotes/referred-quotes/{id}
+  method: put
+  operationId: ReferredQuoteUpdate
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/quotes/quotes/{quoteId}/referred-quotes
+  method: get
+  operationId: ReferredQuoteGetByQuoteId
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/quotes/referred-quotes/{referredQuoteId}/refer-to-underwriter
+  method: post
+  operationId: ReferredQuoteReferQuoteToUnderwriter
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/quotes/referred-quotes/{referredQuoteId}/notes
+  method: post
+  operationId: ReferredQuoteCreateNote
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/quotes/referred-quotes/{referredQuoteId}/notes
+  method: get
+  operationId: ReferredQuoteGetAllNotes
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/quotes/referred-quotes/{referredQuoteId}/notes/{id}
+  method: get
+  operationId: ReferredQuoteGetNote
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/quotes/products/{id}/quote-date-config
+  method: get
+  operationId: QuoteDateConfigGet
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/quotes/products/{id}/quote-date-config
+  method: patch
+  operationId: QuoteDateConfigPatch
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/quotes/public/products/{id}/quote-date-config
+  method: get
+  operationId: QuoteDateConfigGetPublicQuoteDateConfig
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/quotes/public/referred-quotes/{referredQuoteId}/refer-to-underwriter
+  method: post
+  operationId: PublicReferredQuoteReferQuoteToUnderwriter
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/quotes/public/referred-quotes/{id}
+  method: get
+  operationId: PublicReferredQuoteGet
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/quotes/public/quotes/{quoteId}/referred-quotes
+  method: get
+  operationId: PublicReferredQuoteGetByQuoteId
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none

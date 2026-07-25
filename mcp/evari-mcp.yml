@@ -1,0 +1,809 @@
+generated: '2026-07-25'
+method: derived
+status: candidate
+source: openapi/evari-quotes-api-openapi.yml
+note: 'Evari publishes NO MCP server of its own. Its help centre documents MCP at https://evari.tech/help-center/items/assistants/what-is-mcp-model-context-protocol/
+  and states the QuivaWorks Marketplace lists MCP tools and can convert any API into an MCP-hosted tool
+  - but that is the third-party platform partner''s capability, not an Evari-published server, and no
+  server URL or manifest exists. The tools below are a CANDIDATE surface derived one-to-one from the operations
+  in the Swagger document Evari published in the evari-quotes-api npm tarball. Each tool''s real input
+  contract is the backing operation''s parameters. Nothing here is live: the only named API root (api.cloudstream.evari.tech)
+  returns 404 unauthenticated.'
+server:
+  name: evari-quotes
+  transport: http
+  url: null
+  published: false
+searched:
+- source: https://evari.tech/help-center/items/assistants/what-is-mcp-model-context-protocol/
+  result: MCP documented as a QuivaWorks Marketplace capability; no Evari server
+- source: https://registry.modelcontextprotocol.io
+  result: no Evari entry
+- source: npm @modelcontextprotocol / evari
+  result: no Evari MCP package
+coverage:
+  rest_operations: 56
+  tools_derived: 56
+  public_surface_tools: 18
+  internal_surface_tools: 38
+tools:
+- name: health_diagnostics
+  description: GET /api/quotes/health/diagnostics
+  source_operation: openapi/evari-quotes-api-openapi.yml#HealthDiagnostics
+  method: GET
+  path: /api/quotes/health/diagnostics
+  surface: internal
+  input_schema_from_spec: []
+- name: health_health_check
+  description: GET /api/quotes/health
+  source_operation: openapi/evari-quotes-api-openapi.yml#HealthHealthCheck
+  method: GET
+  path: /api/quotes/health
+  surface: internal
+  input_schema_from_spec: []
+- name: quote_search
+  description: GET /api/quotes/search/quotes
+  source_operation: openapi/evari-quotes-api-openapi.yml#QuoteSearch
+  method: GET
+  path: /api/quotes/search/quotes
+  surface: internal
+  input_schema_from_spec:
+  - name: q
+    in: query
+    required: true
+    schema: string
+  - name: offset
+    in: query
+    required: true
+    schema: number
+  - name: limit
+    in: query
+    required: true
+    schema: number
+  - name: sort
+    in: query
+    required: false
+    schema: string
+  - name: order
+    in: query
+    required: false
+    schema: string
+- name: quote_count
+  description: GET /api/quotes/products/{productId}/quotes/count
+  source_operation: openapi/evari-quotes-api-openapi.yml#QuoteCount
+  method: GET
+  path: /api/quotes/products/{productId}/quotes/count
+  surface: internal
+  input_schema_from_spec:
+  - name: productId
+    in: path
+    required: true
+    schema: string
+- name: quote_get
+  description: GET /api/quotes/quotes/{id}
+  source_operation: openapi/evari-quotes-api-openapi.yml#QuoteGet
+  method: GET
+  path: /api/quotes/quotes/{id}
+  surface: internal
+  input_schema_from_spec:
+  - name: id
+    in: path
+    required: true
+    schema: string
+- name: quote_patch
+  description: PATCH /api/quotes/quotes/{id}
+  source_operation: openapi/evari-quotes-api-openapi.yml#QuotePatch
+  method: PATCH
+  path: /api/quotes/quotes/{id}
+  surface: internal
+  input_schema_from_spec:
+  - name: id
+    in: path
+    required: true
+    schema: string
+  - name: quote
+    in: body
+    required: true
+    schema: QuoteUpdateRequest
+- name: quote_get_all
+  description: GET /api/quotes/quotes
+  source_operation: openapi/evari-quotes-api-openapi.yml#QuoteGetAll
+  method: GET
+  path: /api/quotes/quotes
+  surface: internal
+  input_schema_from_spec:
+  - name: limit
+    in: query
+    required: true
+    schema: number
+  - name: offset
+    in: query
+    required: true
+    schema: number
+  - name: sort
+    in: query
+    required: false
+    schema: string
+  - name: order
+    in: query
+    required: false
+    schema: string
+- name: quote_post
+  description: POST /api/quotes/quotes
+  source_operation: openapi/evari-quotes-api-openapi.yml#QuotePost
+  method: POST
+  path: /api/quotes/quotes
+  surface: internal
+  input_schema_from_spec:
+  - name: quote
+    in: body
+    required: true
+    schema: QuoteCreateRequest
+- name: quote_get_by_product
+  description: GET /api/quotes/products/{productId}/quotes
+  source_operation: openapi/evari-quotes-api-openapi.yml#QuoteGetByProduct
+  method: GET
+  path: /api/quotes/products/{productId}/quotes
+  surface: internal
+  input_schema_from_spec:
+  - name: productId
+    in: path
+    required: true
+    schema: string
+  - name: limit
+    in: query
+    required: true
+    schema: number
+  - name: offset
+    in: query
+    required: true
+    schema: number
+  - name: sort
+    in: query
+    required: false
+    schema: string
+  - name: order
+    in: query
+    required: false
+    schema: string
+- name: quote_get_all_for_customer
+  description: GET /api/quotes/customers/{id}/quotes
+  source_operation: openapi/evari-quotes-api-openapi.yml#QuoteGetAllForCustomer
+  method: GET
+  path: /api/quotes/customers/{id}/quotes
+  surface: internal
+  input_schema_from_spec:
+  - name: id
+    in: path
+    required: true
+    schema: string
+  - name: limit
+    in: query
+    required: true
+    schema: number
+  - name: offset
+    in: query
+    required: true
+    schema: number
+  - name: sort
+    in: query
+    required: false
+    schema: string
+  - name: order
+    in: query
+    required: false
+    schema: string
+- name: quote_get_quote_options
+  description: GET /api/quotes/quote-options/{duplicateGroupId}
+  source_operation: openapi/evari-quotes-api-openapi.yml#QuoteGetQuoteOptions
+  method: GET
+  path: /api/quotes/quote-options/{duplicateGroupId}
+  surface: internal
+  input_schema_from_spec:
+  - name: duplicateGroupId
+    in: path
+    required: true
+    schema: string
+  - name: limit
+    in: query
+    required: true
+    schema: number
+  - name: offset
+    in: query
+    required: true
+    schema: number
+  - name: sort
+    in: query
+    required: false
+    schema: string
+  - name: order
+    in: query
+    required: false
+    schema: string
+- name: quote_patch_by_internal_key
+  description: PATCH /api/quotes/quotes/{id}/updatebyinternalkey
+  source_operation: openapi/evari-quotes-api-openapi.yml#QuotePatchByInternalKey
+  method: PATCH
+  path: /api/quotes/quotes/{id}/updatebyinternalkey
+  surface: internal
+  input_schema_from_spec:
+  - name: id
+    in: path
+    required: true
+    schema: string
+  - name: changes
+    in: body
+    required: true
+    schema: QuoteUpdateByInternalKeyRequest
+- name: quote_validate
+  description: GET /api/quotes/quotes/{id}/validate
+  source_operation: openapi/evari-quotes-api-openapi.yml#QuoteValidate
+  method: GET
+  path: /api/quotes/quotes/{id}/validate
+  surface: internal
+  input_schema_from_spec:
+  - name: id
+    in: path
+    required: true
+    schema: string
+- name: quote_get_price
+  description: GET /api/quotes/quotes/{id}/price
+  source_operation: openapi/evari-quotes-api-openapi.yml#QuoteGetPrice
+  method: GET
+  path: /api/quotes/quotes/{id}/price
+  surface: internal
+  input_schema_from_spec:
+  - name: id
+    in: path
+    required: true
+    schema: string
+- name: quote_pdf
+  description: GET /api/quotes/quotes/{id}/pdf
+  source_operation: openapi/evari-quotes-api-openapi.yml#QuotePdf
+  method: GET
+  path: /api/quotes/quotes/{id}/pdf
+  surface: internal
+  input_schema_from_spec:
+  - name: id
+    in: path
+    required: true
+    schema: string
+- name: quote_confirm
+  description: GET /api/quotes/quotes/confirm/{code}
+  source_operation: openapi/evari-quotes-api-openapi.yml#QuoteConfirm
+  method: GET
+  path: /api/quotes/quotes/confirm/{code}
+  surface: internal
+  input_schema_from_spec:
+  - name: code
+    in: path
+    required: true
+    schema: string
+- name: quote_confirmed
+  description: GET /api/quotes/quotes/{id}/confirmed
+  source_operation: openapi/evari-quotes-api-openapi.yml#QuoteConfirmed
+  method: GET
+  path: /api/quotes/quotes/{id}/confirmed
+  surface: internal
+  input_schema_from_spec:
+  - name: id
+    in: path
+    required: true
+    schema: string
+- name: quote_reconfirm
+  description: POST /api/quotes/quotes/{id}/reconfirm
+  source_operation: openapi/evari-quotes-api-openapi.yml#QuoteReconfirm
+  method: POST
+  path: /api/quotes/quotes/{id}/reconfirm
+  surface: internal
+  input_schema_from_spec:
+  - name: id
+    in: path
+    required: true
+    schema: string
+- name: public_quote_get
+  description: GET /api/quotes/public/quotes/{id}
+  source_operation: openapi/evari-quotes-api-openapi.yml#PublicQuoteGet
+  method: GET
+  path: /api/quotes/public/quotes/{id}
+  surface: public
+  input_schema_from_spec:
+  - name: id
+    in: path
+    required: true
+    schema: string
+- name: public_quote_patch
+  description: PATCH /api/quotes/public/quotes/{id}
+  source_operation: openapi/evari-quotes-api-openapi.yml#PublicQuotePatch
+  method: PATCH
+  path: /api/quotes/public/quotes/{id}
+  surface: public
+  input_schema_from_spec:
+  - name: id
+    in: path
+    required: true
+    schema: string
+  - name: quote
+    in: body
+    required: true
+    schema: QuoteUpdateRequest
+- name: public_quote_post
+  description: POST /api/quotes/public/quotes
+  source_operation: openapi/evari-quotes-api-openapi.yml#PublicQuotePost
+  method: POST
+  path: /api/quotes/public/quotes
+  surface: public
+  input_schema_from_spec:
+  - name: quote
+    in: body
+    required: true
+    schema: QuoteCreateRequest
+- name: public_quote_patch_by_internal_key
+  description: PATCH /api/quotes/public/quotes/{id}/updatebyinternalkey
+  source_operation: openapi/evari-quotes-api-openapi.yml#PublicQuotePatchByInternalKey
+  method: PATCH
+  path: /api/quotes/public/quotes/{id}/updatebyinternalkey
+  surface: public
+  input_schema_from_spec:
+  - name: id
+    in: path
+    required: true
+    schema: string
+  - name: changes
+    in: body
+    required: true
+    schema: QuoteUpdateByInternalKeyRequest
+- name: public_quote_validate
+  description: GET /api/quotes/public/quotes/{id}/validate
+  source_operation: openapi/evari-quotes-api-openapi.yml#PublicQuoteValidate
+  method: GET
+  path: /api/quotes/public/quotes/{id}/validate
+  surface: public
+  input_schema_from_spec:
+  - name: id
+    in: path
+    required: true
+    schema: string
+- name: public_quote_get_price
+  description: GET /api/quotes/public/quotes/{id}/price
+  source_operation: openapi/evari-quotes-api-openapi.yml#PublicQuoteGetPrice
+  method: GET
+  path: /api/quotes/public/quotes/{id}/price
+  surface: public
+  input_schema_from_spec:
+  - name: id
+    in: path
+    required: true
+    schema: string
+- name: public_quote_pdf
+  description: GET /api/quotes/public/quotes/{id}/pdf
+  source_operation: openapi/evari-quotes-api-openapi.yml#PublicQuotePdf
+  method: GET
+  path: /api/quotes/public/quotes/{id}/pdf
+  surface: public
+  input_schema_from_spec:
+  - name: id
+    in: path
+    required: true
+    schema: string
+- name: public_quote_confirm
+  description: GET /api/quotes/public/quotes/confirm/{code}
+  source_operation: openapi/evari-quotes-api-openapi.yml#PublicQuoteConfirm
+  method: GET
+  path: /api/quotes/public/quotes/confirm/{code}
+  surface: public
+  input_schema_from_spec:
+  - name: code
+    in: path
+    required: true
+    schema: string
+- name: public_quote_confirmed
+  description: GET /api/quotes/public/quotes/{id}/confirmed
+  source_operation: openapi/evari-quotes-api-openapi.yml#PublicQuoteConfirmed
+  method: GET
+  path: /api/quotes/public/quotes/{id}/confirmed
+  surface: public
+  input_schema_from_spec:
+  - name: id
+    in: path
+    required: true
+    schema: string
+- name: public_quote_reconfirm
+  description: POST /api/quotes/public/quotes/{id}/reconfirm
+  source_operation: openapi/evari-quotes-api-openapi.yml#PublicQuoteReconfirm
+  method: POST
+  path: /api/quotes/public/quotes/{id}/reconfirm
+  surface: public
+  input_schema_from_spec:
+  - name: id
+    in: path
+    required: true
+    schema: string
+- name: public_quote_confirm_s_m_s
+  description: POST /api/quotes/public/quotes/{id}/confirmSMS
+  source_operation: openapi/evari-quotes-api-openapi.yml#PublicQuoteConfirmSMS
+  method: POST
+  path: /api/quotes/public/quotes/{id}/confirmSMS
+  surface: public
+  input_schema_from_spec:
+  - name: id
+    in: path
+    required: true
+    schema: string
+- name: public_quote_confirm_s_m_s_code
+  description: POST /api/quotes/public/quotes/{id}/confirmSMS/{requestId}
+  source_operation: openapi/evari-quotes-api-openapi.yml#PublicQuoteConfirmSMSCode
+  method: POST
+  path: /api/quotes/public/quotes/{id}/confirmSMS/{requestId}
+  surface: public
+  input_schema_from_spec:
+  - name: requestId
+    in: path
+    required: true
+    schema: string
+  - name: code
+    in: body
+    required: true
+    schema: ConfirmSMS
+- name: question_get
+  description: GET /api/quotes/questions/{id}
+  source_operation: openapi/evari-quotes-api-openapi.yml#QuestionGet
+  method: GET
+  path: /api/quotes/questions/{id}
+  surface: internal
+  input_schema_from_spec:
+  - name: id
+    in: path
+    required: true
+    schema: string
+- name: question_get_public_questions
+  description: GET /api/quotes/public/questions/{id}
+  source_operation: openapi/evari-quotes-api-openapi.yml#QuestionGetPublicQuestions
+  method: GET
+  path: /api/quotes/public/questions/{id}
+  surface: public
+  input_schema_from_spec:
+  - name: id
+    in: path
+    required: true
+    schema: string
+- name: question_get_by_quote
+  description: GET /api/quotes/quotes/{id}/questions
+  source_operation: openapi/evari-quotes-api-openapi.yml#QuestionGetByQuote
+  method: GET
+  path: /api/quotes/quotes/{id}/questions
+  surface: internal
+  input_schema_from_spec:
+  - name: id
+    in: path
+    required: true
+    schema: string
+- name: question_get_public_questions_by_quote
+  description: GET /api/quotes/public/quotes/{id}/questions
+  source_operation: openapi/evari-quotes-api-openapi.yml#QuestionGetPublicQuestionsByQuote
+  method: GET
+  path: /api/quotes/public/quotes/{id}/questions
+  surface: public
+  input_schema_from_spec:
+  - name: id
+    in: path
+    required: true
+    schema: string
+- name: attachment_post
+  description: POST /api/quotes/attachments
+  source_operation: openapi/evari-quotes-api-openapi.yml#AttachmentPost
+  method: POST
+  path: /api/quotes/attachments
+  surface: internal
+  input_schema_from_spec:
+  - name: attachment
+    in: formData
+    required: true
+    schema: file
+  - name: description
+    in: formData
+    required: false
+    schema: string
+- name: attachment_get
+  description: GET /api/quotes/attachments/{attachmentId}/download
+  source_operation: openapi/evari-quotes-api-openapi.yml#AttachmentGet
+  method: GET
+  path: /api/quotes/attachments/{attachmentId}/download
+  surface: internal
+  input_schema_from_spec:
+  - name: attachmentId
+    in: path
+    required: true
+    schema: string
+- name: endorsement_get
+  description: GET /api/quotes/endorsements/{id}
+  source_operation: openapi/evari-quotes-api-openapi.yml#EndorsementGet
+  method: GET
+  path: /api/quotes/endorsements/{id}
+  surface: internal
+  input_schema_from_spec:
+  - name: id
+    in: path
+    required: true
+    schema: string
+- name: endorsement_patch
+  description: PATCH /api/quotes/endorsements/{id}
+  source_operation: openapi/evari-quotes-api-openapi.yml#EndorsementPatch
+  method: PATCH
+  path: /api/quotes/endorsements/{id}
+  surface: internal
+  input_schema_from_spec:
+  - name: id
+    in: path
+    required: true
+    schema: string
+  - name: update
+    in: body
+    required: true
+    schema: EndorsementQuoteUpdateRequest
+- name: endorsement_get_price
+  description: GET /api/quotes/endorsements/{id}/price
+  source_operation: openapi/evari-quotes-api-openapi.yml#EndorsementGetPrice
+  method: GET
+  path: /api/quotes/endorsements/{id}/price
+  surface: internal
+  input_schema_from_spec:
+  - name: id
+    in: path
+    required: true
+    schema: string
+- name: endorsement_get_diff
+  description: GET /api/quotes/endorsements/{id}/diff
+  source_operation: openapi/evari-quotes-api-openapi.yml#EndorsementGetDiff
+  method: GET
+  path: /api/quotes/endorsements/{id}/diff
+  surface: internal
+  input_schema_from_spec:
+  - name: id
+    in: path
+    required: true
+    schema: string
+- name: referred_quote_get_all
+  description: GET /api/quotes/referred-quotes
+  source_operation: openapi/evari-quotes-api-openapi.yml#ReferredQuoteGetAll
+  method: GET
+  path: /api/quotes/referred-quotes
+  surface: internal
+  input_schema_from_spec:
+  - name: limit
+    in: query
+    required: true
+    schema: number
+  - name: offset
+    in: query
+    required: true
+    schema: number
+  - name: sort
+    in: query
+    required: false
+    schema: string
+  - name: order
+    in: query
+    required: false
+    schema: string
+  - name: status
+    in: query
+    required: false
+    schema: string
+- name: referred_quote_get_all_by_product
+  description: GET /api/quotes/products/{productId}/referred-quotes
+  source_operation: openapi/evari-quotes-api-openapi.yml#ReferredQuoteGetAllByProduct
+  method: GET
+  path: /api/quotes/products/{productId}/referred-quotes
+  surface: internal
+  input_schema_from_spec:
+  - name: productId
+    in: path
+    required: true
+    schema: string
+  - name: limit
+    in: query
+    required: true
+    schema: number
+  - name: offset
+    in: query
+    required: true
+    schema: number
+  - name: sort
+    in: query
+    required: false
+    schema: string
+  - name: order
+    in: query
+    required: false
+    schema: string
+  - name: status
+    in: query
+    required: false
+    schema: string
+- name: referred_quote_search
+  description: GET /api/quotes/search/referred-quotes
+  source_operation: openapi/evari-quotes-api-openapi.yml#ReferredQuoteSearch
+  method: GET
+  path: /api/quotes/search/referred-quotes
+  surface: internal
+  input_schema_from_spec:
+  - name: q
+    in: query
+    required: true
+    schema: string
+  - name: offset
+    in: query
+    required: true
+    schema: number
+  - name: limit
+    in: query
+    required: true
+    schema: number
+  - name: sort
+    in: query
+    required: false
+    schema: string
+  - name: order
+    in: query
+    required: false
+    schema: string
+- name: referred_quote_get
+  description: GET /api/quotes/referred-quotes/{id}
+  source_operation: openapi/evari-quotes-api-openapi.yml#ReferredQuoteGet
+  method: GET
+  path: /api/quotes/referred-quotes/{id}
+  surface: internal
+  input_schema_from_spec:
+  - name: id
+    in: path
+    required: true
+    schema: string
+- name: referred_quote_update
+  description: PUT /api/quotes/referred-quotes/{id}
+  source_operation: openapi/evari-quotes-api-openapi.yml#ReferredQuoteUpdate
+  method: PUT
+  path: /api/quotes/referred-quotes/{id}
+  surface: internal
+  input_schema_from_spec:
+  - name: id
+    in: path
+    required: true
+    schema: string
+  - name: referredQuote
+    in: body
+    required: true
+    schema: ReferredQuoteUpdateRequest
+- name: referred_quote_get_by_quote_id
+  description: GET /api/quotes/quotes/{quoteId}/referred-quotes
+  source_operation: openapi/evari-quotes-api-openapi.yml#ReferredQuoteGetByQuoteId
+  method: GET
+  path: /api/quotes/quotes/{quoteId}/referred-quotes
+  surface: internal
+  input_schema_from_spec:
+  - name: quoteId
+    in: path
+    required: true
+    schema: string
+- name: referred_quote_refer_quote_to_underwriter
+  description: POST /api/quotes/referred-quotes/{referredQuoteId}/refer-to-underwriter
+  source_operation: openapi/evari-quotes-api-openapi.yml#ReferredQuoteReferQuoteToUnderwriter
+  method: POST
+  path: /api/quotes/referred-quotes/{referredQuoteId}/refer-to-underwriter
+  surface: internal
+  input_schema_from_spec:
+  - name: referredQuoteId
+    in: path
+    required: true
+    schema: string
+- name: referred_quote_create_note
+  description: POST /api/quotes/referred-quotes/{referredQuoteId}/notes
+  source_operation: openapi/evari-quotes-api-openapi.yml#ReferredQuoteCreateNote
+  method: POST
+  path: /api/quotes/referred-quotes/{referredQuoteId}/notes
+  surface: internal
+  input_schema_from_spec:
+  - name: referredQuoteId
+    in: path
+    required: true
+    schema: string
+  - name: note
+    in: body
+    required: true
+    schema: ReferredQuoteNoteCreateRequest
+- name: referred_quote_get_all_notes
+  description: GET /api/quotes/referred-quotes/{referredQuoteId}/notes
+  source_operation: openapi/evari-quotes-api-openapi.yml#ReferredQuoteGetAllNotes
+  method: GET
+  path: /api/quotes/referred-quotes/{referredQuoteId}/notes
+  surface: internal
+  input_schema_from_spec:
+  - name: referredQuoteId
+    in: path
+    required: true
+    schema: string
+- name: referred_quote_get_note
+  description: GET /api/quotes/referred-quotes/{referredQuoteId}/notes/{id}
+  source_operation: openapi/evari-quotes-api-openapi.yml#ReferredQuoteGetNote
+  method: GET
+  path: /api/quotes/referred-quotes/{referredQuoteId}/notes/{id}
+  surface: internal
+  input_schema_from_spec:
+  - name: referredQuoteId
+    in: path
+    required: true
+    schema: string
+  - name: id
+    in: path
+    required: true
+    schema: string
+- name: quote_date_config_get
+  description: GET /api/quotes/products/{id}/quote-date-config
+  source_operation: openapi/evari-quotes-api-openapi.yml#QuoteDateConfigGet
+  method: GET
+  path: /api/quotes/products/{id}/quote-date-config
+  surface: internal
+  input_schema_from_spec:
+  - name: id
+    in: path
+    required: true
+    schema: string
+- name: quote_date_config_patch
+  description: PATCH /api/quotes/products/{id}/quote-date-config
+  source_operation: openapi/evari-quotes-api-openapi.yml#QuoteDateConfigPatch
+  method: PATCH
+  path: /api/quotes/products/{id}/quote-date-config
+  surface: internal
+  input_schema_from_spec:
+  - name: id
+    in: path
+    required: true
+    schema: string
+  - name: update
+    in: body
+    required: true
+    schema: QuoteDateConfigUpdateRequest
+- name: quote_date_config_get_public_quote_date_config
+  description: GET /api/quotes/public/products/{id}/quote-date-config
+  source_operation: openapi/evari-quotes-api-openapi.yml#QuoteDateConfigGetPublicQuoteDateConfig
+  method: GET
+  path: /api/quotes/public/products/{id}/quote-date-config
+  surface: public
+  input_schema_from_spec:
+  - name: id
+    in: path
+    required: true
+    schema: string
+- name: public_referred_quote_refer_quote_to_underwriter
+  description: POST /api/quotes/public/referred-quotes/{referredQuoteId}/refer-to-underwriter
+  source_operation: openapi/evari-quotes-api-openapi.yml#PublicReferredQuoteReferQuoteToUnderwriter
+  method: POST
+  path: /api/quotes/public/referred-quotes/{referredQuoteId}/refer-to-underwriter
+  surface: public
+  input_schema_from_spec:
+  - name: referredQuoteId
+    in: path
+    required: true
+    schema: string
+- name: public_referred_quote_get
+  description: GET /api/quotes/public/referred-quotes/{id}
+  source_operation: openapi/evari-quotes-api-openapi.yml#PublicReferredQuoteGet
+  method: GET
+  path: /api/quotes/public/referred-quotes/{id}
+  surface: public
+  input_schema_from_spec:
+  - name: id
+    in: path
+    required: true
+    schema: string
+- name: public_referred_quote_get_by_quote_id
+  description: GET /api/quotes/public/quotes/{quoteId}/referred-quotes
+  source_operation: openapi/evari-quotes-api-openapi.yml#PublicReferredQuoteGetByQuoteId
+  method: GET
+  path: /api/quotes/public/quotes/{quoteId}/referred-quotes
+  surface: public
+  input_schema_from_spec:
+  - name: quoteId
+    in: path
+    required: true
+    schema: string

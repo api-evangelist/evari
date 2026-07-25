@@ -1,0 +1,106 @@
+generated: '2026-07-25'
+method: searched
+source: https://evari.tech/pricing
+also_source: https://evari.tech/help-center/items/platform/what-platform-tiers-are-available/
+currency: AUD
+currencies_offered: [AUD, GBP, NZD, USD]
+model: |
+  Two-part commercial model: a fixed-price delivery sprint up front, then a recurring
+  platform subscription banded by daily transaction volume. There is no free tier, no
+  self-serve API plan and no published per-call pricing — account creation itself is
+  directed to the third-party QuivaWorks platform at quiva.ai.
+plans:
+- name: Proof of Concept
+  kind: sprint
+  price: 12000
+  currency: AUD
+  unit: one-time
+  duration: 2 weeks
+  features:
+  - ONE specific process automated
+  - 'Week 1: discovery and design'
+  - 'Week 2: build, test and deploy'
+  - Post-launch support included
+  - Team training included
+  requires_platform_from: 2000 AUD/month
+- name: Process Transformation
+  kind: sprint
+  price: 18000
+  currency: AUD
+  unit: one-time
+  duration: 30 days
+  popular: true
+  features:
+  - ONE complete process end-to-end
+  - 'Week 1: discovery and workflow mapping'
+  - 'Weeks 2-3: build and integration'
+  - 'Week 4: deploy and training'
+  - System integrations included
+  requires_platform_from: 4000 AUD/month
+- name: Multi-Process Rollout
+  kind: sprint
+  price: 35000
+  currency: AUD
+  unit: one-time
+  duration: 45 days
+  features:
+  - 2-3 processes automated in parallel
+  - 'Week 1: discovery and architecture'
+  - 'Weeks 2-4: build all processes'
+  - 'Weeks 5-6: integration and deploy'
+  - Post-launch optimisation included
+  requires_platform_from: 8000 AUD/month
+- name: Small
+  kind: platform-subscription
+  price: 2000
+  currency: AUD
+  unit: month
+  annual_prepay: {price: 19200, discount: 20%}
+  limits:
+    daily_transactions: 100
+    storage_gb: 50
+    ai_credits_month: 5000
+    flows: 3
+    ai_assistants: unlimited
+  features: [Account manager, Uptime SLA]
+- name: Growth
+  kind: platform-subscription
+  price: 4000
+  currency: AUD
+  unit: month
+  popular: true
+  annual_prepay: {price: 38400, discount: 20%}
+  limits:
+    daily_transactions: 500
+    storage_gb: 200
+    ai_credits_month: 20000
+    flows: 10
+    ai_assistants: unlimited
+  features: [Priority support, Advanced monitoring, Account manager, Uptime SLA]
+- name: Scale
+  kind: platform-subscription
+  price: 8000
+  currency: AUD
+  unit: month
+  annual_prepay: {price: 76800, discount: 20%}
+  limits:
+    daily_transactions: 1000+
+    storage_gb: unlimited
+    ai_credits_month: 100000
+    flows: unlimited
+    ai_assistants: unlimited
+  features: [Dedicated support, Custom SLA, Account manager]
+metering:
+  unit: transaction
+  definition: A single unit of work processed by an assistant — one submission
+    processed, one renewal handled, one email triaged.
+  secondary_unit: AI credits
+  overage_policy: No overage billing. Usage alerts fire as storage or credit limits
+    approach; the customer upgrades tier, which takes effect instantly.
+sales_motion:
+  self_serve: false
+  entry_point: Free 90-minute discovery workshop / "Book Consultation"
+  account_creation: https://quiva.ai (QuivaWorks) — Evari's help centre directs all
+    sign-ups to the platform partner, not to an Evari-hosted console.
+  enterprise: https://evari.tech/enterprise (SSO, custom contracts, dedicated
+    onboarding)

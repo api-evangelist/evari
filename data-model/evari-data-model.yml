@@ -1,0 +1,126 @@
+generated: '2026-07-25'
+method: derived
+source: openapi/evari-quotes-api-openapi.yml
+also_derived_from: json-schema/evari-contracts-types.json
+summary: |
+  Entity-relationship graph of the Evari quoting domain, derived from the $ref graph
+  and id-reference fields in the Swagger 2.0 definitions (70 definitions across the
+  quotes service) and cross-checked against the 369-definition @evari/contracts type
+  set bundled in the same package. Identifiers are string ids; the spec publishes no
+  id prefixes.
+entities:
+- name: Product
+  description: An insurance product a quote is written against; owns the quote date
+    and timezone configuration.
+  schema: Product
+  relationships:
+  - {kind: has_many, target: Quote, via: quotes}
+  - {kind: has_many, target: QuoteDateSetting, via: quoteDateSettings}
+  - {kind: has_one, target: QuoteTimezoneSetting, via: quoteTimezoneSetting}
+  - {kind: has_one, target: QuoteTimeSetting, via: quoteTimeSetting}
+- name: Quote
+  description: The central entity — a priced, answerable insurance quote for one
+    product and one customer, owned by an agent and a team.
+  schema: Quote
+  response_schema: QuoteResponse
+  relationships:
+  - {kind: belongs_to, target: Product, via: product}
+  - {kind: belongs_to, target: Customer, via: customer}
+  - {kind: belongs_to, target: Agent, via: agentId}
+  - {kind: belongs_to, target: Team, via: teamId}
+  - {kind: has_many, target: Answer, via: answers}
+  - {kind: has_many, target: Cover, via: covers}
+  - {kind: has_many, target: InterestedParty, via: interestedParties}
+  - {kind: has_many, target: QuotePriceComponent, via: priceComponents}
+  - {kind: has_many, target: QuotePriceSummary, via: priceSummary}
+  - {kind: has_many, target: QuotePriceError, via: priceErrors}
+  - {kind: has_many, target: UnderwritingRule, via: underwritingRules}
+  - {kind: has_many, target: Quote, via: duplicateGroupId, note: quote options are
+      siblings sharing a duplicateGroupId (QuoteGetQuoteOptions)}
+- name: Answer
+  description: A response to a product question; the unit the pricing engine consumes.
+  schema: Answer
+  response_schema: QuoteAnswerResponse
+  relationships:
+  - {kind: belongs_to, target: Quote, via: quote}
+  - {kind: belongs_to, target: Question, via: attributeId}
+- name: Question
+  description: A product question presented to the quoting user; addressable publicly
+    and per-quote.
+  schema: QuestionResponse
+  relationships:
+  - {kind: belongs_to, target: Quote, via: quote}
+- name: Cover
+  description: A section of cover on a quote, with limits and its own price
+    components, summary and errors.
+  schema: Cover
+  response_schema: QuoteCoverResponse
+  relationships:
+  - {kind: belongs_to, target: Quote, via: quote}
+  - {kind: has_many, target: CoverLimit, via: limits}
+  - {kind: has_many, target: CoverPriceComponent, via: priceComponents}
+  - {kind: has_many, target: CoverPriceSummary, via: priceSummary}
+  - {kind: has_many, target: CoverPriceError, via: priceErrors}
+  - {kind: has_many, target: EndorsementCover, via: endorsementCovers}
+- name: InterestedParty
+  description: A third party noted on the quote (financier, lessor, principal).
+  schema: InterestedParty
+  relationships:
+  - {kind: belongs_to, target: Quote, via: quote}
+- name: Endorsement
+  description: A mid-term change to a bound policy, priced as a delta against the
+    originating quote.
+  schema: Endorsement
+  response_schema: EndorsementQuoteResponse
+  relationships:
+  - {kind: belongs_to, target: Quote, via: quote}
+  - {kind: belongs_to, target: Policy, via: policyId}
+  - {kind: has_many, target: EndorsementCover, via: covers}
+  - {kind: has_many, target: EndorsementPriceComponent, via: priceComponents}
+  - {kind: has_many, target: EndorsementPriceSummary, via: priceSummary}
+- name: ReferredQuote
+  description: A quote referred out of straight-through processing to a human
+    underwriter, carrying notes and cover price overrides.
+  schema: ReferredQuoteResponse
+  relationships:
+  - {kind: belongs_to, target: Quote, via: quote}
+  - {kind: has_many, target: ReferredQuoteNote, via: notes}
+  - {kind: has_many, target: ReferredQuoteCoverPriceOverride, via: coverPriceOverrides}
+- name: Attachment
+  description: A document uploaded against the quoting flow.
+  schema: AttachmentResponse
+- name: QuoteDateConfig
+  description: Per-product configuration of allowable quote/inception date periods.
+  schema: QuoteDateConfigResponse
+  relationships:
+  - {kind: belongs_to, target: Product, via: productId}
+- name: Customer
+  description: Referenced from Quote; the customer entity itself is not exposed by
+    this microservice (only /api/quotes/customers/{id}/quotes).
+  schema: null
+  external: true
+- name: Agent
+  description: Referenced by agentId on Quote; agent CRUD lives outside this service
+    (AgentCreateRequest / AgentResponse appear in the @evari/contracts type set, not
+    in this spec's paths).
+  schema: null
+  external: true
+diff_model:
+  note: The endorsement flow publishes a first-class diff model — AnswerDiff,
+    CoverDiff, LimitDiff, InterestedPartyDiff and DateDiff roll up into
+    EndorsementDiffResponse (EndorsementGetDiff). This is the machine-readable
+    "what changed mid-term" contract.
+pricing_model:
+  chain: Quote -> Cover -> CoverPriceComponent -> CoverPriceSummary
+  errors: PriceError / QuotePriceError / CoverPriceError are first-class, so pricing
+    failure is modelled as data rather than as an HTTP error.
+wider_domain:
+  source: json-schema/evari-contracts-types.json
+  note: |
+    The bundled @evari/contracts type set is far wider than the quotes service — it
+    carries 369 draft-07 definitions including a full claims domain (ClaimCreateRequest,
+    ClaimAttestationResponse, ClaimEventListResponse, ClaimStatus workflows,
+    ClaimAttachment*), agents (AgentCreateRequest/AgentResponse), billing
+    (BillingMethod, BillingAddressResponse), cancellation (CancellationReason,
+    CancellationPriceResponse) and attributes. Those entities have no published HTTP
+    surface — they are the shape of the closed platform behind the login wall.

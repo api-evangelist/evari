@@ -2,23 +2,26 @@ aid: evari
 url: https://raw.githubusercontent.com/api-evangelist/evari/refs/heads/main/apis.yml
 name: Evari
 kind: company
-description: Evari is an Australian insurance technology company, founded in Sydney
-  by Daniel Fogarty (former CEO of Zurich Australia and New Zealand), Robert Jeffery
-  and Brack Norris. It launched as a digital small-business and trades insurance
-  brand at evari.insure, operating as a Lloyd's coverholder with direct and partner
-  distribution, then moved upstream into core systems with CloudStream, a cloud-native
-  policy administration platform covering quote, bind and issue through endorsement,
-  renewal and cancellation, broker and MGA portals, appetite and eligibility rules,
-  commission tracking and policyholder self-service. Its current positioning is
-  insurance AI operations for brokers, MGAs and insurers, delivered as 30-day
-  assistant deployment sprints powered by the third-party QuivaWorks platform.
-  Evari publishes no public developer portal and no downloadable OpenAPI. Every API
-  surface found is tenant-scoped and closed - api.cloudstream.evari.tech and its
-  /api/docs path return 404 unauthenticated, api.envest.evari.tech returns 502, and
-  the customer and admin applications are login walls. Evari is a consumer of other
-  vendors' APIs (Socotra, Vertafore AMS360/Sagitta, Applied Epic, Guidewire read
-  access) rather than a publisher of its own, and no ACORD, AL3 or IVANS reference
-  appears anywhere on its site or in its help centre.
+description: Evari is an insurance technology company founded in Sydney by Daniel Fogarty
+  (former CEO of Zurich Australia and New Zealand), Robert Jeffery and Brack Norris,
+  and now operating as Evari Services UK Ltd. It launched as a digital small-business
+  and trades insurance brand at evari.insure, a Lloyd's coverholder with direct and
+  partner distribution, then moved upstream into core systems with CloudStream, a
+  cloud-native policy administration platform covering quote, bind and issue through
+  endorsement, renewal and cancellation, broker and MGA portals, appetite and
+  eligibility rules, commission tracking and policyholder self-service. Its current
+  positioning is insurance AI operations for brokers, MGAs and insurers, delivered as
+  30-day assistant deployment sprints powered by the third-party QuivaWorks platform.
+  Evari publishes no developer portal and no API reference, and every running API host
+  is tenant-scoped and closed - api.cloudstream.evari.tech returns 404 unauthenticated,
+  api.envest.evari.tech returns 502, and the customer and admin applications are login
+  walls. One real first-party contract does exist off-portal - Evari published its
+  Quotes microservice to npm as evari-quotes-api, and that tarball ships a generated
+  Swagger 2.0 document of 49 paths and 56 operations plus a draft-07 JSON Schema set of
+  369 definitions, both harvested here. Evari is otherwise a consumer of other vendors'
+  APIs, integrating into Socotra, Vertafore AMS360 and Sagitta, Applied Epic and
+  Guidewire read access, and no ACORD, AL3 or IVANS reference appears anywhere on its
+  site, in its help centre or in its data model.
 image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
 tags:
 - Insurance
@@ -32,23 +35,124 @@ tags:
 - Broker
 - MGA
 - Artificial Intelligence
+- Quoting
+- Endorsements
 created: '2026-07-25'
 modified: '2026-07-25'
 specificationVersion: '0.19'
-apis: []
+apis:
+- name: Evari Quotes API
+  description: The Evari Quotes microservice - the internal broker and underwriter
+    quoting surface at /api/quotes/** plus a customer-facing mirror at
+    /api/quotes/public/**. 49 paths, 56 operations and 70 definitions covering quote
+    create/read/patch, product questions, validation, pricing with first-class price
+    errors, quote options, SMS and code confirmation, PDF issue, attachments, mid-term
+    endorsements with a structured diff model, referral to a human underwriter with
+    notes and cover price overrides, and per-product quote-date configuration. Auth is
+    a single apiKey carried in the Authorization header. NOT SELF-SERVE - this spec was
+    harvested from the Swagger document Evari bundled in its own evari-quotes-api npm
+    tarball, not from a developer portal; the API is tenant-scoped and the only API
+    root named in a first-party build config returns 404 unauthenticated.
+  humanURL: https://www.npmjs.com/package/evari-quotes-api
+  baseURL: https://api.cloudstream.evari.tech/
+  tags:
+  - insurance
+  - quoting
+  - underwriting
+  - policy-administration
+  - endorsements
+  - referrals
+  - pricing
+  properties:
+  - type: OpenAPI
+    url: openapi/evari-quotes-api-openapi.yml
+  - type: JSONSchema
+    url: json-schema/evari-contracts-types.json
+  - type: Overlay
+    url: overlays/evari-quotes-api-overlay.yaml
+  - type: Authentication
+    url: authentication/evari-authentication.yml
+  - type: Conventions
+    url: conventions/evari-conventions.yml
+  - type: DataModel
+    url: data-model/evari-data-model.yml
+  - type: AgenticAccess
+    url: agentic-access/evari-agentic-access.yml
+  - type: MCPServer
+    url: mcp/evari-mcp.yml
+  - type: AgentSkill
+    url: skills/_index.yml
+  - type: Packages
+    url: packages/evari-packages.yml
+  - type: SourceCode
+    url: https://www.npmjs.com/package/evari-quotes-api
 common:
 - type: Website
   url: https://evari.tech/
 - type: Documentation
   url: https://evari.tech/help-center/
+- type: GettingStarted
+  url: https://evari.tech/help-center/categories/getting-started/
+- type: Support
+  url: https://evari.tech/help-center/contact/
 - type: Blog
   url: https://evari.tech/blog/
-- type: TrustCenter
-  url: https://evari.tech/trust
-- type: VulnerabilityDisclosure
-  url: https://evari.tech/.well-known/security.txt
+- type: BlogRSS
+  url: https://evari.tech/blog/rss.xml
+- type: GitHubOrganization
+  url: https://github.com/myevari
 - type: Pricing
   url: https://evari.tech/pricing
+- type: Plans
+  url: plans/evari-plans.yml
+- type: SignUp
+  url: https://quiva.ai/
+- type: TermsOfService
+  url: https://evari.tech/legal#terms
+- type: PrivacyPolicy
+  url: https://evari.tech/legal#privacy
+- type: TrustCenter
+  url: https://evari.tech/trust
+- type: TrustCenter
+  url: security/evari-trust-center.yml
+- type: Compliance
+  url: https://evari.tech/trust
+- type: Security
+  url: https://evari.tech/.well-known/security.txt
+- type: VulnerabilityDisclosure
+  url: security/evari-vulnerability-disclosure.yml
+- type: SecurityTxt
+  url: well-known/evari-security.txt
+- type: WellKnown
+  url: well-known/evari-well-known.yml
+- type: DomainSecurity
+  url: security/evari-domain-security.yml
+- type: OpenAPI
+  url: openapi/evari-quotes-api-openapi.yml
+- type: JSONSchema
+  url: json-schema/evari-contracts-types.json
+- type: Packages
+  url: packages/evari-packages.yml
+- type: Authentication
+  url: authentication/evari-authentication.yml
+- type: Conventions
+  url: conventions/evari-conventions.yml
+- type: DataModel
+  url: data-model/evari-data-model.yml
+- type: Conformance
+  url: conformance/evari-conformance.yml
+- type: Lifecycle
+  url: lifecycle/evari-lifecycle.yml
+- type: AgenticAccess
+  url: agentic-access/evari-agentic-access.yml
+- type: MCPServer
+  url: mcp/evari-mcp.yml
+- type: AgentSkill
+  url: skills/_index.yml
+- type: LLMsTxt
+  url: llms/evari-llms.txt
+- type: Overlay
+  url: overlays/evari-quotes-api-overlay.yaml
 - type: LinkedIn
   url: https://www.linkedin.com/company/evari/
 maintainers:

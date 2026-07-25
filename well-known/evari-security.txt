@@ -1,0 +1,12 @@
+Contact: mailto:security@evari.tech
+Expires: 2027-07-21T07:46:48.384Z
+Preferred-Languages: en
+Canonical: https://evari.tech/.well-known/security.txt
+
+# Security Policy
+
+If you discover a security vulnerability, please email security@evari.tech
+with details of the issue. We take security seriously and will respond promptly.
+
+# PGP Key (optional)
+# Encryption: https://evari.tech/pgp-key.txt

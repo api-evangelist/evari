@@ -1,0 +1,37 @@
+generated: '2026-07-25'
+method: generated
+source: openapi/evari-quotes-api-openapi.yml
+note: |
+  Evari publishes no AGENTS.md, no skill files and no agent guidance of its own. These
+  skills are generated from the Swagger 2.0 document Evari published inside the
+  evari-quotes-api npm tarball; every operationId referenced was grepped out of that
+  spec. They describe a closed, tenant-scoped API — an agent needs a tenant credential
+  from Evari to run any of them.
+skills:
+- file: evari-public-quote-to-confirmation.md
+  name: Evari public quote to confirmation
+  api: openapi/evari-quotes-api-openapi.yml
+  surface: public
+  operations: [PublicQuotePost, QuestionGetPublicQuestionsByQuote, PublicQuotePatch,
+    PublicQuoteValidate, PublicQuoteGetPrice, PublicQuoteConfirmSMS,
+    PublicQuoteConfirmSMSCode, PublicQuoteConfirmed, PublicQuotePdf]
+- file: evari-broker-quote-lifecycle.md
+  name: Evari broker quote lifecycle
+  api: openapi/evari-quotes-api-openapi.yml
+  surface: internal
+  operations: [QuotePost, QuestionGetByQuote, QuotePatch, QuotePatchByInternalKey,
+    QuoteValidate, QuoteGetPrice, QuoteGetQuoteOptions, QuoteConfirm, QuoteConfirmed,
+    QuotePdf, QuoteSearch, QuoteGetAllForCustomer]
+- file: evari-refer-quote-to-underwriter.md
+  name: Evari refer a quote to an underwriter
+  api: openapi/evari-quotes-api-openapi.yml
+  surface: internal
+  operations: [ReferredQuoteGetByQuoteId, ReferredQuoteReferQuoteToUnderwriter,
+    ReferredQuoteGet, ReferredQuoteCreateNote, ReferredQuoteGetAllNotes,
+    ReferredQuoteUpdate, ReferredQuoteSearch, ReferredQuoteGetAll]
+- file: evari-price-an-endorsement.md
+  name: Evari price a mid-term endorsement
+  api: openapi/evari-quotes-api-openapi.yml
+  surface: internal
+  operations: [EndorsementGet, EndorsementPatch, EndorsementGetDiff,
+    EndorsementGetPrice]

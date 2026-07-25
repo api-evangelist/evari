@@ -1,0 +1,103 @@
+generated: '2026-07-25'
+method: derived
+source: openapi/evari-quotes-api-openapi.yml
+docs: null
+summary: |
+  Cross-cutting request/response semantics of the Evari Quotes API, derived from the
+  Swagger 2.0 document Evari published inside the evari-quotes-api npm tarball.
+  Evari publishes no developer documentation, so nothing here is a documented
+  provider promise — every entry is read off the spec and marked with its evidence.
+authentication:
+  style: api-key
+  scheme_name: undefined
+  location: header
+  parameter: Authorization
+  applied: 'every operation carries security: [{default: []}]'
+  note: The securityDefinitions key is literally "undefined" — an artefact of the
+    typescript-rest-swagger generator. The scheme is an apiKey in the Authorization
+    header; no bearer format, no OAuth2, no scopes are declared.
+  see: authentication/evari-authentication.yml
+public_vs_private_surface:
+  pattern: path prefix
+  private: /api/quotes/**
+  public: /api/quotes/public/**
+  operations_public: 15
+  note: |
+    The API is split into an internal (broker/underwriter) surface and a customer
+    facing "public" mirror. The public mirror re-exposes quote create/read/patch,
+    validate, price, PDF, confirm, reconfirm, questions, quote-date-config and
+    referred-quote read, plus two SMS confirmation operations that exist only on the
+    public side (PublicQuoteConfirmSMS, PublicQuoteConfirmSMSCode). Both surfaces
+    declare the same Authorization header scheme.
+pagination:
+  style: offset-limit
+  params: [offset, limit, sort, order]
+  in: query
+  operations: 8
+  examples:
+  - QuoteGetAll
+  - QuoteSearch
+  - ReferredQuoteGetAll
+  - ReferredQuoteSearch
+  response_envelope: '{items: [...], total: number} (QuoteListResponse,
+    ReferredQuoteListResponse, QuestionResponseList)'
+  cursor: false
+search:
+  param: q
+  in: query
+  operations: [QuoteSearch, ReferredQuoteSearch]
+filtering:
+  by_path_segment: [productId, customerId, quoteId, duplicateGroupId]
+  by_query: [status]
+partial_update:
+  method: PATCH
+  operations: [QuotePatch, PublicQuotePatch, EndorsementPatch, QuoteDateConfigPatch]
+  alternate_key:
+    operations: [QuotePatchByInternalKey, PublicQuotePatchByInternalKey]
+    note: A second patch route addresses answers by the product's internal key rather
+      than by answer id — the request body is a list of QuoteItemToUpdateByInternalKey.
+idempotency:
+  supported: false
+  header: null
+  evidence: No Idempotency-Key parameter, header or documented retry contract appears
+    anywhere in the spec or on evari.tech.
+  note: POST /api/quotes/quotes and the confirm/reconfirm operations are not
+    idempotent as specified. No Idempotency pointer is emitted for this provider.
+versioning:
+  scheme: none-in-path
+  current: null
+  evidence: Paths are /api/quotes/** with no version segment. The Swagger info.version
+    is the npm package version (0.1.0), not an API version.
+  see: lifecycle/evari-lifecycle.yml
+content_types:
+  request: [application/json, multipart/form-data]
+  response: [application/json]
+  binary: AttachmentGet and QuotePdf/PublicQuotePdf return documents; AttachmentPost
+    takes formData (attachment + description).
+errors:
+  envelope: undocumented
+  documented_failure_responses: 0
+  evidence: |
+    All 56 operations document only success responses — 48 x 200, 6 x 204, 2 x 202.
+    No 4xx or 5xx response, no error schema and no application/problem+json media
+    type appears anywhere in the spec. No error reference exists on evari.tech.
+    Because there is nothing real to catalogue, no errors/ artifact and no
+    ErrorCatalog pointer is emitted rather than an empty one.
+rate_limiting:
+  api_headers: undocumented
+  note: No rate-limit headers or quotas are documented for the API. Evari does
+    publish per-tier platform quotas (daily transactions, AI credits, storage,
+    flows) — those are subscription limits, captured in plans/, not API rate limits.
+tracing:
+  request_id_header: undocumented
+health:
+  operations: [HealthHealthCheck, HealthDiagnostics]
+  paths: [/api/quotes/health, /api/quotes/health/diagnostics]
+  note: HealthDiagnostics returns a DiagnosticsResponse with per-dependency
+    DependencyStatusResponse entries — a real, spec'd readiness surface.
+cross_links:
+  authentication: authentication/evari-authentication.yml
+  lifecycle: lifecycle/evari-lifecycle.yml
+  data_model: data-model/evari-data-model.yml
+  conformance: conformance/evari-conformance.yml
+  plans: plans/evari-plans.yml

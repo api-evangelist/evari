@@ -1,0 +1,57 @@
+generated: '2026-07-25'
+method: searched
+source: live probes of every Evari host in apis.yml + the OpenAPI-adjacent API hosts
+hosts_probed:
+- https://www.evari.tech
+- https://api.cloudstream.evari.tech
+- https://api.envest.evari.tech
+- https://auth.cloudstream.evari.tech
+host: https://www.evari.tech
+documents:
+- path: /.well-known/security.txt
+  status: 200
+  file: evari-security.txt
+  spec: RFC 9116
+  note: Real RFC 9116 document. Contact mailto:security@evari.tech, Expires
+    2027-07-21, Canonical https://evari.tech/.well-known/security.txt. Served with
+    Content-Type text/html but the body is valid security.txt.
+- path: /.well-known/openid-configuration
+  status: 200
+  real: false
+  note: NOT a discovery document. The site serves a catch-all — the body is the
+    74,025-byte marketing homepage (text/html). Recorded as absent.
+- path: /.well-known/oauth-authorization-server
+  status: 200
+  real: false
+  note: Same catch-all homepage (74,025 bytes). Recorded as absent.
+- path: /.well-known/api-catalog
+  status: 200
+  real: false
+  note: Same catch-all homepage (74,025 bytes). No RFC 9727 API catalog exists.
+- path: /.well-known/ai-plugin.json
+  status: 404
+other_hosts:
+- host: https://api.cloudstream.evari.tech
+  documents:
+  - {path: /.well-known/security.txt, status: 404}
+  - {path: /.well-known/oauth-authorization-server, status: 404}
+  - {path: /.well-known/openid-configuration, status: 404}
+  note: nginx 404 on every path unauthenticated; tenant-scoped API root named in the
+    CloudStream SPA build config.
+- host: https://api.envest.evari.tech
+  documents:
+  - {path: /.well-known/*, status: 502}
+  note: 502/504 on every path — decommissioned tenant backend.
+- host: https://auth.cloudstream.evari.tech
+  documents:
+  - {path: /.well-known/openid-configuration, status: 0}
+  note: DNS/connection failure. No anonymous OIDC or OAuth discovery is available
+    for Evari's token service.
+site_files:
+- {path: /robots.txt, status: 200, note: 'Disallows /api/, /admin/, /llms.txt;
+    explicit allow rules for GPTBot, ChatGPT-User, Google-Extended, anthropic-ai and
+    Claude-Web. Generated 2026-07-21.'}
+- {path: /sitemap.xml, status: 200, note: '~120 URLs; every page is duplicated under
+    a /dist/ prefix.'}
+- {path: /llms.txt, status: 200, bytes: 418510, note: 'Full-site content corpus, not
+    a link index. Disallowed in robots.txt. See llms/.'}

@@ -1,0 +1,5334 @@
+{
+	"definitions": {
+		"DependencyStatusResponse": {
+			"description": "",
+			"properties": {
+				"name": {
+					"type": "string",
+					"description": ""
+				},
+				"ok": {
+					"type": "boolean",
+					"description": ""
+				},
+				"message": {
+					"type": "string",
+					"description": ""
+				}
+			},
+			"type": "object",
+			"required": [
+				"name",
+				"ok",
+				"message"
+			]
+		},
+		"DiagnosticsResponse": {
+			"description": "",
+			"properties": {
+				"description": {
+					"type": "string",
+					"description": ""
+				},
+				"status": {
+					"type": "string",
+					"description": ""
+				},
+				"version": {
+					"type": "string",
+					"description": ""
+				},
+				"dependencies": {
+					"type": "array",
+					"items": {
+						"$ref": "#/definitions/DependencyStatusResponse"
+					},
+					"description": ""
+				}
+			},
+			"type": "object",
+			"required": [
+				"description",
+				"status",
+				"version",
+				"dependencies"
+			]
+		},
+		"HealthResponse": {
+			"description": "",
+			"properties": {
+				"status": {
+					"type": "string",
+					"description": ""
+				}
+			},
+			"type": "object",
+			"required": [
+				"status"
+			]
+		},
+		"QuoteProduct": {
+			"description": "",
+			"properties": {
+				"id": {
+					"type": "string",
+					"description": ""
+				},
+				"name": {
+					"type": "string",
+					"description": ""
+				},
+				"locale": {
+					"type": "string",
+					"description": ""
+				},
+				"currency": {
+					"type": "string",
+					"description": ""
+				},
+				"allowAgentsToProxy": {
+					"type": "boolean",
+					"description": ""
+				}
+			},
+			"type": "object",
+			"required": [
+				"id",
+				"name",
+				"locale",
+				"currency",
+				"allowAgentsToProxy"
+			]
+		},
+		"QuoteAnswerResponse": {
+			"description": "",
+			"properties": {
+				"isDeclined": {
+					"type": "boolean",
+					"description": ""
+				},
+				"originalAnswer": {
+					"type": "object",
+					"description": ""
+				},
+				"questionId": {
+					"type": "string",
+					"description": ""
+				},
+				"internalKey": {
+					"type": "string",
+					"description": ""
+				},
+				"attributeId": {
+					"type": "object",
+					"description": ""
+				},
+				"question": {
+					"type": "string",
+					"description": ""
+				},
+				"answer": {
+					"type": "string",
+					"description": ""
+				},
+				"answerLabel": {
+					"type": "string",
+					"description": ""
+				}
+			},
+			"type": "object",
+			"required": [
+				"isDeclined",
+				"originalAnswer",
+				"questionId",
+				"internalKey",
+				"attributeId",
+				"question",
+				"answer"
+			]
+		},
+		"QuoteCoverLimit": {
+			"description": "",
+			"properties": {
+				"id": {
+					"type": "string",
+					"description": ""
+				},
+				"value": {
+					"type": "string",
+					"description": ""
+				},
+				"label": {
+					"type": "string",
+					"description": ""
+				},
+				"internalKey": {
+					"type": "string",
+					"description": ""
+				},
+				"originalValue": {
+					"type": "string",
+					"description": ""
+				}
+			},
+			"type": "object",
+			"required": [
+				"id",
+				"value",
+				"label",
+				"internalKey",
+				"originalValue"
+			]
+		},
+		"PriceComponent": {
+			"description": "",
+			"properties": {
+				"name": {
+					"type": "string",
+					"description": ""
+				},
+				"value": {
+					"type": "string",
+					"description": ""
+				},
+				"type": {
+					"type": "string",
+					"description": ""
+				},
+				"source": {
+					"type": "string",
+					"description": ""
+				},
+				"target": {
+					"type": "string",
+					"description": ""
+				}
+			},
+			"type": "object",
+			"required": [
+				"name",
+				"value",
+				"type"
+			]
+		},
+		"PriceSummary": {
+			"description": "",
+			"properties": {
+				"premium": {
+					"type": "string",
+					"description": ""
+				},
+				"totalTaxes": {
+					"type": "string",
+					"description": ""
+				},
+				"totalFees": {
+					"type": "string",
+					"description": ""
+				},
+				"totalPayable": {
+					"type": "string",
+					"description": ""
+				}
+			},
+			"type": "object",
+			"required": [
+				"premium",
+				"totalTaxes",
+				"totalFees",
+				"totalPayable"
+			],
+			"additionalProperties": {}
+		},
+		"PriceError": {
+			"description": "",
+			"properties": {
+				"message": {
+					"type": "string",
+					"description": ""
+				}
+			},
+			"type": "object",
+			"required": [
+				"message"
+			]
+		},
+		"QuoteCoverResponse": {
+			"description": "",
+			"properties": {
+				"isDeclined": {
+					"type": "boolean",
+					"description": ""
+				},
+				"declinedReason": {
+					"type": "string",
+					"description": ""
+				},
+				"isReferred": {
+					"type": "boolean",
+					"description": ""
+				},
+				"referredReason": {
+					"type": "string",
+					"description": ""
+				},
+				"id": {
+					"type": "string",
+					"description": ""
+				},
+				"coverId": {
+					"type": "string",
+					"description": ""
+				},
+				"internalKey": {
+					"type": "string",
+					"description": ""
+				},
+				"label": {
+					"type": "string",
+					"description": ""
+				},
+				"value": {
+					"type": "boolean",
+					"description": ""
+				},
+				"limits": {
+					"type": "array",
+					"items": {
+						"$ref": "#/definitions/QuoteCoverLimit"
+					},
+					"description": ""
+				},
+				"priceComponents": {
+					"type": "array",
+					"items": {
+						"$ref": "#/definitions/PriceComponent"
+					},
+					"description": ""
+				},
+				"price": {
+					"$ref": "#/definitions/PriceSummary"
+				},
+				"errors": {
+					"type": "array",
+					"items": {
+						"$ref": "#/definitions/PriceError"
+					},
+					"description": ""
+				}
+			},
+			"type": "object",
+			"required": [
+				"id",
+				"coverId",
+				"internalKey",
+				"label",
+				"value",
+				"limits",
+				"priceComponents"
+			]
+		},
+		"QuoteInterestedParty": {
+			"description": "",
+			"properties": {
+				"name": {
+					"type": "string",
+					"description": ""
+				},
+				"type": {
+					"type": "string",
+					"description": ""
+				},
+				"loanId": {
+					"type": "object",
+					"description": ""
+				},
+				"mailingAddress": {
+					"type": "object",
+					"description": ""
+				},
+				"email": {
+					"type": "object",
+					"description": ""
+				},
+				"sendEmail": {
+					"type": "object",
+					"description": ""
+				},
+				"description": {
+					"type": "object",
+					"description": ""
+				}
+			},
+			"type": "object",
+			"required": [
+				"name",
+				"type"
+			]
+		},
+		"QuoteResponse": {
+			"description": "",
+			"properties": {
+				"id": {
+					"type": "string",
+					"description": ""
+				},
+				"createdAt": {
+					"type": "string",
+					"description": ""
+				},
+				"updatedAt": {
+					"type": "string",
+					"description": ""
+				},
+				"customer": {
+					"type": "object",
+					"description": ""
+				},
+				"product": {
+					"$ref": "#/definitions/QuoteProduct"
+				},
+				"answers": {
+					"type": "array",
+					"items": {
+						"$ref": "#/definitions/QuoteAnswerResponse"
+					},
+					"description": ""
+				},
+				"covers": {
+					"type": "array",
+					"items": {
+						"$ref": "#/definitions/QuoteCoverResponse"
+					},
+					"description": ""
+				},
+				"interestedParties": {
+					"type": "array",
+					"items": {
+						"$ref": "#/definitions/QuoteInterestedParty"
+					},
+					"description": ""
+				},
+				"startDate": {
+					"type": "string",
+					"description": ""
+				},
+				"endDate": {
+					"type": "string",
+					"description": ""
+				},
+				"timezoneOffset": {
+					"type": "string",
+					"description": ""
+				},
+				"expiryDate": {
+					"type": "string",
+					"description": ""
+				},
+				"customerConfirmed": {
+					"type": "boolean",
+					"description": ""
+				},
+				"attestations": {
+					"type": "object",
+					"description": ""
+				},
+				"agentId": {
+					"type": "object",
+					"description": ""
+				},
+				"locked": {
+					"type": "boolean",
+					"description": ""
+				},
+				"origin": {
+					"enum": [
+						"POLICY_NEW",
+						"POLICY_ENDORSEMENT"
+					],
+					"type": "string",
+					"description": ""
+				},
+				"referred": {
+					"type": "boolean",
+					"description": ""
+				},
+				"referredQuote": {
+					"type": "object",
+					"description": ""
+				},
+				"status": {
+					"type": "string",
+					"description": ""
+				},
+				"referredQuoteLocked": {
+					"type": "boolean",
+					"description": ""
+				},
+				"customerProxy": {
+					"type": "object",
+					"description": ""
+				},
+				"duplicateGroupId": {
+					"type": "object",
+					"description": ""
+				},
+				"teamId": {
+					"type": "string",
+					"description": ""
+				},
+				"triggeredUnderwritingRule": {
+					"type": "object",
+					"description": ""
+				},
+				"priceComponents": {
+					"type": "array",
+					"items": {
+						"$ref": "#/definitions/PriceComponent"
+					},
+					"description": ""
+				},
+				"price": {
+					"$ref": "#/definitions/PriceSummary"
+				},
+				"errors": {
+					"type": "array",
+					"items": {
+						"$ref": "#/definitions/PriceError"
+					},
+					"description": ""
+				}
+			},
+			"type": "object",
+			"required": [
+				"id",
+				"createdAt",
+				"updatedAt",
+				"customer",
+				"product",
+				"answers",
+				"covers",
+				"interestedParties",
+				"startDate",
+				"endDate",
+				"timezoneOffset",
+				"expiryDate",
+				"customerConfirmed",
+				"attestations",
+				"agentId",
+				"locked",
+				"origin",
+				"referred",
+				"referredQuote",
+				"status",
+				"referredQuoteLocked",
+				"customerProxy",
+				"duplicateGroupId",
+				"triggeredUnderwritingRule",
+				"priceComponents"
+			]
+		},
+		"QuoteListResponse": {
+			"description": "",
+			"properties": {
+				"items": {
+					"type": "array",
+					"items": {
+						"$ref": "#/definitions/QuoteResponse"
+					},
+					"description": ""
+				},
+				"limit": {
+					"type": "number",
+					"format": "double",
+					"description": ""
+				},
+				"offset": {
+					"type": "number",
+					"format": "double",
+					"description": ""
+				},
+				"total": {
+					"type": "number",
+					"format": "double",
+					"description": ""
+				}
+			},
+			"type": "object",
+			"required": [
+				"items",
+				"limit",
+				"offset",
+				"total"
+			]
+		},
+		"QuoteCountResponse": {
+			"description": "",
+			"properties": {
+				"count": {
+					"type": "number",
+					"format": "double",
+					"description": ""
+				}
+			},
+			"type": "object",
+			"required": [
+				"count"
+			]
+		},
+		"QuoteAnswerRequest": {
+			"description": "",
+			"properties": {
+				"questionId": {
+					"type": "string",
+					"description": ""
+				},
+				"internalKey": {
+					"type": "string",
+					"description": ""
+				},
+				"attributeId": {
+					"type": "object",
+					"description": ""
+				},
+				"question": {
+					"type": "string",
+					"description": ""
+				},
+				"answer": {
+					"type": "string",
+					"description": ""
+				},
+				"answerLabel": {
+					"type": "string",
+					"description": ""
+				}
+			},
+			"type": "object",
+			"required": [
+				"questionId",
+				"internalKey",
+				"attributeId",
+				"question",
+				"answer"
+			]
+		},
+		"QuoteCoverRequest": {
+			"description": "",
+			"properties": {
+				"id": {
+					"type": "string",
+					"description": ""
+				},
+				"coverId": {
+					"type": "string",
+					"description": ""
+				},
+				"internalKey": {
+					"type": "string",
+					"description": ""
+				},
+				"label": {
+					"type": "string",
+					"description": ""
+				},
+				"value": {
+					"type": "boolean",
+					"description": ""
+				},
+				"limits": {
+					"type": "array",
+					"items": {
+						"$ref": "#/definitions/QuoteCoverLimit"
+					},
+					"description": ""
+				},
+				"isDeclined": {
+					"type": "boolean",
+					"description": ""
+				},
+				"isReferred": {
+					"type": "boolean",
+					"description": ""
+				},
+				"referredReason": {
+					"type": "string",
+					"description": ""
+				}
+			},
+			"type": "object",
+			"required": [
+				"id",
+				"coverId",
+				"internalKey",
+				"label",
+				"value",
+				"limits"
+			]
+		},
+		"QuoteCreateRequest": {
+			"description": "",
+			"properties": {
+				"customer": {
+					"type": "object",
+					"description": ""
+				},
+				"product": {
+					"type": "object",
+					"properties": {
+						"id": {
+							"type": "string",
+							"description": ""
+						}
+					},
+					"description": ""
+				},
+				"answers": {
+					"type": "array",
+					"items": {
+						"$ref": "#/definitions/QuoteAnswerRequest"
+					},
+					"description": ""
+				},
+				"covers": {
+					"type": "array",
+					"items": {
+						"$ref": "#/definitions/QuoteCoverRequest"
+					},
+					"description": ""
+				},
+				"interestedParties": {
+					"type": "array",
+					"items": {
+						"$ref": "#/definitions/QuoteInterestedParty"
+					},
+					"description": ""
+				},
+				"startDate": {
+					"type": "string",
+					"description": ""
+				},
+				"endDate": {
+					"type": "string",
+					"description": ""
+				},
+				"timezoneOffset": {
+					"type": "string",
+					"description": ""
+				},
+				"attestations": {
+					"type": "object",
+					"description": ""
+				},
+				"actAsCustomerProxy": {
+					"type": "boolean",
+					"description": ""
+				},
+				"duplicateGroupId": {
+					"type": "string",
+					"description": ""
+				},
+				"teamId": {
+					"type": "string",
+					"description": ""
+				}
+			},
+			"type": "object",
+			"required": [
+				"product",
+				"answers",
+				"covers"
+			]
+		},
+		"QuoteUpdateRequest": {
+			"description": "",
+			"properties": {
+				"customer": {
+					"type": "object",
+					"description": ""
+				},
+				"product": {
+					"type": "object",
+					"properties": {
+						"id": {
+							"type": "string",
+							"description": ""
+						}
+					},
+					"description": ""
+				},
+				"answers": {
+					"type": "array",
+					"items": {
+						"$ref": "#/definitions/QuoteAnswerRequest"
+					},
+					"description": ""
+				},
+				"covers": {
+					"type": "array",
+					"items": {
+						"$ref": "#/definitions/QuoteCoverRequest"
+					},
+					"description": ""
+				},
+				"interestedParties": {
+					"type": "array",
+					"items": {
+						"$ref": "#/definitions/QuoteInterestedParty"
+					},
+					"description": ""
+				},
+				"startDate": {
+					"type": "string",
+					"description": ""
+				},
+				"endDate": {
+					"type": "string",
+					"description": ""
+				},
+				"timezoneOffset": {
+					"type": "string",
+					"description": ""
+				},
+				"attestations": {
+					"type": "object",
+					"description": ""
+				},
+				"referredQuoteLocked": {
+					"type": "boolean",
+					"description": ""
+				},
+				"actAsCustomerProxy": {
+					"type": "boolean",
+					"description": ""
+				},
+				"duplicateGroupId": {
+					"type": "string",
+					"description": ""
+				},
+				"teamId": {
+					"type": "string",
+					"description": ""
+				}
+			},
+			"type": "object"
+		},
+		"PartialAnswerResponse": {
+			"description": "",
+			"properties": {
+				"questionId": {
+					"type": "string",
+					"description": ""
+				},
+				"internalKey": {
+					"type": "string",
+					"description": ""
+				},
+				"isDeclined": {
+					"type": "boolean",
+					"description": ""
+				},
+				"originalAnswer": {
+					"type": "object",
+					"description": ""
+				},
+				"attributeId": {
+					"type": "object",
+					"description": ""
+				},
+				"question": {
+					"type": "string",
+					"description": ""
+				},
+				"answer": {
+					"type": "string",
+					"description": ""
+				},
+				"answerLabel": {
+					"type": "string",
+					"description": ""
+				}
+			},
+			"type": "object",
+			"required": [
+				"questionId",
+				"internalKey"
+			]
+		},
+		"PartialLimitResponse": {
+			"description": "",
+			"properties": {
+				"id": {
+					"type": "string",
+					"description": ""
+				},
+				"internalKey": {
+					"type": "string",
+					"description": ""
+				},
+				"value": {
+					"type": "string",
+					"description": ""
+				},
+				"label": {
+					"type": "string",
+					"description": ""
+				},
+				"originalValue": {
+					"type": "string",
+					"description": ""
+				}
+			},
+			"type": "object",
+			"required": [
+				"id",
+				"internalKey"
+			]
+		},
+		"PartialCoverResponse": {
+			"description": "",
+			"properties": {
+				"id": {
+					"type": "string",
+					"description": ""
+				},
+				"internalKey": {
+					"type": "string",
+					"description": ""
+				},
+				"limits": {
+					"type": "array",
+					"items": {
+						"$ref": "#/definitions/PartialLimitResponse"
+					},
+					"description": ""
+				},
+				"label": {
+					"type": "string",
+					"description": ""
+				},
+				"value": {
+					"type": "boolean",
+					"description": ""
+				},
+				"isDeclined": {
+					"type": "boolean",
+					"description": ""
+				},
+				"declinedReason": {
+					"type": "string",
+					"description": ""
+				},
+				"isReferred": {
+					"type": "boolean",
+					"description": ""
+				},
+				"referredReason": {
+					"type": "string",
+					"description": ""
+				}
+			},
+			"type": "object",
+			"required": [
+				"id",
+				"internalKey"
+			]
+		},
+		"QuoteUpdateByInternalKeyResponse": {
+			"description": "",
+			"properties": {
+				"id": {
+					"type": "string",
+					"description": ""
+				},
+				"updatedAt": {
+					"type": "string",
+					"description": ""
+				},
+				"customer": {
+					"type": "object",
+					"description": ""
+				},
+				"product": {
+					"$ref": "#/definitions/QuoteProduct"
+				},
+				"interestedParties": {
+					"type": "array",
+					"items": {
+						"$ref": "#/definitions/QuoteInterestedParty"
+					},
+					"description": ""
+				},
+				"startDate": {
+					"type": "string",
+					"description": ""
+				},
+				"endDate": {
+					"type": "string",
+					"description": ""
+				},
+				"timezoneOffset": {
+					"type": "string",
+					"description": ""
+				},
+				"expiryDate": {
+					"type": "string",
+					"description": ""
+				},
+				"customerConfirmed": {
+					"type": "boolean",
+					"description": ""
+				},
+				"attestations": {
+					"type": "object",
+					"description": ""
+				},
+				"agentId": {
+					"type": "object",
+					"description": ""
+				},
+				"locked": {
+					"type": "boolean",
+					"description": ""
+				},
+				"origin": {
+					"enum": [
+						"POLICY_NEW",
+						"POLICY_ENDORSEMENT"
+					],
+					"type": "string",
+					"description": ""
+				},
+				"referred": {
+					"type": "boolean",
+					"description": ""
+				},
+				"referredQuote": {
+					"type": "object",
+					"description": ""
+				},
+				"status": {
+					"type": "string",
+					"description": ""
+				},
+				"referredQuoteLocked": {
+					"type": "boolean",
+					"description": ""
+				},
+				"customerProxy": {
+					"type": "object",
+					"description": ""
+				},
+				"answers": {
+					"type": "array",
+					"items": {
+						"$ref": "#/definitions/PartialAnswerResponse"
+					},
+					"description": ""
+				},
+				"covers": {
+					"type": "array",
+					"items": {
+						"$ref": "#/definitions/PartialCoverResponse"
+					},
+					"description": ""
+				},
+				"triggeredUnderwritingRule": {
+					"type": "object",
+					"description": ""
+				}
+			},
+			"type": "object",
+			"required": [
+				"id",
+				"updatedAt"
+			]
+		},
+		"QuoteItemToUpdateByInternalKey": {
+			"description": "",
+			"properties": {
+				"internalKey": {
+					"type": "string",
+					"description": ""
+				}
+			},
+			"type": "object",
+			"required": [
+				"internalKey"
+			],
+			"additionalProperties": {}
+		},
+		"QuoteUpdateByInternalKeyRequest": {
+			"description": "",
+			"properties": {
+				"items": {
+					"type": "array",
+					"items": {
+						"$ref": "#/definitions/QuoteItemToUpdateByInternalKey"
+					},
+					"description": ""
+				}
+			},
+			"type": "object",
+			"required": [
+				"items"
+			]
+		},
+		"ConfirmSMS": {
+			"description": "",
+			"properties": {
+				"number": {
+					"type": "string",
+					"description": ""
+				}
+			},
+			"type": "object",
+			"required": [
+				"number"
+			]
+		},
+		"QuestionResponse": {
+			"description": "",
+			"properties": {
+				"id": {
+					"type": "string",
+					"description": ""
+				},
+				"internalDescription": {
+					"type": "object",
+					"description": ""
+				},
+				"internalKey": {
+					"type": "string",
+					"description": ""
+				},
+				"label": {
+					"type": "string",
+					"description": ""
+				},
+				"dataType": {
+					"type": "string",
+					"description": ""
+				},
+				"dataSource": {
+					"type": "object",
+					"description": ""
+				},
+				"dataLookupKey": {
+					"type": "object",
+					"description": ""
+				},
+				"dataSourceType": {
+					"type": "object",
+					"description": ""
+				},
+				"required": {
+					"type": "boolean",
+					"description": ""
+				},
+				"minValue": {
+					"type": "object",
+					"description": ""
+				},
+				"maxValue": {
+					"type": "object",
+					"description": ""
+				},
+				"placeholder": {
+					"type": "string",
+					"description": ""
+				},
+				"value": {
+					"type": "string",
+					"description": ""
+				},
+				"options": {
+					"type": "object",
+					"description": ""
+				},
+				"group": {
+					"type": "object",
+					"description": ""
+				},
+				"styling": {
+					"type": "object",
+					"description": ""
+				},
+				"dependencies": {
+					"type": "object",
+					"description": ""
+				},
+				"helpText": {
+					"type": "object",
+					"description": ""
+				},
+				"parentKey": {
+					"type": "object",
+					"description": ""
+				},
+				"isCoversTrigger": {
+					"type": "boolean",
+					"description": ""
+				},
+				"attributeId": {
+					"type": "object",
+					"description": ""
+				},
+				"isVisible": {
+					"type": "boolean",
+					"description": ""
+				},
+				"isParent": {
+					"type": "boolean",
+					"description": ""
+				},
+				"isEndorsable": {
+					"type": "boolean",
+					"description": ""
+				},
+				"isLocked": {
+					"type": "boolean",
+					"description": ""
+				},
+				"rules": {
+					"type": "object",
+					"description": ""
+				},
+				"dataSourceConfiguration": {
+					"type": "object",
+					"description": ""
+				}
+			},
+			"type": "object",
+			"required": [
+				"id",
+				"internalDescription",
+				"internalKey",
+				"label",
+				"dataType",
+				"dataSource",
+				"dataLookupKey",
+				"dataSourceType",
+				"required",
+				"minValue",
+				"maxValue",
+				"placeholder",
+				"value",
+				"options",
+				"group",
+				"styling",
+				"dependencies",
+				"helpText",
+				"parentKey",
+				"isCoversTrigger",
+				"attributeId",
+				"isVisible",
+				"isParent",
+				"isEndorsable",
+				"isLocked",
+				"rules",
+				"dataSourceConfiguration"
+			]
+		},
+		"QuestionResponseList": {
+			"description": "",
+			"properties": {
+				"items": {
+					"type": "array",
+					"items": {
+						"$ref": "#/definitions/QuestionResponse"
+					},
+					"description": ""
+				}
+			},
+			"type": "object",
+			"required": [
+				"items"
+			]
+		},
+		"AttachmentResponse": {
+			"description": "",
+			"properties": {
+				"id": {
+					"type": "string",
+					"description": ""
+				},
+				"fileName": {
+					"type": "string",
+					"description": ""
+				},
+				"description": {
+					"type": "object",
+					"description": ""
+				}
+			},
+			"type": "object",
+			"required": [
+				"id",
+				"fileName",
+				"description"
+			]
+		},
+		"Quote": {
+			"description": "",
+			"properties": {
+				"teamId": {
+					"type": "object",
+					"description": ""
+				},
+				"version": {
+					"type": "number",
+					"format": "double",
+					"description": ""
+				},
+				"customer": {
+					"type": "object",
+					"description": ""
+				},
+				"customerConfirmed": {
+					"type": "boolean",
+					"description": ""
+				},
+				"confirmationCode": {
+					"type": "object",
+					"description": ""
+				},
+				"confirmationExpiration": {
+					"type": "object",
+					"description": ""
+				},
+				"product": {
+					"$ref": "#/definitions/Product"
+				},
+				"answers": {
+					"type": "array",
+					"items": {
+						"$ref": "#/definitions/Answer"
+					},
+					"description": ""
+				},
+				"covers": {
+					"type": "array",
+					"items": {
+						"$ref": "#/definitions/Cover"
+					},
+					"description": ""
+				},
+				"startDate": {
+					"type": "string",
+					"format": "date-time",
+					"description": ""
+				},
+				"endDate": {
+					"type": "string",
+					"format": "date-time",
+					"description": ""
+				},
+				"timezoneOffset": {
+					"type": "string",
+					"description": ""
+				},
+				"expiryDate": {
+					"type": "string",
+					"format": "date-time",
+					"description": ""
+				},
+				"priceStatus": {
+					"enum": [
+						"NONE",
+						"CALCULATING",
+						"CALCULATED"
+					],
+					"type": "string",
+					"description": ""
+				},
+				"documentId": {
+					"type": "object",
+					"description": ""
+				},
+				"documentStatus": {
+					"enum": [
+						"NONE",
+						"GENERATING",
+						"GENERATED"
+					],
+					"type": "string",
+					"description": ""
+				},
+				"customerProxy": {
+					"type": "object",
+					"description": ""
+				},
+				"priceComponents": {
+					"type": "array",
+					"items": {
+						"$ref": "#/definitions/QuotePriceComponent"
+					},
+					"description": ""
+				},
+				"priceSummaries": {
+					"type": "array",
+					"items": {
+						"$ref": "#/definitions/QuotePriceSummary"
+					},
+					"description": ""
+				},
+				"priceErrors": {
+					"type": "array",
+					"items": {
+						"$ref": "#/definitions/QuotePriceError"
+					},
+					"description": ""
+				},
+				"interestedParties": {
+					"type": "array",
+					"items": {
+						"$ref": "#/definitions/InterestedParty"
+					},
+					"description": ""
+				},
+				"attestationsDateTimeStamp": {
+					"type": "object",
+					"description": ""
+				},
+				"attestationsAccepted": {
+					"type": "boolean",
+					"description": ""
+				},
+				"agentId": {
+					"type": "object",
+					"description": ""
+				},
+				"locked": {
+					"type": "boolean",
+					"description": ""
+				},
+				"origin": {
+					"enum": [
+						"POLICY_NEW",
+						"POLICY_ENDORSEMENT"
+					],
+					"type": "string",
+					"description": ""
+				},
+				"endorsement": {
+					"type": "object",
+					"description": ""
+				},
+				"referredQuote": {
+					"type": "object",
+					"description": ""
+				},
+				"referredQuoteLocked": {
+					"type": "boolean",
+					"description": ""
+				},
+				"externallyReferred": {
+					"type": "boolean",
+					"description": ""
+				},
+				"duplicateGroupId": {
+					"type": "object",
+					"description": ""
+				},
+				"referralContractText": {
+					"type": "object",
+					"description": ""
+				},
+				"referralOutcomeText": {
+					"type": "object",
+					"description": ""
+				},
+				"referralNotes": {
+					"type": "object",
+					"description": ""
+				},
+				"referredQuoteCoverPrices": {
+					"type": "object",
+					"description": ""
+				},
+				"suppressedUnderwritingRules": {
+					"type": "array",
+					"items": {
+						"$ref": "#/definitions/UnderwritingRule"
+					},
+					"description": ""
+				},
+				"triggeredUnderwritingRule": {
+					"type": "object",
+					"description": ""
+				},
+				"id": {
+					"type": "string",
+					"description": ""
+				},
+				"createdAt": {
+					"type": "string",
+					"format": "date-time",
+					"description": ""
+				},
+				"updatedAt": {
+					"type": "string",
+					"format": "date-time",
+					"description": ""
+				}
+			},
+			"type": "object",
+			"required": [
+				"teamId",
+				"version",
+				"customer",
+				"customerConfirmed",
+				"confirmationCode",
+				"confirmationExpiration",
+				"product",
+				"answers",
+				"covers",
+				"startDate",
+				"endDate",
+				"timezoneOffset",
+				"expiryDate",
+				"priceStatus",
+				"documentId",
+				"documentStatus",
+				"customerProxy",
+				"priceComponents",
+				"priceSummaries",
+				"priceErrors",
+				"interestedParties",
+				"attestationsDateTimeStamp",
+				"attestationsAccepted",
+				"agentId",
+				"locked",
+				"origin",
+				"referredQuoteLocked",
+				"externallyReferred",
+				"duplicateGroupId",
+				"referralContractText",
+				"referralOutcomeText",
+				"referralNotes",
+				"referredQuoteCoverPrices",
+				"suppressedUnderwritingRules",
+				"id",
+				"createdAt",
+				"updatedAt"
+			]
+		},
+		"Product": {
+			"description": "",
+			"properties": {
+				"id": {
+					"type": "string",
+					"description": ""
+				},
+				"name": {
+					"type": "string",
+					"description": ""
+				},
+				"locale": {
+					"type": "string",
+					"description": ""
+				},
+				"currency": {
+					"type": "string",
+					"description": ""
+				},
+				"quotes": {
+					"type": "array",
+					"items": {
+						"$ref": "#/definitions/Quote"
+					},
+					"description": ""
+				},
+				"allowAgentsToProxy": {
+					"type": "boolean",
+					"description": ""
+				},
+				"isPublic": {
+					"type": "boolean",
+					"description": ""
+				},
+				"questionIds": {
+					"type": "array",
+					"items": {
+						"type": "string"
+					},
+					"description": ""
+				},
+				"dateSettings": {
+					"type": "array",
+					"items": {
+						"$ref": "#/definitions/QuoteDateSetting"
+					},
+					"description": ""
+				},
+				"timezoneSetting": {
+					"$ref": "#/definitions/QuoteTimezoneSetting"
+				},
+				"timeSetting": {
+					"$ref": "#/definitions/QuoteTimeSetting"
+				}
+			},
+			"type": "object",
+			"required": [
+				"id",
+				"name",
+				"locale",
+				"currency",
+				"quotes",
+				"allowAgentsToProxy",
+				"isPublic",
+				"questionIds",
+				"dateSettings",
+				"timezoneSetting",
+				"timeSetting"
+			]
+		},
+		"QuoteDateSetting": {
+			"description": "",
+			"properties": {
+				"id": {
+					"type": "string",
+					"description": ""
+				},
+				"period": {
+					"type": "number",
+					"format": "double",
+					"description": ""
+				},
+				"unit": {
+					"enum": [
+						"DAY",
+						"MONTH",
+						"YEAR"
+					],
+					"type": "string",
+					"description": ""
+				},
+				"type": {
+					"enum": [
+						"DEFAULT",
+						"MINIMUM",
+						"MAXIMUM",
+						"VALIDITY",
+						"MAXFUTURESTART"
+					],
+					"type": "string",
+					"description": ""
+				},
+				"product": {
+					"$ref": "#/definitions/Product"
+				}
+			},
+			"type": "object",
+			"required": [
+				"id",
+				"period",
+				"unit",
+				"type",
+				"product"
+			]
+		},
+		"QuoteTimezoneSetting": {
+			"description": "",
+			"properties": {
+				"id": {
+					"type": "string",
+					"description": ""
+				},
+				"defaultTimezone": {
+					"type": "object",
+					"description": ""
+				},
+				"timezoneUpdatable": {
+					"type": "boolean",
+					"description": ""
+				},
+				"product": {
+					"$ref": "#/definitions/Product"
+				}
+			},
+			"type": "object",
+			"required": [
+				"id",
+				"defaultTimezone",
+				"timezoneUpdatable",
+				"product"
+			]
+		},
+		"QuoteTimeSetting": {
+			"description": "",
+			"properties": {
+				"id": {
+					"type": "string",
+					"description": ""
+				},
+				"startTime": {
+					"type": "string",
+					"description": ""
+				},
+				"endTime": {
+					"type": "string",
+					"description": ""
+				},
+				"useCurrentTimeWhenInceptionToday": {
+					"type": "boolean",
+					"description": ""
+				},
+				"product": {
+					"$ref": "#/definitions/Product"
+				}
+			},
+			"type": "object",
+			"required": [
+				"id",
+				"startTime",
+				"endTime",
+				"useCurrentTimeWhenInceptionToday",
+				"product"
+			]
+		},
+		"Answer": {
+			"description": "",
+			"properties": {
+				"id": {
+					"type": "string",
+					"description": ""
+				},
+				"value": {
+					"type": "string",
+					"description": ""
+				},
+				"valueLabel": {
+					"type": "object",
+					"description": ""
+				},
+				"originalValue": {
+					"type": "object",
+					"description": ""
+				},
+				"questionId": {
+					"type": "string",
+					"description": ""
+				},
+				"internalKey": {
+					"type": "string",
+					"description": ""
+				},
+				"question": {
+					"type": "string",
+					"description": ""
+				},
+				"attributeId": {
+					"type": "object",
+					"description": ""
+				},
+				"createdAt": {
+					"type": "string",
+					"format": "date-time",
+					"description": ""
+				},
+				"updatedAt": {
+					"type": "string",
+					"format": "date-time",
+					"description": ""
+				},
+				"isDeclined": {
+					"type": "boolean",
+					"description": ""
+				},
+				"quote": {
+					"$ref": "#/definitions/Quote"
+				}
+			},
+			"type": "object",
+			"required": [
+				"id",
+				"value",
+				"valueLabel",
+				"originalValue",
+				"questionId",
+				"internalKey",
+				"question",
+				"attributeId",
+				"createdAt",
+				"updatedAt",
+				"isDeclined",
+				"quote"
+			]
+		},
+		"Cover": {
+			"description": "",
+			"properties": {
+				"coverId": {
+					"type": "string",
+					"description": ""
+				},
+				"internalKey": {
+					"type": "string",
+					"description": ""
+				},
+				"label": {
+					"type": "string",
+					"description": ""
+				},
+				"value": {
+					"type": "boolean",
+					"description": ""
+				},
+				"quote": {
+					"$ref": "#/definitions/Quote"
+				},
+				"limits": {
+					"type": "array",
+					"items": {
+						"$ref": "#/definitions/CoverLimit"
+					},
+					"description": ""
+				},
+				"priceErrors": {
+					"type": "array",
+					"items": {
+						"$ref": "#/definitions/CoverPriceError"
+					},
+					"description": ""
+				},
+				"priceComponents": {
+					"type": "array",
+					"items": {
+						"$ref": "#/definitions/CoverPriceComponent"
+					},
+					"description": ""
+				},
+				"priceSummaries": {
+					"type": "array",
+					"items": {
+						"$ref": "#/definitions/CoverPriceSummary"
+					},
+					"description": ""
+				},
+				"isDeclined": {
+					"type": "boolean",
+					"description": ""
+				},
+				"declineReason": {
+					"type": "object",
+					"description": ""
+				},
+				"isReferred": {
+					"type": "boolean",
+					"description": ""
+				},
+				"referredReason": {
+					"type": "object",
+					"description": ""
+				},
+				"endorsements": {
+					"type": "array",
+					"items": {
+						"$ref": "#/definitions/EndorsementCover"
+					},
+					"description": ""
+				},
+				"id": {
+					"type": "string",
+					"description": ""
+				},
+				"createdAt": {
+					"type": "string",
+					"format": "date-time",
+					"description": ""
+				},
+				"updatedAt": {
+					"type": "string",
+					"format": "date-time",
+					"description": ""
+				}
+			},
+			"type": "object",
+			"required": [
+				"coverId",
+				"internalKey",
+				"label",
+				"value",
+				"quote",
+				"limits",
+				"priceErrors",
+				"priceComponents",
+				"priceSummaries",
+				"isDeclined",
+				"declineReason",
+				"isReferred",
+				"referredReason",
+				"endorsements",
+				"id",
+				"createdAt",
+				"updatedAt"
+			]
+		},
+		"CoverLimit": {
+			"description": "",
+			"properties": {
+				"limitId": {
+					"type": "string",
+					"description": ""
+				},
+				"value": {
+					"type": "string",
+					"description": ""
+				},
+				"originalValue": {
+					"type": "string",
+					"description": ""
+				},
+				"label": {
+					"type": "string",
+					"description": ""
+				},
+				"internalKey": {
+					"type": "string",
+					"description": ""
+				},
+				"cover": {
+					"$ref": "#/definitions/Cover"
+				},
+				"id": {
+					"type": "string",
+					"description": ""
+				},
+				"createdAt": {
+					"type": "string",
+					"format": "date-time",
+					"description": ""
+				},
+				"updatedAt": {
+					"type": "string",
+					"format": "date-time",
+					"description": ""
+				}
+			},
+			"type": "object",
+			"required": [
+				"limitId",
+				"value",
+				"originalValue",
+				"label",
+				"internalKey",
+				"cover",
+				"id",
+				"createdAt",
+				"updatedAt"
+			]
+		},
+		"CoverPriceError": {
+			"description": "",
+			"properties": {
+				"cover": {
+					"$ref": "#/definitions/Cover"
+				},
+				"message": {
+					"type": "string",
+					"description": ""
+				},
+				"id": {
+					"type": "string",
+					"description": ""
+				},
+				"createdAt": {
+					"type": "string",
+					"format": "date-time",
+					"description": ""
+				},
+				"updatedAt": {
+					"type": "string",
+					"format": "date-time",
+					"description": ""
+				}
+			},
+			"type": "object",
+			"required": [
+				"cover",
+				"message",
+				"id",
+				"createdAt",
+				"updatedAt"
+			]
+		},
+		"CoverPriceComponent": {
+			"description": "",
+			"properties": {
+				"cover": {
+					"$ref": "#/definitions/Cover"
+				},
+				"name": {
+					"type": "string",
+					"description": ""
+				},
+				"type": {
+					"type": "string",
+					"description": ""
+				},
+				"value": {
+					"type": "string",
+					"description": ""
+				},
+				"source": {
+					"type": "object",
+					"description": ""
+				},
+				"target": {
+					"type": "object",
+					"description": ""
+				},
+				"id": {
+					"type": "string",
+					"description": ""
+				},
+				"createdAt": {
+					"type": "string",
+					"format": "date-time",
+					"description": ""
+				},
+				"updatedAt": {
+					"type": "string",
+					"format": "date-time",
+					"description": ""
+				}
+			},
+			"type": "object",
+			"required": [
+				"cover",
+				"name",
+				"type",
+				"value",
+				"source",
+				"target",
+				"id",
+				"createdAt",
+				"updatedAt"
+			]
+		},
+		"CoverPriceSummary": {
+			"description": "",
+			"properties": {
+				"cover": {
+					"$ref": "#/definitions/Cover"
+				},
+				"name": {
+					"type": "string",
+					"description": ""
+				},
+				"value": {
+					"type": "string",
+					"description": ""
+				},
+				"id": {
+					"type": "string",
+					"description": ""
+				},
+				"createdAt": {
+					"type": "string",
+					"format": "date-time",
+					"description": ""
+				},
+				"updatedAt": {
+					"type": "string",
+					"format": "date-time",
+					"description": ""
+				}
+			},
+			"type": "object",
+			"required": [
+				"cover",
+				"name",
+				"value",
+				"id",
+				"createdAt",
+				"updatedAt"
+			]
+		},
+		"EndorsementCover": {
+			"description": "",
+			"properties": {
+				"cover": {
+					"$ref": "#/definitions/Cover"
+				},
+				"endorsement": {
+					"$ref": "#/definitions/Endorsement"
+				},
+				"priceComponents": {
+					"type": "array",
+					"items": {
+						"$ref": "#/definitions/EndorsementCoverPriceComponent"
+					},
+					"description": ""
+				},
+				"priceSummaries": {
+					"type": "array",
+					"items": {
+						"$ref": "#/definitions/EndorsementCoverPriceSummary"
+					},
+					"description": ""
+				},
+				"id": {
+					"type": "string",
+					"description": ""
+				},
+				"createdAt": {
+					"type": "string",
+					"format": "date-time",
+					"description": ""
+				},
+				"updatedAt": {
+					"type": "string",
+					"format": "date-time",
+					"description": ""
+				}
+			},
+			"type": "object",
+			"required": [
+				"cover",
+				"endorsement",
+				"priceComponents",
+				"priceSummaries",
+				"id",
+				"createdAt",
+				"updatedAt"
+			]
+		},
+		"Endorsement": {
+			"description": "",
+			"properties": {
+				"quote": {
+					"$ref": "#/definitions/Quote"
+				},
+				"policyId": {
+					"type": "string",
+					"description": ""
+				},
+				"covers": {
+					"type": "array",
+					"items": {
+						"$ref": "#/definitions/EndorsementCover"
+					},
+					"description": ""
+				},
+				"priceComponents": {
+					"type": "array",
+					"items": {
+						"$ref": "#/definitions/EndorsementPriceComponent"
+					},
+					"description": ""
+				},
+				"priceSummaries": {
+					"type": "array",
+					"items": {
+						"$ref": "#/definitions/EndorsementPriceSummary"
+					},
+					"description": ""
+				},
+				"acceptedDate": {
+					"type": "object",
+					"description": ""
+				},
+				"priceStatus": {
+					"enum": [
+						"NONE",
+						"CALCULATING",
+						"CALCULATED"
+					],
+					"type": "string",
+					"description": ""
+				},
+				"scheduledApplyDate": {
+					"type": "string",
+					"format": "date-time",
+					"description": ""
+				},
+				"minApplyDate": {
+					"type": "object",
+					"description": ""
+				},
+				"diff": {
+					"type": "object",
+					"description": ""
+				},
+				"originalQuoteCreatedAt": {
+					"type": "string",
+					"format": "date-time",
+					"description": ""
+				},
+				"id": {
+					"type": "string",
+					"description": ""
+				},
+				"createdAt": {
+					"type": "string",
+					"format": "date-time",
+					"description": ""
+				},
+				"updatedAt": {
+					"type": "string",
+					"format": "date-time",
+					"description": ""
+				}
+			},
+			"type": "object",
+			"required": [
+				"quote",
+				"policyId",
+				"covers",
+				"priceComponents",
+				"priceSummaries",
+				"acceptedDate",
+				"priceStatus",
+				"scheduledApplyDate",
+				"minApplyDate",
+				"diff",
+				"originalQuoteCreatedAt",
+				"id",
+				"createdAt",
+				"updatedAt"
+			]
+		},
+		"EndorsementPriceComponent": {
+			"description": "",
+			"properties": {
+				"endorsement": {
+					"$ref": "#/definitions/Endorsement"
+				},
+				"name": {
+					"type": "string",
+					"description": ""
+				},
+				"type": {
+					"type": "string",
+					"description": ""
+				},
+				"value": {
+					"type": "string",
+					"description": ""
+				},
+				"source": {
+					"type": "object",
+					"description": ""
+				},
+				"target": {
+					"type": "object",
+					"description": ""
+				},
+				"id": {
+					"type": "string",
+					"description": ""
+				},
+				"createdAt": {
+					"type": "string",
+					"format": "date-time",
+					"description": ""
+				},
+				"updatedAt": {
+					"type": "string",
+					"format": "date-time",
+					"description": ""
+				}
+			},
+			"type": "object",
+			"required": [
+				"endorsement",
+				"name",
+				"type",
+				"value",
+				"source",
+				"target",
+				"id",
+				"createdAt",
+				"updatedAt"
+			]
+		},
+		"EndorsementPriceSummary": {
+			"description": "",
+			"properties": {
+				"endorsement": {
+					"$ref": "#/definitions/Endorsement"
+				},
+				"name": {
+					"type": "string",
+					"description": ""
+				},
+				"value": {
+					"type": "string",
+					"description": ""
+				},
+				"id": {
+					"type": "string",
+					"description": ""
+				},
+				"createdAt": {
+					"type": "string",
+					"format": "date-time",
+					"description": ""
+				},
+				"updatedAt": {
+					"type": "string",
+					"format": "date-time",
+					"description": ""
+				}
+			},
+			"type": "object",
+			"required": [
+				"endorsement",
+				"name",
+				"value",
+				"id",
+				"createdAt",
+				"updatedAt"
+			]
+		},
+		"EndorsementCoverPriceComponent": {
+			"description": "",
+			"properties": {
+				"cover": {
+					"$ref": "#/definitions/EndorsementCover"
+				},
+				"name": {
+					"type": "string",
+					"description": ""
+				},
+				"type": {
+					"type": "string",
+					"description": ""
+				},
+				"value": {
+					"type": "string",
+					"description": ""
+				},
+				"source": {
+					"type": "object",
+					"description": ""
+				},
+				"target": {
+					"type": "object",
+					"description": ""
+				},
+				"id": {
+					"type": "string",
+					"description": ""
+				},
+				"createdAt": {
+					"type": "string",
+					"format": "date-time",
+					"description": ""
+				},
+				"updatedAt": {
+					"type": "string",
+					"format": "date-time",
+					"description": ""
+				}
+			},
+			"type": "object",
+			"required": [
+				"cover",
+				"name",
+				"type",
+				"value",
+				"source",
+				"target",
+				"id",
+				"createdAt",
+				"updatedAt"
+			]
+		},
+		"EndorsementCoverPriceSummary": {
+			"description": "",
+			"properties": {
+				"cover": {
+					"$ref": "#/definitions/EndorsementCover"
+				},
+				"name": {
+					"type": "string",
+					"description": ""
+				},
+				"value": {
+					"type": "string",
+					"description": ""
+				},
+				"id": {
+					"type": "string",
+					"description": ""
+				},
+				"createdAt": {
+					"type": "string",
+					"format": "date-time",
+					"description": ""
+				},
+				"updatedAt": {
+					"type": "string",
+					"format": "date-time",
+					"description": ""
+				}
+			},
+			"type": "object",
+			"required": [
+				"cover",
+				"name",
+				"value",
+				"id",
+				"createdAt",
+				"updatedAt"
+			]
+		},
+		"QuotePriceComponent": {
+			"description": "",
+			"properties": {
+				"quote": {
+					"$ref": "#/definitions/Quote"
+				},
+				"name": {
+					"type": "string",
+					"description": ""
+				},
+				"type": {
+					"type": "string",
+					"description": ""
+				},
+				"value": {
+					"type": "string",
+					"description": ""
+				},
+				"source": {
+					"type": "object",
+					"description": ""
+				},
+				"target": {
+					"type": "object",
+					"description": ""
+				},
+				"id": {
+					"type": "string",
+					"description": ""
+				},
+				"createdAt": {
+					"type": "string",
+					"format": "date-time",
+					"description": ""
+				},
+				"updatedAt": {
+					"type": "string",
+					"format": "date-time",
+					"description": ""
+				}
+			},
+			"type": "object",
+			"required": [
+				"quote",
+				"name",
+				"type",
+				"value",
+				"source",
+				"target",
+				"id",
+				"createdAt",
+				"updatedAt"
+			]
+		},
+		"QuotePriceSummary": {
+			"description": "",
+			"properties": {
+				"quote": {
+					"$ref": "#/definitions/Quote"
+				},
+				"name": {
+					"type": "string",
+					"description": ""
+				},
+				"value": {
+					"type": "string",
+					"description": ""
+				},
+				"id": {
+					"type": "string",
+					"description": ""
+				},
+				"createdAt": {
+					"type": "string",
+					"format": "date-time",
+					"description": ""
+				},
+				"updatedAt": {
+					"type": "string",
+					"format": "date-time",
+					"description": ""
+				}
+			},
+			"type": "object",
+			"required": [
+				"quote",
+				"name",
+				"value",
+				"id",
+				"createdAt",
+				"updatedAt"
+			]
+		},
+		"QuotePriceError": {
+			"description": "",
+			"properties": {
+				"quote": {
+					"$ref": "#/definitions/Quote"
+				},
+				"message": {
+					"type": "string",
+					"description": ""
+				},
+				"id": {
+					"type": "string",
+					"description": ""
+				},
+				"createdAt": {
+					"type": "string",
+					"format": "date-time",
+					"description": ""
+				},
+				"updatedAt": {
+					"type": "string",
+					"format": "date-time",
+					"description": ""
+				}
+			},
+			"type": "object",
+			"required": [
+				"quote",
+				"message",
+				"id",
+				"createdAt",
+				"updatedAt"
+			]
+		},
+		"InterestedParty": {
+			"description": "",
+			"properties": {
+				"id": {
+					"type": "string",
+					"description": ""
+				},
+				"name": {
+					"type": "string",
+					"description": ""
+				},
+				"type": {
+					"type": "string",
+					"description": ""
+				},
+				"loanId": {
+					"type": "object",
+					"description": ""
+				},
+				"mailingAddress": {
+					"type": "object",
+					"description": ""
+				},
+				"email": {
+					"type": "object",
+					"description": ""
+				},
+				"sendEmail": {
+					"type": "object",
+					"description": ""
+				},
+				"description": {
+					"type": "object",
+					"description": ""
+				},
+				"quote": {
+					"$ref": "#/definitions/Quote"
+				}
+			},
+			"type": "object",
+			"required": [
+				"id",
+				"name",
+				"type",
+				"loanId",
+				"mailingAddress",
+				"email",
+				"sendEmail",
+				"description",
+				"quote"
+			]
+		},
+		"UnderwritingRule": {
+			"description": "",
+			"properties": {
+				"id": {
+					"type": "string",
+					"description": ""
+				},
+				"ruleId": {
+					"type": "string",
+					"description": ""
+				},
+				"quote": {
+					"$ref": "#/definitions/Quote"
+				}
+			},
+			"type": "object",
+			"required": [
+				"id",
+				"ruleId",
+				"quote"
+			]
+		},
+		"QuotePrice": {
+			"description": "",
+			"properties": {
+				"premium": {
+					"type": "string",
+					"description": ""
+				},
+				"totalFees": {
+					"type": "string",
+					"description": ""
+				},
+				"totalTaxes": {
+					"type": "string",
+					"description": ""
+				},
+				"totalPayable": {
+					"type": "string",
+					"description": ""
+				}
+			},
+			"type": "object",
+			"required": [
+				"premium",
+				"totalFees",
+				"totalTaxes",
+				"totalPayable"
+			],
+			"additionalProperties": {}
+		},
+		"AnswerDiff": {
+			"description": "",
+			"properties": {
+				"question": {
+					"type": "string",
+					"description": ""
+				},
+				"currentAnswer": {
+					"type": "string",
+					"description": ""
+				},
+				"endorsementAnswer": {
+					"type": "string",
+					"description": ""
+				}
+			},
+			"type": "object",
+			"required": [
+				"question",
+				"currentAnswer",
+				"endorsementAnswer"
+			]
+		},
+		"CoverDiff": {
+			"description": "",
+			"properties": {
+				"label": {
+					"type": "string",
+					"description": ""
+				},
+				"currentCover": {
+					"type": "string",
+					"description": ""
+				},
+				"endorsementCover": {
+					"type": "string",
+					"description": ""
+				}
+			},
+			"type": "object",
+			"required": [
+				"label",
+				"currentCover",
+				"endorsementCover"
+			]
+		},
+		"LimitDiff": {
+			"description": "",
+			"properties": {
+				"label": {
+					"type": "string",
+					"description": ""
+				},
+				"currentLimit": {
+					"type": "string",
+					"description": ""
+				},
+				"endorsementLimit": {
+					"type": "string",
+					"description": ""
+				}
+			},
+			"type": "object",
+			"required": [
+				"label",
+				"currentLimit",
+				"endorsementLimit"
+			]
+		},
+		"InterestedPartyDiff": {
+			"description": "",
+			"properties": {
+				"operation": {
+					"enum": [
+						"ADD",
+						"DELETE"
+					],
+					"type": "string",
+					"description": ""
+				},
+				"name": {
+					"type": "string",
+					"description": ""
+				},
+				"currentInterestedParty": {
+					"type": "string",
+					"description": ""
+				},
+				"endorsementInterestedParty": {
+					"type": "string",
+					"description": ""
+				}
+			},
+			"type": "object",
+			"required": [
+				"operation",
+				"name"
+			]
+		},
+		"DateDiff": {
+			"description": "",
+			"properties": {
+				"name": {
+					"type": "string",
+					"description": ""
+				},
+				"currentDate": {
+					"type": "string",
+					"description": ""
+				},
+				"endorsementDate": {
+					"type": "string",
+					"description": ""
+				}
+			},
+			"type": "object",
+			"required": [
+				"name",
+				"currentDate",
+				"endorsementDate"
+			]
+		},
+		"EndorsementDiffResponse": {
+			"description": "",
+			"properties": {
+				"answers": {
+					"type": "array",
+					"items": {
+						"$ref": "#/definitions/AnswerDiff"
+					},
+					"description": ""
+				},
+				"covers": {
+					"type": "array",
+					"items": {
+						"$ref": "#/definitions/CoverDiff"
+					},
+					"description": ""
+				},
+				"limits": {
+					"type": "array",
+					"items": {
+						"$ref": "#/definitions/LimitDiff"
+					},
+					"description": ""
+				},
+				"interestedParties": {
+					"type": "array",
+					"items": {
+						"$ref": "#/definitions/InterestedPartyDiff"
+					},
+					"description": ""
+				},
+				"startDate": {
+					"$ref": "#/definitions/DateDiff"
+				},
+				"endDate": {
+					"$ref": "#/definitions/DateDiff"
+				}
+			},
+			"type": "object"
+		},
+		"EndorsementQuoteResponse": {
+			"description": "",
+			"properties": {
+				"id": {
+					"type": "string",
+					"description": ""
+				},
+				"policyId": {
+					"type": "string",
+					"description": ""
+				},
+				"quote": {
+					"$ref": "#/definitions/QuoteResponse"
+				},
+				"priceComponents": {
+					"type": "array",
+					"items": {
+						"$ref": "#/definitions/QuotePriceComponent"
+					},
+					"description": ""
+				},
+				"priceSummary": {
+					"$ref": "#/definitions/QuotePrice"
+				},
+				"acceptedDate": {
+					"type": "string",
+					"description": ""
+				},
+				"scheduledApplyDate": {
+					"type": "string",
+					"description": ""
+				},
+				"minApplyDate": {
+					"type": "string",
+					"description": ""
+				},
+				"diff": {
+					"$ref": "#/definitions/EndorsementDiffResponse"
+				}
+			},
+			"type": "object",
+			"required": [
+				"id",
+				"policyId",
+				"quote",
+				"priceComponents",
+				"scheduledApplyDate"
+			]
+		},
+		"EndorsementQuoteUpdateRequest": {
+			"description": "",
+			"properties": {
+				"acceptedDate": {
+					"type": "string",
+					"description": ""
+				},
+				"scheduledApplyDate": {
+					"type": "string",
+					"description": ""
+				}
+			},
+			"type": "object"
+		},
+		"QuoteSummary": {
+			"description": "",
+			"properties": {
+				"id": {
+					"type": "string",
+					"description": ""
+				},
+				"customer": {
+					"type": "object",
+					"description": ""
+				},
+				"product": {
+					"$ref": "#/definitions/QuoteProduct"
+				},
+				"answers": {
+					"type": "array",
+					"items": {
+						"$ref": "#/definitions/QuoteAnswerResponse"
+					},
+					"description": ""
+				},
+				"priceComponents": {
+					"type": "array",
+					"items": {
+						"$ref": "#/definitions/PriceComponent"
+					},
+					"description": ""
+				},
+				"price": {
+					"$ref": "#/definitions/PriceSummary"
+				},
+				"errors": {
+					"type": "array",
+					"items": {
+						"$ref": "#/definitions/PriceError"
+					},
+					"description": ""
+				}
+			},
+			"type": "object",
+			"required": [
+				"id",
+				"customer",
+				"product",
+				"answers",
+				"priceComponents"
+			]
+		},
+		"ReferredQuoteListItem": {
+			"description": "",
+			"properties": {
+				"id": {
+					"type": "string",
+					"description": ""
+				},
+				"createdAt": {
+					"type": "string",
+					"description": ""
+				},
+				"updatedAt": {
+					"type": "string",
+					"description": ""
+				},
+				"quote": {
+					"$ref": "#/definitions/QuoteSummary"
+				},
+				"status": {
+					"enum": [
+						"REFERRED",
+						"ACCEPTED",
+						"DECLINED"
+					],
+					"type": "string",
+					"description": ""
+				},
+				"outcomeText": {
+					"type": "object",
+					"description": ""
+				},
+				"contractText": {
+					"type": "object",
+					"description": ""
+				},
+				"overrideTotalPrice": {
+					"type": "object",
+					"description": ""
+				}
+			},
+			"type": "object",
+			"required": [
+				"id",
+				"createdAt",
+				"updatedAt",
+				"quote",
+				"status"
+			]
+		},
+		"ReferredQuoteListResponse": {
+			"description": "",
+			"properties": {
+				"items": {
+					"type": "array",
+					"items": {
+						"$ref": "#/definitions/ReferredQuoteListItem"
+					},
+					"description": ""
+				},
+				"limit": {
+					"type": "number",
+					"format": "double",
+					"description": ""
+				},
+				"offset": {
+					"type": "number",
+					"format": "double",
+					"description": ""
+				},
+				"total": {
+					"type": "number",
+					"format": "double",
+					"description": ""
+				}
+			},
+			"type": "object",
+			"required": [
+				"items",
+				"limit",
+				"offset",
+				"total"
+			]
+		},
+		"ReferredQuoteNoteResponse": {
+			"description": "",
+			"properties": {
+				"id": {
+					"type": "string",
+					"description": ""
+				},
+				"createdAt": {
+					"type": "string",
+					"description": ""
+				},
+				"updatedAt": {
+					"type": "string",
+					"description": ""
+				},
+				"agentId": {
+					"type": "string",
+					"description": ""
+				},
+				"subject": {
+					"type": "string",
+					"description": ""
+				},
+				"content": {
+					"type": "string",
+					"description": ""
+				}
+			},
+			"type": "object",
+			"required": [
+				"id",
+				"createdAt",
+				"updatedAt",
+				"agentId",
+				"subject",
+				"content"
+			]
+		},
+		"ReferredQuoteResponse": {
+			"description": "",
+			"properties": {
+				"createdAt": {
+					"type": "string",
+					"description": ""
+				},
+				"updatedAt": {
+					"type": "string",
+					"description": ""
+				},
+				"outcomeText": {
+					"type": "object",
+					"description": ""
+				},
+				"overrideTotalPrice": {
+					"type": "object",
+					"description": ""
+				},
+				"quote": {
+					"$ref": "#/definitions/QuoteResponse"
+				},
+				"notes": {
+					"type": "array",
+					"items": {
+						"$ref": "#/definitions/ReferredQuoteNoteResponse"
+					},
+					"description": ""
+				},
+				"id": {
+					"type": "string",
+					"description": ""
+				},
+				"status": {
+					"enum": [
+						"REFERRED",
+						"ACCEPTED",
+						"DECLINED"
+					],
+					"type": "string",
+					"description": ""
+				},
+				"contractText": {
+					"type": "object",
+					"description": ""
+				}
+			},
+			"type": "object",
+			"required": [
+				"createdAt",
+				"updatedAt",
+				"quote",
+				"notes",
+				"id",
+				"status"
+			]
+		},
+		"ReferredQuoteCoverPriceOverride": {
+			"description": "",
+			"properties": {
+				"coverId": {
+					"type": "string",
+					"description": ""
+				},
+				"overrideType": {
+					"enum": [
+						"NO_OVERRIDE",
+						"PREMIUM_OVERRIDE_FIXED",
+						"PREMIUM_OVERRIDE_PERCENTAGE"
+					],
+					"type": "string",
+					"description": ""
+				},
+				"overrideValue": {
+					"type": "string",
+					"description": ""
+				}
+			},
+			"type": "object",
+			"required": [
+				"coverId",
+				"overrideType"
+			]
+		},
+		"ReferredQuoteUpdateRequest": {
+			"description": "",
+			"properties": {
+				"status": {
+					"enum": [
+						"REFERRED",
+						"ACCEPTED",
+						"DECLINED"
+					],
+					"type": "string",
+					"description": ""
+				},
+				"outcomeText": {
+					"type": "object",
+					"description": ""
+				},
+				"contractText": {
+					"type": "object",
+					"description": ""
+				},
+				"coverPriceOverrides": {
+					"type": "array",
+					"items": {
+						"$ref": "#/definitions/ReferredQuoteCoverPriceOverride"
+					},
+					"description": ""
+				},
+				"overrideTotalPrice": {
+					"type": "object",
+					"description": ""
+				}
+			},
+			"type": "object",
+			"required": [
+				"status",
+				"outcomeText",
+				"contractText",
+				"overrideTotalPrice"
+			]
+		},
+		"ReferredQuoteNoteCreateRequest": {
+			"description": "",
+			"properties": {
+				"content": {
+					"type": "string",
+					"description": ""
+				},
+				"subject": {
+					"type": "string",
+					"description": ""
+				}
+			},
+			"type": "object",
+			"required": [
+				"content",
+				"subject"
+			]
+		},
+		"QuoteDatePeriod": {
+			"description": "",
+			"properties": {
+				"period": {
+					"type": "number",
+					"format": "double",
+					"description": ""
+				},
+				"unit": {
+					"enum": [
+						"YEAR",
+						"MONTH",
+						"DAY"
+					],
+					"type": "string",
+					"description": ""
+				}
+			},
+			"type": "object",
+			"required": [
+				"period",
+				"unit"
+			]
+		},
+		"QuoteDateConfigResponse": {
+			"description": "",
+			"properties": {
+				"date": {
+					"type": "object",
+					"properties": {
+						"defaultPolicy": {
+							"$ref": "#/definitions/QuoteDatePeriod"
+						},
+						"minimumPolicy": {
+							"$ref": "#/definitions/QuoteDatePeriod"
+						},
+						"maximumPolicy": {
+							"$ref": "#/definitions/QuoteDatePeriod"
+						},
+						"maximumQuoteValidity": {
+							"$ref": "#/definitions/QuoteDatePeriod"
+						},
+						"maximumFuturePolicyInception": {
+							"$ref": "#/definitions/QuoteDatePeriod"
+						}
+					},
+					"description": ""
+				},
+				"timezone": {
+					"type": "object",
+					"properties": {
+						"defaultTimezone": {
+							"type": "object",
+							"description": ""
+						},
+						"timezoneUpdatable": {
+							"type": "boolean",
+							"description": ""
+						}
+					},
+					"description": ""
+				},
+				"time": {
+					"type": "object",
+					"properties": {
+						"startTime": {
+							"type": "string",
+							"description": ""
+						},
+						"endTime": {
+							"type": "string",
+							"description": ""
+						},
+						"useCurrentTimeWhenInceptionToday": {
+							"type": "boolean",
+							"description": ""
+						}
+					},
+					"description": ""
+				}
+			},
+			"type": "object",
+			"required": [
+				"date",
+				"timezone",
+				"time"
+			]
+		},
+		"QuoteDateConfigUpdateRequest": {
+			"description": "",
+			"properties": {
+				"date": {
+					"type": "object",
+					"properties": {
+						"defaultPolicy": {
+							"$ref": "#/definitions/QuoteDatePeriod"
+						},
+						"minimumPolicy": {
+							"$ref": "#/definitions/QuoteDatePeriod"
+						},
+						"maximumPolicy": {
+							"$ref": "#/definitions/QuoteDatePeriod"
+						},
+						"maximumQuoteValidity": {
+							"$ref": "#/definitions/QuoteDatePeriod"
+						},
+						"maximumFuturePolicyInception": {
+							"$ref": "#/definitions/QuoteDatePeriod"
+						}
+					},
+					"description": ""
+				},
+				"timezone": {
+					"type": "object",
+					"properties": {
+						"defaultTimezone": {
+							"type": "object",
+							"description": ""
+						},
+						"timezoneUpdatable": {
+							"type": "boolean",
+							"description": ""
+						}
+					},
+					"description": ""
+				},
+				"time": {
+					"type": "object",
+					"properties": {
+						"startTime": {
+							"type": "string",
+							"description": ""
+						},
+						"endTime": {
+							"type": "string",
+							"description": ""
+						},
+						"useCurrentTimeWhenInceptionToday": {
+							"type": "boolean",
+							"description": ""
+						}
+					},
+					"description": ""
+				}
+			},
+			"type": "object"
+		}
+	},
+	"info": {
+		"description": "The documentation for the Evari Quotes API",
+		"license": {
+			"name": "UNLICENSED"
+		},
+		"title": "Evari Quotes API",
+		"version": "0.1.0"
+	},
+	"paths": {
+		"/api/quotes/health/diagnostics": {
+			"get": {
+				"operationId": "HealthDiagnostics",
+				"produces": [
+					"application/json"
+				],
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"schema": {
+							"$ref": "#/definitions/DiagnosticsResponse"
+						}
+					}
+				},
+				"description": "Send a detailed system diagnostics response message.",
+				"security": [
+					{
+						"default": []
+					}
+				],
+				"parameters": []
+			}
+		},
+		"/api/quotes/health": {
+			"get": {
+				"operationId": "HealthHealthCheck",
+				"produces": [
+					"application/json"
+				],
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"schema": {
+							"$ref": "#/definitions/HealthResponse"
+						}
+					}
+				},
+				"description": "Send a health response message.\n200 OK or nothing - no other information",
+				"parameters": []
+			}
+		},
+		"/api/quotes/search/quotes": {
+			"get": {
+				"operationId": "QuoteSearch",
+				"produces": [
+					"application/json"
+				],
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"schema": {
+							"$ref": "#/definitions/QuoteListResponse"
+						}
+					}
+				},
+				"description": "",
+				"security": [
+					{
+						"default": []
+					}
+				],
+				"parameters": [
+					{
+						"description": "",
+						"in": "query",
+						"name": "q",
+						"required": true,
+						"type": "string"
+					},
+					{
+						"description": "The starting position to retrieve data from",
+						"in": "query",
+						"name": "offset",
+						"required": true,
+						"type": "number",
+						"format": "double"
+					},
+					{
+						"description": "The number of item to retrieve",
+						"in": "query",
+						"name": "limit",
+						"required": true,
+						"type": "number",
+						"format": "double"
+					},
+					{
+						"description": "The column name to sort",
+						"in": "query",
+						"name": "sort",
+						"required": false,
+						"type": "string"
+					},
+					{
+						"description": "The order of sort",
+						"in": "query",
+						"name": "order",
+						"required": false,
+						"type": "string",
+						"enum": [
+							"ASC",
+							"DESC"
+						]
+					}
+				]
+			}
+		},
+		"/api/quotes/products/{productId}/quotes/count": {
+			"get": {
+				"operationId": "QuoteCount",
+				"produces": [
+					"application/json"
+				],
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"schema": {
+							"$ref": "#/definitions/QuoteCountResponse"
+						}
+					}
+				},
+				"description": "",
+				"security": [
+					{
+						"default": []
+					}
+				],
+				"parameters": [
+					{
+						"description": "",
+						"in": "path",
+						"name": "productId",
+						"required": true,
+						"type": "string"
+					}
+				]
+			}
+		},
+		"/api/quotes/quotes/{id}": {
+			"get": {
+				"operationId": "QuoteGet",
+				"produces": [
+					"application/json"
+				],
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"schema": {
+							"$ref": "#/definitions/QuoteResponse"
+						}
+					}
+				},
+				"description": "",
+				"security": [
+					{
+						"default": []
+					}
+				],
+				"parameters": [
+					{
+						"description": "The id of the quote resource",
+						"in": "path",
+						"name": "id",
+						"required": true,
+						"type": "string"
+					}
+				]
+			},
+			"patch": {
+				"operationId": "QuotePatch",
+				"produces": [
+					"application/json"
+				],
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"schema": {
+							"$ref": "#/definitions/QuoteResponse"
+						}
+					}
+				},
+				"description": "",
+				"security": [
+					{
+						"default": []
+					}
+				],
+				"consumes": [
+					"application/json"
+				],
+				"parameters": [
+					{
+						"description": "",
+						"in": "path",
+						"name": "id",
+						"required": true,
+						"type": "string"
+					},
+					{
+						"description": "",
+						"in": "body",
+						"name": "quote",
+						"required": true,
+						"schema": {
+							"$ref": "#/definitions/QuoteUpdateRequest"
+						}
+					}
+				]
+			}
+		},
+		"/api/quotes/quotes": {
+			"get": {
+				"operationId": "QuoteGetAll",
+				"produces": [
+					"application/json"
+				],
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"schema": {
+							"$ref": "#/definitions/QuoteListResponse"
+						}
+					}
+				},
+				"description": "",
+				"security": [
+					{
+						"default": []
+					}
+				],
+				"parameters": [
+					{
+						"description": "The number of item to retrieve",
+						"in": "query",
+						"name": "limit",
+						"required": true,
+						"type": "number",
+						"format": "double"
+					},
+					{
+						"description": "The starting position to retrieve data from",
+						"in": "query",
+						"name": "offset",
+						"required": true,
+						"type": "number",
+						"format": "double"
+					},
+					{
+						"description": "The column name to sort",
+						"in": "query",
+						"name": "sort",
+						"required": false,
+						"type": "string"
+					},
+					{
+						"description": "The order of sort\nTODO: Require correctly authorised user (owner of the quote or agent associated with the owner)",
+						"in": "query",
+						"name": "order",
+						"required": false,
+						"type": "string",
+						"enum": [
+							"ASC",
+							"DESC"
+						]
+					}
+				]
+			},
+			"post": {
+				"operationId": "QuotePost",
+				"produces": [
+					"application/json"
+				],
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"schema": {
+							"$ref": "#/definitions/QuoteResponse"
+						}
+					}
+				},
+				"description": "",
+				"security": [
+					{
+						"default": []
+					}
+				],
+				"consumes": [
+					"application/json"
+				],
+				"parameters": [
+					{
+						"description": "The object expected by the post",
+						"in": "body",
+						"name": "quote",
+						"required": true,
+						"schema": {
+							"$ref": "#/definitions/QuoteCreateRequest"
+						}
+					}
+				]
+			}
+		},
+		"/api/quotes/products/{productId}/quotes": {
+			"get": {
+				"operationId": "QuoteGetByProduct",
+				"produces": [
+					"application/json"
+				],
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"schema": {
+							"$ref": "#/definitions/QuoteListResponse"
+						}
+					}
+				},
+				"description": "",
+				"security": [
+					{
+						"default": []
+					}
+				],
+				"parameters": [
+					{
+						"description": "",
+						"in": "path",
+						"name": "productId",
+						"required": true,
+						"type": "string"
+					},
+					{
+						"description": "",
+						"in": "query",
+						"name": "limit",
+						"required": true,
+						"type": "number",
+						"format": "double"
+					},
+					{
+						"description": "",
+						"in": "query",
+						"name": "offset",
+						"required": true,
+						"type": "number",
+						"format": "double"
+					},
+					{
+						"description": "",
+						"in": "query",
+						"name": "sort",
+						"required": false,
+						"type": "string"
+					},
+					{
+						"description": "",
+						"in": "query",
+						"name": "order",
+						"required": false,
+						"type": "string",
+						"enum": [
+							"ASC",
+							"DESC"
+						]
+					}
+				]
+			}
+		},
+		"/api/quotes/customers/{id}/quotes": {
+			"get": {
+				"operationId": "QuoteGetAllForCustomer",
+				"produces": [
+					"application/json"
+				],
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"schema": {
+							"$ref": "#/definitions/QuoteListResponse"
+						}
+					}
+				},
+				"description": "",
+				"security": [
+					{
+						"default": []
+					}
+				],
+				"parameters": [
+					{
+						"description": "Id of customer",
+						"in": "path",
+						"name": "id",
+						"required": true,
+						"type": "string"
+					},
+					{
+						"description": "The number of item to retrieve",
+						"in": "query",
+						"name": "limit",
+						"required": true,
+						"type": "number",
+						"format": "double"
+					},
+					{
+						"description": "The starting position to retrieve data from",
+						"in": "query",
+						"name": "offset",
+						"required": true,
+						"type": "number",
+						"format": "double"
+					},
+					{
+						"description": "The column name to sort",
+						"in": "query",
+						"name": "sort",
+						"required": false,
+						"type": "string"
+					},
+					{
+						"description": "The order of sort\nTODO: Require correctly authorised user (owner of the quote or agent associated with the owner)",
+						"in": "query",
+						"name": "order",
+						"required": false,
+						"type": "string",
+						"enum": [
+							"ASC",
+							"DESC"
+						]
+					}
+				]
+			}
+		},
+		"/api/quotes/quote-options/{duplicateGroupId}": {
+			"get": {
+				"operationId": "QuoteGetQuoteOptions",
+				"produces": [
+					"application/json"
+				],
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"schema": {
+							"$ref": "#/definitions/QuoteListResponse"
+						}
+					}
+				},
+				"description": "",
+				"security": [
+					{
+						"default": []
+					}
+				],
+				"parameters": [
+					{
+						"description": "duplicateGroupId of quote resource",
+						"in": "path",
+						"name": "duplicateGroupId",
+						"required": true,
+						"type": "string"
+					},
+					{
+						"description": "The number of item to retrieve",
+						"in": "query",
+						"name": "limit",
+						"required": true,
+						"type": "number",
+						"format": "double"
+					},
+					{
+						"description": "The starting position to retrieve data from",
+						"in": "query",
+						"name": "offset",
+						"required": true,
+						"type": "number",
+						"format": "double"
+					},
+					{
+						"description": "The column name to sort",
+						"in": "query",
+						"name": "sort",
+						"required": false,
+						"type": "string"
+					},
+					{
+						"description": "The order of sort",
+						"in": "query",
+						"name": "order",
+						"required": false,
+						"type": "string",
+						"enum": [
+							"ASC",
+							"DESC"
+						]
+					}
+				]
+			}
+		},
+		"/api/quotes/quotes/{id}/updatebyinternalkey": {
+			"patch": {
+				"operationId": "QuotePatchByInternalKey",
+				"produces": [
+					"application/json"
+				],
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"schema": {
+							"$ref": "#/definitions/QuoteUpdateByInternalKeyResponse"
+						}
+					}
+				},
+				"description": "",
+				"security": [
+					{
+						"default": []
+					}
+				],
+				"consumes": [
+					"application/json"
+				],
+				"parameters": [
+					{
+						"description": "",
+						"in": "path",
+						"name": "id",
+						"required": true,
+						"type": "string"
+					},
+					{
+						"description": "",
+						"in": "body",
+						"name": "changes",
+						"required": true,
+						"schema": {
+							"$ref": "#/definitions/QuoteUpdateByInternalKeyRequest"
+						}
+					}
+				]
+			}
+		},
+		"/api/quotes/quotes/{id}/validate": {
+			"get": {
+				"operationId": "QuoteValidate",
+				"produces": [
+					"text/html"
+				],
+				"responses": {
+					"204": {
+						"description": "No content"
+					}
+				},
+				"description": "",
+				"security": [
+					{
+						"default": []
+					}
+				],
+				"parameters": [
+					{
+						"description": "",
+						"in": "path",
+						"name": "id",
+						"required": true,
+						"type": "string"
+					}
+				]
+			}
+		},
+		"/api/quotes/quotes/{id}/price": {
+			"get": {
+				"operationId": "QuoteGetPrice",
+				"produces": [
+					"text/html"
+				],
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"schema": {
+							"enum": [
+								"QuotePriceResponse",
+								"Return.RequestAccepted<void>"
+							],
+							"type": "string"
+						}
+					}
+				},
+				"description": "",
+				"security": [
+					{
+						"default": []
+					}
+				],
+				"parameters": [
+					{
+						"description": "The id of the quote resource",
+						"in": "path",
+						"name": "id",
+						"required": true,
+						"type": "string"
+					}
+				]
+			}
+		},
+		"/api/quotes/quotes/{id}/pdf": {
+			"get": {
+				"operationId": "QuotePdf",
+				"produces": [
+					"text/html"
+				],
+				"responses": {
+					"202": {
+						"description": "Ok"
+					}
+				},
+				"description": "",
+				"security": [
+					{
+						"default": []
+					}
+				],
+				"parameters": [
+					{
+						"description": "The id of the quote resource",
+						"in": "path",
+						"name": "id",
+						"required": true,
+						"type": "string"
+					}
+				]
+			}
+		},
+		"/api/quotes/quotes/confirm/{code}": {
+			"get": {
+				"operationId": "QuoteConfirm",
+				"produces": [
+					"text/html"
+				],
+				"responses": {
+					"204": {
+						"description": "No content"
+					}
+				},
+				"description": "",
+				"parameters": [
+					{
+						"description": "The confirmation code of the customer to activate",
+						"in": "path",
+						"name": "code",
+						"required": true,
+						"type": "string"
+					}
+				]
+			}
+		},
+		"/api/quotes/quotes/{id}/confirmed": {
+			"get": {
+				"operationId": "QuoteConfirmed",
+				"produces": [
+					"application/json"
+				],
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"schema": {
+							"type": "object"
+						}
+					}
+				},
+				"description": "",
+				"security": [
+					{
+						"default": []
+					}
+				],
+				"parameters": [
+					{
+						"description": "The id of the quote to check if is confirmed",
+						"in": "path",
+						"name": "id",
+						"required": true,
+						"type": "string"
+					}
+				]
+			}
+		},
+		"/api/quotes/quotes/{id}/reconfirm": {
+			"post": {
+				"operationId": "QuoteReconfirm",
+				"produces": [
+					"application/json"
+				],
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"schema": {
+							"type": "object"
+						}
+					}
+				},
+				"description": "",
+				"security": [
+					{
+						"default": []
+					}
+				],
+				"consumes": [
+					"application/json"
+				],
+				"parameters": [
+					{
+						"description": "The id of the quote to reconfirm",
+						"in": "path",
+						"name": "id",
+						"required": true,
+						"type": "string"
+					}
+				]
+			}
+		},
+		"/api/quotes/public/quotes/{id}": {
+			"get": {
+				"operationId": "PublicQuoteGet",
+				"produces": [
+					"application/json"
+				],
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"schema": {
+							"$ref": "#/definitions/QuoteResponse"
+						}
+					}
+				},
+				"description": "",
+				"parameters": [
+					{
+						"description": "The id of the quote resource",
+						"in": "path",
+						"name": "id",
+						"required": true,
+						"type": "string"
+					}
+				]
+			},
+			"patch": {
+				"operationId": "PublicQuotePatch",
+				"produces": [
+					"application/json"
+				],
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"schema": {
+							"$ref": "#/definitions/QuoteResponse"
+						}
+					}
+				},
+				"description": "",
+				"consumes": [
+					"application/json"
+				],
+				"parameters": [
+					{
+						"description": "",
+						"in": "path",
+						"name": "id",
+						"required": true,
+						"type": "string"
+					},
+					{
+						"description": "",
+						"in": "body",
+						"name": "quote",
+						"required": true,
+						"schema": {
+							"$ref": "#/definitions/QuoteUpdateRequest"
+						}
+					}
+				]
+			}
+		},
+		"/api/quotes/public/quotes": {
+			"post": {
+				"operationId": "PublicQuotePost",
+				"produces": [
+					"application/json"
+				],
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"schema": {
+							"$ref": "#/definitions/QuoteResponse"
+						}
+					}
+				},
+				"description": "",
+				"consumes": [
+					"application/json"
+				],
+				"parameters": [
+					{
+						"description": "",
+						"in": "body",
+						"name": "quote",
+						"required": true,
+						"schema": {
+							"$ref": "#/definitions/QuoteCreateRequest"
+						}
+					}
+				]
+			}
+		},
+		"/api/quotes/public/quotes/{id}/updatebyinternalkey": {
+			"patch": {
+				"operationId": "PublicQuotePatchByInternalKey",
+				"produces": [
+					"application/json"
+				],
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"schema": {
+							"$ref": "#/definitions/QuoteUpdateByInternalKeyResponse"
+						}
+					}
+				},
+				"description": "",
+				"consumes": [
+					"application/json"
+				],
+				"parameters": [
+					{
+						"description": "",
+						"in": "path",
+						"name": "id",
+						"required": true,
+						"type": "string"
+					},
+					{
+						"description": "",
+						"in": "body",
+						"name": "changes",
+						"required": true,
+						"schema": {
+							"$ref": "#/definitions/QuoteUpdateByInternalKeyRequest"
+						}
+					}
+				]
+			}
+		},
+		"/api/quotes/public/quotes/{id}/validate": {
+			"get": {
+				"operationId": "PublicQuoteValidate",
+				"produces": [
+					"text/html"
+				],
+				"responses": {
+					"204": {
+						"description": "No content"
+					}
+				},
+				"description": "",
+				"parameters": [
+					{
+						"description": "",
+						"in": "path",
+						"name": "id",
+						"required": true,
+						"type": "string"
+					}
+				]
+			}
+		},
+		"/api/quotes/public/quotes/{id}/price": {
+			"get": {
+				"operationId": "PublicQuoteGetPrice",
+				"produces": [
+					"text/html"
+				],
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"schema": {
+							"enum": [
+								"QuotePriceResponse",
+								"Return.RequestAccepted<void>"
+							],
+							"type": "string"
+						}
+					}
+				},
+				"description": "",
+				"parameters": [
+					{
+						"description": "The id of the quote resource",
+						"in": "path",
+						"name": "id",
+						"required": true,
+						"type": "string"
+					}
+				]
+			}
+		},
+		"/api/quotes/public/quotes/{id}/pdf": {
+			"get": {
+				"operationId": "PublicQuotePdf",
+				"produces": [
+					"text/html"
+				],
+				"responses": {
+					"202": {
+						"description": "Ok"
+					}
+				},
+				"description": "",
+				"parameters": [
+					{
+						"description": "The id of the quote resource",
+						"in": "path",
+						"name": "id",
+						"required": true,
+						"type": "string"
+					}
+				]
+			}
+		},
+		"/api/quotes/public/quotes/confirm/{code}": {
+			"get": {
+				"operationId": "PublicQuoteConfirm",
+				"produces": [
+					"text/html"
+				],
+				"responses": {
+					"204": {
+						"description": "No content"
+					}
+				},
+				"description": "",
+				"parameters": [
+					{
+						"description": "The confirmation code of the customer to activate",
+						"in": "path",
+						"name": "code",
+						"required": true,
+						"type": "string"
+					}
+				]
+			}
+		},
+		"/api/quotes/public/quotes/{id}/confirmed": {
+			"get": {
+				"operationId": "PublicQuoteConfirmed",
+				"produces": [
+					"application/json"
+				],
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"schema": {
+							"type": "object"
+						}
+					}
+				},
+				"description": "",
+				"parameters": [
+					{
+						"description": "The id of the quote to check if is confirmed",
+						"in": "path",
+						"name": "id",
+						"required": true,
+						"type": "string"
+					}
+				]
+			}
+		},
+		"/api/quotes/public/quotes/{id}/reconfirm": {
+			"post": {
+				"operationId": "PublicQuoteReconfirm",
+				"produces": [
+					"application/json"
+				],
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"schema": {
+							"type": "object"
+						}
+					}
+				},
+				"description": "",
+				"consumes": [
+					"application/json"
+				],
+				"parameters": [
+					{
+						"description": "The id of the quote to reconfirm",
+						"in": "path",
+						"name": "id",
+						"required": true,
+						"type": "string"
+					}
+				]
+			}
+		},
+		"/api/quotes/public/quotes/{id}/confirmSMS": {
+			"post": {
+				"operationId": "PublicQuoteConfirmSMS",
+				"produces": [
+					"application/json"
+				],
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"schema": {
+							"type": "object"
+						}
+					}
+				},
+				"description": "",
+				"consumes": [
+					"application/json"
+				],
+				"parameters": [
+					{
+						"description": "The id of the quote to confirm",
+						"in": "path",
+						"name": "id",
+						"required": true,
+						"type": "string"
+					}
+				]
+			}
+		},
+		"/api/quotes/public/quotes/{id}/confirmSMS/{requestId}": {
+			"post": {
+				"operationId": "PublicQuoteConfirmSMSCode",
+				"produces": [
+					"application/json"
+				],
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"schema": {
+							"type": "object"
+						}
+					}
+				},
+				"description": "",
+				"consumes": [
+					"application/json"
+				],
+				"parameters": [
+					{
+						"description": "",
+						"in": "path",
+						"name": "requestId",
+						"required": true,
+						"type": "string"
+					},
+					{
+						"description": "",
+						"in": "body",
+						"name": "code",
+						"required": true,
+						"schema": {
+							"$ref": "#/definitions/ConfirmSMS"
+						}
+					}
+				]
+			}
+		},
+		"/api/quotes/questions/{id}": {
+			"get": {
+				"operationId": "QuestionGet",
+				"produces": [
+					"application/json"
+				],
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"schema": {
+							"$ref": "#/definitions/QuestionResponseList"
+						}
+					}
+				},
+				"description": "",
+				"security": [
+					{
+						"default": []
+					}
+				],
+				"parameters": [
+					{
+						"description": "",
+						"in": "path",
+						"name": "id",
+						"required": true,
+						"type": "string"
+					}
+				]
+			}
+		},
+		"/api/quotes/public/questions/{id}": {
+			"get": {
+				"operationId": "QuestionGetPublicQuestions",
+				"produces": [
+					"text/html"
+				],
+				"responses": {
+					"204": {
+						"description": "No content"
+					}
+				},
+				"description": "",
+				"parameters": [
+					{
+						"description": "",
+						"in": "path",
+						"name": "id",
+						"required": true,
+						"type": "string"
+					}
+				]
+			}
+		},
+		"/api/quotes/quotes/{id}/questions": {
+			"get": {
+				"operationId": "QuestionGetByQuote",
+				"produces": [
+					"application/json"
+				],
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"schema": {
+							"$ref": "#/definitions/QuestionResponseList"
+						}
+					}
+				},
+				"description": "",
+				"security": [
+					{
+						"default": []
+					}
+				],
+				"parameters": [
+					{
+						"description": "",
+						"in": "path",
+						"name": "id",
+						"required": true,
+						"type": "string"
+					}
+				]
+			}
+		},
+		"/api/quotes/public/quotes/{id}/questions": {
+			"get": {
+				"operationId": "QuestionGetPublicQuestionsByQuote",
+				"produces": [
+					"text/html"
+				],
+				"responses": {
+					"204": {
+						"description": "No content"
+					}
+				},
+				"description": "",
+				"parameters": [
+					{
+						"description": "",
+						"in": "path",
+						"name": "id",
+						"required": true,
+						"type": "string"
+					}
+				]
+			}
+		},
+		"/api/quotes/attachments": {
+			"post": {
+				"operationId": "AttachmentPost",
+				"produces": [
+					"application/json"
+				],
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"schema": {
+							"$ref": "#/definitions/AttachmentResponse"
+						}
+					}
+				},
+				"description": "",
+				"consumes": [
+					"multipart/form-data"
+				],
+				"parameters": [
+					{
+						"description": "",
+						"in": "formData",
+						"name": "attachment",
+						"required": true,
+						"type": "file"
+					},
+					{
+						"description": "",
+						"in": "formData",
+						"name": "description",
+						"required": false,
+						"type": "string"
+					}
+				]
+			}
+		},
+		"/api/quotes/attachments/{attachmentId}/download": {
+			"get": {
+				"operationId": "AttachmentGet",
+				"produces": [
+					"text/html"
+				],
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"schema": {
+							"type": "file"
+						}
+					}
+				},
+				"description": "",
+				"parameters": [
+					{
+						"description": "",
+						"in": "path",
+						"name": "attachmentId",
+						"required": true,
+						"type": "string"
+					}
+				]
+			}
+		},
+		"/api/quotes/endorsements/{id}": {
+			"get": {
+				"operationId": "EndorsementGet",
+				"produces": [
+					"application/json"
+				],
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"schema": {
+							"$ref": "#/definitions/EndorsementQuoteResponse"
+						}
+					}
+				},
+				"description": "",
+				"security": [
+					{
+						"default": []
+					}
+				],
+				"parameters": [
+					{
+						"description": "",
+						"in": "path",
+						"name": "id",
+						"required": true,
+						"type": "string"
+					}
+				]
+			},
+			"patch": {
+				"operationId": "EndorsementPatch",
+				"produces": [
+					"application/json"
+				],
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"schema": {
+							"$ref": "#/definitions/EndorsementQuoteResponse"
+						}
+					}
+				},
+				"description": "",
+				"security": [
+					{
+						"default": []
+					}
+				],
+				"consumes": [
+					"application/json"
+				],
+				"parameters": [
+					{
+						"description": "",
+						"in": "path",
+						"name": "id",
+						"required": true,
+						"type": "string"
+					},
+					{
+						"description": "",
+						"in": "body",
+						"name": "update",
+						"required": true,
+						"schema": {
+							"$ref": "#/definitions/EndorsementQuoteUpdateRequest"
+						}
+					}
+				]
+			}
+		},
+		"/api/quotes/endorsements/{id}/price": {
+			"get": {
+				"operationId": "EndorsementGetPrice",
+				"produces": [
+					"text/html"
+				],
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"schema": {
+							"enum": [
+								"EndorsementQuoteResponse",
+								"Return.RequestAccepted<void>"
+							],
+							"type": "string"
+						}
+					}
+				},
+				"description": "",
+				"security": [
+					{
+						"default": []
+					}
+				],
+				"parameters": [
+					{
+						"description": "The id of the quote resource",
+						"in": "path",
+						"name": "id",
+						"required": true,
+						"type": "string"
+					}
+				]
+			}
+		},
+		"/api/quotes/endorsements/{id}/diff": {
+			"get": {
+				"operationId": "EndorsementGetDiff",
+				"produces": [
+					"application/json"
+				],
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"schema": {
+							"$ref": "#/definitions/EndorsementDiffResponse"
+						}
+					}
+				},
+				"description": "",
+				"security": [
+					{
+						"default": []
+					}
+				],
+				"parameters": [
+					{
+						"description": "The id of the quote resource",
+						"in": "path",
+						"name": "id",
+						"required": true,
+						"type": "string"
+					}
+				]
+			}
+		},
+		"/api/quotes/referred-quotes": {
+			"get": {
+				"operationId": "ReferredQuoteGetAll",
+				"produces": [
+					"application/json"
+				],
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"schema": {
+							"$ref": "#/definitions/ReferredQuoteListResponse"
+						}
+					}
+				},
+				"description": "",
+				"security": [
+					{
+						"default": []
+					}
+				],
+				"parameters": [
+					{
+						"description": "The number of items to retrieve",
+						"in": "query",
+						"name": "limit",
+						"required": true,
+						"type": "number",
+						"format": "double"
+					},
+					{
+						"description": "The starting position to retrieve data from",
+						"in": "query",
+						"name": "offset",
+						"required": true,
+						"type": "number",
+						"format": "double"
+					},
+					{
+						"description": "The column name to sort",
+						"in": "query",
+						"name": "sort",
+						"required": false,
+						"type": "string"
+					},
+					{
+						"description": "The order of sort",
+						"in": "query",
+						"name": "order",
+						"required": false,
+						"type": "string",
+						"enum": [
+							"ASC",
+							"DESC"
+						]
+					},
+					{
+						"description": "",
+						"in": "query",
+						"name": "status",
+						"required": false,
+						"type": "string",
+						"enum": [
+							"REFERRED",
+							"ACCEPTED",
+							"DECLINED"
+						]
+					}
+				]
+			}
+		},
+		"/api/quotes/products/{productId}/referred-quotes": {
+			"get": {
+				"operationId": "ReferredQuoteGetAllByProduct",
+				"produces": [
+					"application/json"
+				],
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"schema": {
+							"$ref": "#/definitions/ReferredQuoteListResponse"
+						}
+					}
+				},
+				"description": "",
+				"security": [
+					{
+						"default": []
+					}
+				],
+				"parameters": [
+					{
+						"description": "",
+						"in": "path",
+						"name": "productId",
+						"required": true,
+						"type": "string"
+					},
+					{
+						"description": "The number of items to retrieve",
+						"in": "query",
+						"name": "limit",
+						"required": true,
+						"type": "number",
+						"format": "double"
+					},
+					{
+						"description": "The starting position to retrieve data from",
+						"in": "query",
+						"name": "offset",
+						"required": true,
+						"type": "number",
+						"format": "double"
+					},
+					{
+						"description": "The column name to sort",
+						"in": "query",
+						"name": "sort",
+						"required": false,
+						"type": "string"
+					},
+					{
+						"description": "The order of sort",
+						"in": "query",
+						"name": "order",
+						"required": false,
+						"type": "string",
+						"enum": [
+							"ASC",
+							"DESC"
+						]
+					},
+					{
+						"description": "",
+						"in": "query",
+						"name": "status",
+						"required": false,
+						"type": "string",
+						"enum": [
+							"REFERRED",
+							"ACCEPTED",
+							"DECLINED"
+						]
+					}
+				]
+			}
+		},
+		"/api/quotes/search/referred-quotes": {
+			"get": {
+				"operationId": "ReferredQuoteSearch",
+				"produces": [
+					"application/json"
+				],
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"schema": {
+							"$ref": "#/definitions/ReferredQuoteListResponse"
+						}
+					}
+				},
+				"description": "",
+				"security": [
+					{
+						"default": []
+					}
+				],
+				"parameters": [
+					{
+						"description": "",
+						"in": "query",
+						"name": "q",
+						"required": true,
+						"type": "string"
+					},
+					{
+						"description": "The starting position to retrieve data from",
+						"in": "query",
+						"name": "offset",
+						"required": true,
+						"type": "number",
+						"format": "double"
+					},
+					{
+						"description": "The number of item to retrieve",
+						"in": "query",
+						"name": "limit",
+						"required": true,
+						"type": "number",
+						"format": "double"
+					},
+					{
+						"description": "The column name to sort",
+						"in": "query",
+						"name": "sort",
+						"required": false,
+						"type": "string"
+					},
+					{
+						"description": "The order of sort",
+						"in": "query",
+						"name": "order",
+						"required": false,
+						"type": "string",
+						"enum": [
+							"ASC",
+							"DESC"
+						]
+					}
+				]
+			}
+		},
+		"/api/quotes/referred-quotes/{id}": {
+			"get": {
+				"operationId": "ReferredQuoteGet",
+				"produces": [
+					"application/json"
+				],
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"schema": {
+							"$ref": "#/definitions/ReferredQuoteResponse"
+						}
+					}
+				},
+				"description": " @param id The id of the referred quote resource",
+				"security": [
+					{
+						"default": []
+					}
+				],
+				"parameters": [
+					{
+						"description": "",
+						"in": "path",
+						"name": "id",
+						"required": true,
+						"type": "string"
+					}
+				]
+			},
+			"put": {
+				"operationId": "ReferredQuoteUpdate",
+				"produces": [
+					"application/json"
+				],
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"schema": {
+							"$ref": "#/definitions/ReferredQuoteResponse"
+						}
+					}
+				},
+				"description": " @param id The id of the referred quote resource to update",
+				"security": [
+					{
+						"default": []
+					}
+				],
+				"consumes": [
+					"application/json"
+				],
+				"parameters": [
+					{
+						"description": "",
+						"in": "path",
+						"name": "id",
+						"required": true,
+						"type": "string"
+					},
+					{
+						"description": "",
+						"in": "body",
+						"name": "referredQuote",
+						"required": true,
+						"schema": {
+							"$ref": "#/definitions/ReferredQuoteUpdateRequest"
+						}
+					}
+				]
+			}
+		},
+		"/api/quotes/quotes/{quoteId}/referred-quotes": {
+			"get": {
+				"operationId": "ReferredQuoteGetByQuoteId",
+				"produces": [
+					"application/json"
+				],
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"schema": {
+							"$ref": "#/definitions/ReferredQuoteResponse"
+						}
+					}
+				},
+				"description": " @quoteId quote resource",
+				"security": [
+					{
+						"default": []
+					}
+				],
+				"parameters": [
+					{
+						"description": "",
+						"in": "path",
+						"name": "quoteId",
+						"required": true,
+						"type": "string"
+					}
+				]
+			}
+		},
+		"/api/quotes/referred-quotes/{referredQuoteId}/refer-to-underwriter": {
+			"post": {
+				"operationId": "ReferredQuoteReferQuoteToUnderwriter",
+				"produces": [
+					"application/json"
+				],
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"schema": {
+							"$ref": "#/definitions/ReferredQuoteResponse"
+						}
+					}
+				},
+				"description": " @param referredQuoteId The id of the referred quote resource",
+				"security": [
+					{
+						"default": []
+					}
+				],
+				"consumes": [
+					"application/json"
+				],
+				"parameters": [
+					{
+						"description": "",
+						"in": "path",
+						"name": "referredQuoteId",
+						"required": true,
+						"type": "string"
+					}
+				]
+			}
+		},
+		"/api/quotes/referred-quotes/{referredQuoteId}/notes": {
+			"post": {
+				"operationId": "ReferredQuoteCreateNote",
+				"produces": [
+					"application/json"
+				],
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"schema": {
+							"$ref": "#/definitions/ReferredQuoteNoteResponse"
+						}
+					}
+				},
+				"description": " @param referredQuoteId The id of the referred quote resource",
+				"security": [
+					{
+						"default": []
+					}
+				],
+				"consumes": [
+					"application/json"
+				],
+				"parameters": [
+					{
+						"description": "",
+						"in": "path",
+						"name": "referredQuoteId",
+						"required": true,
+						"type": "string"
+					},
+					{
+						"description": "",
+						"in": "body",
+						"name": "note",
+						"required": true,
+						"schema": {
+							"$ref": "#/definitions/ReferredQuoteNoteCreateRequest"
+						}
+					}
+				]
+			},
+			"get": {
+				"operationId": "ReferredQuoteGetAllNotes",
+				"produces": [
+					"application/json"
+				],
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"schema": {
+							"type": "array",
+							"items": {
+								"$ref": "#/definitions/ReferredQuoteNoteResponse"
+							}
+						}
+					}
+				},
+				"description": " @param referredQuoteId The id of the referred quote resource",
+				"security": [
+					{
+						"default": []
+					}
+				],
+				"parameters": [
+					{
+						"description": "",
+						"in": "path",
+						"name": "referredQuoteId",
+						"required": true,
+						"type": "string"
+					}
+				]
+			}
+		},
+		"/api/quotes/referred-quotes/{referredQuoteId}/notes/{id}": {
+			"get": {
+				"operationId": "ReferredQuoteGetNote",
+				"produces": [
+					"application/json"
+				],
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"schema": {
+							"$ref": "#/definitions/ReferredQuoteNoteResponse"
+						}
+					}
+				},
+				"description": "",
+				"security": [
+					{
+						"default": []
+					}
+				],
+				"parameters": [
+					{
+						"description": "",
+						"in": "path",
+						"name": "referredQuoteId",
+						"required": true,
+						"type": "string"
+					},
+					{
+						"description": "",
+						"in": "path",
+						"name": "id",
+						"required": true,
+						"type": "string"
+					}
+				]
+			}
+		},
+		"/api/quotes/products/{id}/quote-date-config": {
+			"get": {
+				"operationId": "QuoteDateConfigGet",
+				"produces": [
+					"application/json"
+				],
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"schema": {
+							"$ref": "#/definitions/QuoteDateConfigResponse"
+						}
+					}
+				},
+				"description": "",
+				"security": [
+					{
+						"default": []
+					}
+				],
+				"parameters": [
+					{
+						"description": "",
+						"in": "path",
+						"name": "id",
+						"required": true,
+						"type": "string"
+					}
+				]
+			},
+			"patch": {
+				"operationId": "QuoteDateConfigPatch",
+				"produces": [
+					"application/json"
+				],
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"schema": {
+							"$ref": "#/definitions/QuoteDateConfigResponse"
+						}
+					}
+				},
+				"description": "",
+				"security": [
+					{
+						"default": []
+					}
+				],
+				"consumes": [
+					"application/json"
+				],
+				"parameters": [
+					{
+						"description": "",
+						"in": "path",
+						"name": "id",
+						"required": true,
+						"type": "string"
+					},
+					{
+						"description": "",
+						"in": "body",
+						"name": "update",
+						"required": true,
+						"schema": {
+							"$ref": "#/definitions/QuoteDateConfigUpdateRequest"
+						}
+					}
+				]
+			}
+		},
+		"/api/quotes/public/products/{id}/quote-date-config": {
+			"get": {
+				"operationId": "QuoteDateConfigGetPublicQuoteDateConfig",
+				"produces": [
+					"application/json"
+				],
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"schema": {
+							"$ref": "#/definitions/QuoteDateConfigResponse"
+						}
+					}
+				},
+				"description": "",
+				"parameters": [
+					{
+						"description": "",
+						"in": "path",
+						"name": "id",
+						"required": true,
+						"type": "string"
+					}
+				]
+			}
+		},
+		"/api/quotes/public/referred-quotes/{referredQuoteId}/refer-to-underwriter": {
+			"post": {
+				"operationId": "PublicReferredQuoteReferQuoteToUnderwriter",
+				"produces": [
+					"application/json"
+				],
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"schema": {
+							"$ref": "#/definitions/ReferredQuoteResponse"
+						}
+					}
+				},
+				"description": " @param referredQuoteId The id of the referred quote resource",
+				"consumes": [
+					"application/json"
+				],
+				"parameters": [
+					{
+						"description": "",
+						"in": "path",
+						"name": "referredQuoteId",
+						"required": true,
+						"type": "string"
+					}
+				]
+			}
+		},
+		"/api/quotes/public/referred-quotes/{id}": {
+			"get": {
+				"operationId": "PublicReferredQuoteGet",
+				"produces": [
+					"application/json"
+				],
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"schema": {
+							"$ref": "#/definitions/ReferredQuoteResponse"
+						}
+					}
+				},
+				"description": " @param id The id of the referred quote resource",
+				"parameters": [
+					{
+						"description": "",
+						"in": "path",
+						"name": "id",
+						"required": true,
+						"type": "string"
+					}
+				]
+			}
+		},
+		"/api/quotes/public/quotes/{quoteId}/referred-quotes": {
+			"get": {
+				"operationId": "PublicReferredQuoteGetByQuoteId",
+				"produces": [
+					"application/json"
+				],
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"schema": {
+							"$ref": "#/definitions/ReferredQuoteResponse"
+						}
+					}
+				},
+				"description": " @quoteId quote resource",
+				"parameters": [
+					{
+						"description": "",
+						"in": "path",
+						"name": "quoteId",
+						"required": true,
+						"type": "string"
+					}
+				]
+			}
+		}
+	},
+	"swagger": "2.0",
+	"securityDefinitions": {
+		"undefined": {
+			"type": "apiKey",
+			"name": "Authorization",
+			"in": "header"
+		}
+	},
+	"produces": [
+		"application/json"
+	]
+}

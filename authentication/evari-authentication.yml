@@ -1,0 +1,15 @@
+generated: '2026-07-25'
+method: derived
+source: openapi/evari-quotes-api-openapi.yml
+summary:
+  types:
+  - apiKey
+  api_key_in:
+  - header
+schemes:
+- name: undefined
+  type: apiKey
+  in: header
+  parameter: Authorization
+  sources:
+  - openapi/evari-quotes-api-openapi.yml

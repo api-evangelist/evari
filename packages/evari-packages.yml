@@ -1,0 +1,60 @@
+generated: '2026-07-25'
+method: searched
+source: https://registry.npmjs.org/evari-quotes-api
+notes: |
+  Evari publishes no client SDKs. The one public first-party package on npm is a
+  SERVICE package (the Evari Quotes microservice itself), published under the npm
+  user "evari" (brack@evari.insure — co-founder Brack Norris) with author
+  "Evari Insure" (https://evari.insure/). It is the only published Evari code
+  artifact found across npm, PyPI, Maven Central, NuGet, pkg.go.dev, RubyGems,
+  Packagist and crates.io. Its published tarball carries the generated
+  Swagger 2.0 document harvested to openapi/ and the draft-07 JSON Schema type
+  set harvested to json-schema/ — which is why the package matters far more than
+  its install count.
+packages:
+- language: javascript
+  registry: npm
+  name: evari-quotes-api
+  version: 0.1.0
+  url: https://www.npmjs.com/package/evari-quotes-api
+  install: npm install evari-quotes-api
+  official: true
+  kind: service
+  sdk: false
+  license: UNLICENSED
+  published: '2020-12-01'
+  author: Evari Insure
+  maintainer_email: brack@evari.insure
+  repository: git://github.com/myevari/evari-quotes-api.git
+  repository_status: 404 (private or removed; the myevari GitHub org is public but
+    this repo is not)
+  ships_spec: true
+  spec_files:
+  - dist/swagger.json
+  - dist/swagger.yaml
+  - dist/types.json
+  note: TypeScript microservice built with typescript-rest + typescript-rest-swagger;
+    the build script generates the Swagger document that is bundled in the tarball.
+private_scope:
+- scope: '@evari'
+  registry: npm
+  status: private
+  probed:
+  - {name: '@evari/contracts', status: 404}
+  - {name: '@evari/logging', status: 404}
+  - {name: '@evari/node-api', status: 404}
+  - {name: '@evari/queue-messaging', status: 404}
+  - {name: '@evari/rule-engine', status: 404}
+  note: Named as dependencies of evari-quotes-api; all return 404 on the public npm
+    registry, so the @evari scope is private. @evari/contracts is the source of the
+    json-schema/ type set (typescript-json-schema output bundled in dist/types.json).
+registries_probed:
+- {registry: npm, query: 'maintainer:evari', results: 1}
+- {registry: npm, query: evari, results: 1}
+- {registry: pypi, name: evari, status: 404}
+- {registry: pkg.go.dev, results: none}
+- {registry: rubygems, results: none}
+- {registry: packagist, results: none}
+- {registry: crates.io, results: none}
+- {registry: nuget, results: none}
+- {registry: maven-central, results: none}
