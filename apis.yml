@@ -1,0 +1,56 @@
+aid: evari
+url: https://raw.githubusercontent.com/api-evangelist/evari/refs/heads/main/apis.yml
+name: Evari
+kind: company
+description: Evari is an Australian insurance technology company, founded in Sydney
+  by Daniel Fogarty (former CEO of Zurich Australia and New Zealand), Robert Jeffery
+  and Brack Norris. It launched as a digital small-business and trades insurance
+  brand at evari.insure, operating as a Lloyd's coverholder with direct and partner
+  distribution, then moved upstream into core systems with CloudStream, a cloud-native
+  policy administration platform covering quote, bind and issue through endorsement,
+  renewal and cancellation, broker and MGA portals, appetite and eligibility rules,
+  commission tracking and policyholder self-service. Its current positioning is
+  insurance AI operations for brokers, MGAs and insurers, delivered as 30-day
+  assistant deployment sprints powered by the third-party QuivaWorks platform.
+  Evari publishes no public developer portal and no downloadable OpenAPI. Every API
+  surface found is tenant-scoped and closed - api.cloudstream.evari.tech and its
+  /api/docs path return 404 unauthenticated, api.envest.evari.tech returns 502, and
+  the customer and admin applications are login walls. Evari is a consumer of other
+  vendors' APIs (Socotra, Vertafore AMS360/Sagitta, Applied Epic, Guidewire read
+  access) rather than a publisher of its own, and no ACORD, AL3 or IVANS reference
+  appears anywhere on its site or in its help centre.
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+tags:
+- Insurance
+- Australia
+- Insurtech
+- Policy Administration
+- Core Systems
+- Property and Casualty
+- Underwriting
+- Claims
+- Broker
+- MGA
+- Artificial Intelligence
+created: '2026-07-25'
+modified: '2026-07-25'
+specificationVersion: '0.19'
+apis: []
+common:
+- type: Website
+  url: https://evari.tech/
+- type: Documentation
+  url: https://evari.tech/help-center/
+- type: Blog
+  url: https://evari.tech/blog/
+- type: TrustCenter
+  url: https://evari.tech/trust
+- type: VulnerabilityDisclosure
+  url: https://evari.tech/.well-known/security.txt
+- type: Pricing
+  url: https://evari.tech/pricing
+- type: LinkedIn
+  url: https://www.linkedin.com/company/evari/
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

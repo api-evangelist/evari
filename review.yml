@@ -1,0 +1,235 @@
+aid: evari
+name: Evari
+review:
+  question: Does Evari expose a public, self-serve developer portal or downloadable
+    API definitions for its insurance platform?
+  answer: false
+  date: '2026-07-25'
+  reviewer: API Evangelist
+  homeMarket: Australia
+  tier: core-systems
+  gated: true
+findings:
+  summary: |
+    Evari publishes no public developer portal, no API reference and no
+    downloadable OpenAPI/Swagger definition. Every candidate developer host
+    was probed and none resolved: developer., developers., docs. and api.
+    across evari.com, evari.insure and evari.tech all fail DNS. On the live
+    corporate site (evari.tech) the paths /developers, /api, /docs and
+    /integrations return HTTP 200 but serve the homepage byte-for-byte
+    (74,025 bytes) - a static catch-all, not a portal - and robots.txt
+    explicitly disallows /api/. https://www.evari.tech/openapi.json and
+    /swagger.json both return 404.
+
+    The company's own API surface exists but is tenant-scoped and closed.
+    The CloudStream single-page app (https://cloudstream.evari.tech, HTTP
+    200) ships a build config naming REACT_APP_API_ROOT
+    "https://api.cloudstream.evari.tech/api" and REACT_APP_API_URL_DOCS
+    "https://api.cloudstream.evari.tech/api/docs"; that host answers HTTP
+    404 (nginx, 153 bytes) on every path probed, including /api/docs,
+    /swagger.json, /openapi.json, /swagger/v1/swagger.json, /api-docs,
+    /spec, /redoc and /graphql. The Envest tenant deployment behind
+    https://app.evari.insure (HTTP 200 login wall) points at
+    https://api.envest.evari.tech, which returns HTTP 502 on every path and
+    504 on /api - a decommissioned backend. admin.cloudstream.evari.tech
+    returns HTTP 200 with the title "Evari cloudStream" and is a login wall.
+
+    Domain note: the nominal primary domain evari.com is NOT the company.
+    It is a parked lander (HTTP 200, 114-byte redirect to /lander, no MX,
+    no TXT) and the Internet Archive shows it as a "this website is for
+    sale" park since at least 2018. The company's original domain
+    evari.com.au 301-redirects to https://evari.insure, which now returns a
+    Webflow HTTP 404 on every path including /, /partners, /platform and
+    /developers. The live company site is https://evari.tech.
+
+    Evari's product literature markets the four insurance verbs but exposes
+    none of them programmatically to the public: CloudStream is described
+    as "quote, bind, issue in one workflow" with endorsement, renewal and
+    cancellation, plus "customisable data exports and APIs", but no
+    reference documentation backs that claim. Claims appear only as
+    document-processing of "claims intake forms" - there is no documented
+    FNOL API. Everything is partner/tenant-gated behind a sales-led,
+    30-day sprint engagement.
+
+    Evari is a consumer of other vendors' APIs rather than a publisher. Its
+    help centre lists the systems it integrates INTO: Socotra, Vertafore
+    (AMS360, Sagitta), Applied Epic, Guidewire (read access), plus
+    Salesforce, HubSpot, Microsoft Dynamics, Microsoft 365, Google
+    Workspace, SharePoint and custom broker portals "via API or scraping
+    where API is unavailable". Its integration guidance to customers is
+    "if your system exposes an API (REST, SOAP, GraphQL), we can connect
+    to it".
+
+    The only reachable "API documentation" anywhere in Evari's stack
+    belongs to a different company: QuivaWorks (https://docs.quiva.ai),
+    the third-party AI platform Evari is "powered by". That site's
+    /api-reference/openapi.json returns HTTP 200 and does parse as OpenAPI
+    3.1.0, but it is the unmodified Mintlify sample document ("OpenAPI
+    Plant Store", server http://sandbox.mintlify.com, paths /plants and
+    /plants/{id}) - a template placeholder, not a real API. It is neither
+    Evari's API nor a genuine specification, so nothing was harvested.
+  acordPosture: no ACORD reference found
+  acordEvidence: |
+    Zero case-insensitive matches for "ACORD", "AL3" or "IVANS" across the
+    full evari.tech site corpus (llms.txt, 418,510 bytes, HTTP 200, fetched
+    2026-07-25), which includes the homepage, for-brokers, for-mgas,
+    for-insurers, pricing, trust and the entire help centre. The
+    agency-management vocabulary that IS present is vendor-integration
+    naming - Vertafore AMS360, Vertafore Sagitta, Applied Epic, Socotra,
+    Guidewire - named as target systems Evari connects to, with no ACORD
+    XML, AL3 download or NGDS certification claim attached.
+  insuranceVerbs:
+    quote: marketed in CloudStream ("quote, bind, issue in one workflow"); no public API
+    bind: marketed in CloudStream; no public API
+    issue: marketed in CloudStream; no public API
+    fnol: not exposed; claims appear only as AI document-processing of intake forms
+    audience: partner-only / tenant-only (broker, MGA and insurer portals behind login)
+  authModel: |
+    First-party, unpublished. The CloudStream SPA config names
+    REACT_APP_EVARI_TOKEN_SERVICE "https://auth.cloudstream.evari.tech"
+    with REACT_APP_EVARI_TOKEN_SERVICE_CLIENT_ID "app". That host does not
+    resolve publicly (connection failure), and neither
+    /.well-known/openid-configuration nor
+    /.well-known/oauth-authorization-server could be retrieved anonymously
+    on it or on auth.envest.evari.tech. No API key programme, no public
+    OAuth client registration, no documented scopes.
+  webhooks: |
+    No event catalog and no AsyncAPI. "Webhook" appears twice in the whole
+    site corpus, both times describing an action an AI assistant may be
+    permitted to call on a customer's system - not an Evari-published
+    event.
+  postman: No public Postman collection or workspace found.
+  graphql: |
+    No Evari GraphQL endpoint. GraphQL appears only as a protocol Evari can
+    consume from a customer system. https://api.cloudstream.evari.tech/graphql
+    returns 404.
+  grpc: No published .proto files found.
+  mcp: |
+    Notable agentic angle without a public surface: Evari's help centre
+    documents MCP (Model Context Protocol) tools and a marketplace, and
+    states QuivaWorks "can convert any API into an MCP-hosted tool". All of
+    it is QuivaWorks functionality behind a workspace account; Evari
+    publishes no MCP server URL or manifest of its own.
+  security:
+    securityTxt: https://evari.tech/.well-known/security.txt (HTTP 200, security@evari.tech, expires 2027-07-21)
+    certifications: ISO 27001 certified (annually audited ISMS), SOC 2 Type II claimed, GDPR, Australian Privacy Act
+    dataResidency: AU/NZ customers on AWS ap-southeast-2; UK eu-west-2; US us-east-1
+  transports:
+    - protocol: REST
+      scheme: https
+      baseURL: https://api.cloudstream.evari.tech/api
+      documented: false
+      note: Named in the CloudStream SPA build config; host returns 404 on every path unauthenticated. Tenant-scoped, not public.
+    - protocol: REST
+      scheme: https
+      baseURL: https://api.envest.evari.tech/api
+      documented: false
+      note: Named in the app.evari.insure SPA build config; host returns 502/504. Decommissioned tenant backend.
+    - protocol: GraphQL
+      documented: false
+      note: No Evari GraphQL endpoint; mentioned only as a customer-side protocol Evari can consume.
+    - protocol: WebSocket
+      documented: false
+      note: No WebSocket surface documented anywhere.
+    - protocol: SOAP
+      documented: false
+      note: Named only as a customer-side protocol Evari can consume.
+probes:
+  - url: https://evari.com/
+    status: 200
+    note: Parked lander (114 bytes, JS redirect to /lander). No MX, no TXT. Archived as "for sale" since 2018. Not the company.
+  - url: http://evari.com.au/
+    status: 404
+    note: Webflow 404 today; Wayback 2021-12-03 shows 301 to https://evari.insure.
+  - url: https://evari.insure/
+    status: 404
+    note: Webflow 404 (surrogate-key evari.webflow.io). Same 404 on /partners, /platform, /developers, /api, /integrations, /technology.
+  - url: https://app.evari.insure/
+    status: 200
+    note: Live React customer app; login wall. Loads https://mfe.envest.evari.tech/loader.js.
+  - url: https://www.evari.tech/
+    status: 200
+    note: Live corporate site. Title "Evari - Insurance AI Operations Transformation | Deploy AI Agents in 30 Days".
+  - url: https://www.evari.tech/developers
+    status: 200
+    note: Catch-all - byte-identical to the homepage (74,025 bytes). Not a developer portal.
+  - url: https://www.evari.tech/api
+    status: 200
+    note: Catch-all - byte-identical to the homepage. robots.txt disallows /api/.
+  - url: https://www.evari.tech/docs
+    status: 200
+    note: Catch-all - byte-identical to the homepage.
+  - url: https://www.evari.tech/integrations
+    status: 200
+    note: Catch-all - byte-identical to the homepage.
+  - url: https://www.evari.tech/openapi.json
+    status: 404
+  - url: https://www.evari.tech/swagger.json
+    status: 404
+  - url: https://www.evari.tech/.well-known/security.txt
+    status: 200
+  - url: https://www.evari.tech/llms.txt
+    status: 200
+    note: 418,510-byte full-site corpus; searched for ACORD/AL3/IVANS - zero matches.
+  - url: https://developer.evari.tech/
+    status: 0
+    note: DNS does not resolve.
+  - url: https://developers.evari.tech/
+    status: 0
+    note: DNS does not resolve.
+  - url: https://docs.evari.tech/
+    status: 0
+    note: DNS does not resolve, despite being referenced in site content.
+  - url: https://api.evari.tech/
+    status: 0
+    note: DNS does not resolve.
+  - url: https://cloudstream.evari.tech/
+    status: 200
+    note: CloudStream SPA shell; requires JavaScript and authentication.
+  - url: https://admin.cloudstream.evari.tech/
+    status: 200
+    note: Login wall, title "Evari cloudStream".
+  - url: https://api.cloudstream.evari.tech/api/docs
+    status: 404
+    note: nginx 404 (153 bytes). Also 404 on /swagger.json, /openapi.json, /swagger/v1/swagger.json, /api/swagger.json, /api/openapi.json, /v1/openapi.json, /api-docs, /spec, /redoc, /graphql, /health.
+  - url: https://api.envest.evari.tech/api/docs
+    status: 502
+    note: Also 502 on /, /apiv2, /swagger.json, /openapi.json; 504 on /api. Retried twice.
+  - url: https://auth.cloudstream.evari.tech/.well-known/openid-configuration
+    status: 0
+    note: DNS/connection failure; no anonymous OIDC discovery available.
+  - url: https://docs.quiva.ai/api-reference/openapi.json
+    status: 200
+    note: Third-party (QuivaWorks). Parses as OpenAPI 3.1.0 but is the Mintlify sample "OpenAPI Plant Store" placeholder. Not Evari's, not real - not harvested.
+sources:
+  - url: https://www.evari.tech/
+    type: Website
+    note: Current positioning - insurance AI operations sprints for brokers, MGAs and insurers.
+  - url: https://www.evari.tech/about-us
+    type: About
+    note: Founders Daniel Fogarty (ex-CEO Zurich Australia and NZ), Robert Jeffery, Brack Norris. InsurTech100 2020-2023, DIA Top 100 InsurTechs 2019-2024.
+  - url: https://www.evari.tech/for-insurers
+    type: Product
+    note: CloudStream policy administration - quote/bind/issue, endorsement, renewal, cancellation, broker and MGA portals, appetite rules, commission tracking, "customisable data exports and APIs" with no reference docs.
+  - url: https://evari.tech/help-center/items/integrations/what-systems-does-evari-integrate-with/
+    type: Documentation
+    note: Integration target list - Socotra, Vertafore (AMS360, Sagitta), Applied Epic, Guidewire (read access), Salesforce, HubSpot, Dynamics, M365, Google Workspace, SharePoint.
+  - url: https://evari.tech/help-center/items/security/where-is-my-data-stored/
+    type: Documentation
+    note: AU/NZ data residency on AWS ap-southeast-2; Australian Privacy Act and APRA context named.
+  - url: https://evari.tech/trust
+    type: TrustCenter
+    note: ISO 27001 certified, AES-256 at rest, TLS 1.2+, GDPR.
+  - url: https://web.archive.org/web/20211203125119/http://evari.com.au/
+    type: Archive
+    note: 301 from evari.com.au to https://evari.insure, establishing the original company domain.
+actions:
+  openapiHarvested: false
+  specsSaved: 0
+  apisYmlEntries: 0
+  reason: |
+    No real, public, self-serve API surface exists to record. apis[] is
+    deliberately empty. Recording the absence accurately - a core-systems
+    insurance vendor whose only integration path is a sales-led,
+    tenant-scoped deployment behind a login wall, with no ACORD posture at
+    all - is the finding.
