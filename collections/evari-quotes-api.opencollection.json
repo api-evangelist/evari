@@ -1,0 +1,1148 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Evari Quotes API",
+    "version": "0.1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "HealthDiagnostics",
+        "type": "http"
+      },
+      "http": {
+        "method": "GET",
+        "url": "{{baseUrl}}/api/quotes/health/diagnostics"
+      },
+      "docs": "Send a detailed system diagnostics response message."
+    },
+    {
+      "info": {
+        "name": "HealthHealthCheck",
+        "type": "http"
+      },
+      "http": {
+        "method": "GET",
+        "url": "{{baseUrl}}/api/quotes/health"
+      },
+      "docs": "Send a health response message.\n200 OK or nothing - no other information"
+    },
+    {
+      "info": {
+        "name": "QuoteSearch",
+        "type": "http"
+      },
+      "http": {
+        "method": "GET",
+        "url": "{{baseUrl}}/api/quotes/search/quotes",
+        "params": [
+          {
+            "name": "q",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "offset",
+            "value": "",
+            "type": "query",
+            "description": "The starting position to retrieve data from"
+          },
+          {
+            "name": "limit",
+            "value": "",
+            "type": "query",
+            "description": "The number of item to retrieve"
+          },
+          {
+            "name": "sort",
+            "value": "",
+            "type": "query",
+            "description": "The column name to sort"
+          },
+          {
+            "name": "order",
+            "value": "",
+            "type": "query",
+            "description": "The order of sort"
+          }
+        ]
+      }
+    },
+    {
+      "info": {
+        "name": "QuoteCount",
+        "type": "http"
+      },
+      "http": {
+        "method": "GET",
+        "url": "{{baseUrl}}/api/quotes/products/:productId/quotes/count",
+        "params": [
+          {
+            "name": "productId",
+            "value": "",
+            "type": "path"
+          }
+        ]
+      }
+    },
+    {
+      "info": {
+        "name": "QuoteGet",
+        "type": "http"
+      },
+      "http": {
+        "method": "GET",
+        "url": "{{baseUrl}}/api/quotes/quotes/:id",
+        "params": [
+          {
+            "name": "id",
+            "value": "",
+            "type": "path",
+            "description": "The id of the quote resource"
+          }
+        ]
+      }
+    },
+    {
+      "info": {
+        "name": "QuotePatch",
+        "type": "http"
+      },
+      "http": {
+        "method": "PATCH",
+        "url": "{{baseUrl}}/api/quotes/quotes/:id",
+        "params": [
+          {
+            "name": "id",
+            "value": "",
+            "type": "path"
+          }
+        ]
+      }
+    },
+    {
+      "info": {
+        "name": "QuoteGetAll",
+        "type": "http"
+      },
+      "http": {
+        "method": "GET",
+        "url": "{{baseUrl}}/api/quotes/quotes",
+        "params": [
+          {
+            "name": "limit",
+            "value": "",
+            "type": "query",
+            "description": "The number of item to retrieve"
+          },
+          {
+            "name": "offset",
+            "value": "",
+            "type": "query",
+            "description": "The starting position to retrieve data from"
+          },
+          {
+            "name": "sort",
+            "value": "",
+            "type": "query",
+            "description": "The column name to sort"
+          },
+          {
+            "name": "order",
+            "value": "",
+            "type": "query",
+            "description": "The order of sort\nTODO: Require correctly authorised user (owner of the quote or agent associated with the owner)"
+          }
+        ]
+      }
+    },
+    {
+      "info": {
+        "name": "QuotePost",
+        "type": "http"
+      },
+      "http": {
+        "method": "POST",
+        "url": "{{baseUrl}}/api/quotes/quotes"
+      }
+    },
+    {
+      "info": {
+        "name": "QuoteGetByProduct",
+        "type": "http"
+      },
+      "http": {
+        "method": "GET",
+        "url": "{{baseUrl}}/api/quotes/products/:productId/quotes",
+        "params": [
+          {
+            "name": "productId",
+            "value": "",
+            "type": "path"
+          },
+          {
+            "name": "limit",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "offset",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "sort",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "order",
+            "value": "",
+            "type": "query"
+          }
+        ]
+      }
+    },
+    {
+      "info": {
+        "name": "QuoteGetAllForCustomer",
+        "type": "http"
+      },
+      "http": {
+        "method": "GET",
+        "url": "{{baseUrl}}/api/quotes/customers/:id/quotes",
+        "params": [
+          {
+            "name": "id",
+            "value": "",
+            "type": "path",
+            "description": "Id of customer"
+          },
+          {
+            "name": "limit",
+            "value": "",
+            "type": "query",
+            "description": "The number of item to retrieve"
+          },
+          {
+            "name": "offset",
+            "value": "",
+            "type": "query",
+            "description": "The starting position to retrieve data from"
+          },
+          {
+            "name": "sort",
+            "value": "",
+            "type": "query",
+            "description": "The column name to sort"
+          },
+          {
+            "name": "order",
+            "value": "",
+            "type": "query",
+            "description": "The order of sort\nTODO: Require correctly authorised user (owner of the quote or agent associated with the owner)"
+          }
+        ]
+      }
+    },
+    {
+      "info": {
+        "name": "QuoteGetQuoteOptions",
+        "type": "http"
+      },
+      "http": {
+        "method": "GET",
+        "url": "{{baseUrl}}/api/quotes/quote-options/:duplicateGroupId",
+        "params": [
+          {
+            "name": "duplicateGroupId",
+            "value": "",
+            "type": "path",
+            "description": "duplicateGroupId of quote resource"
+          },
+          {
+            "name": "limit",
+            "value": "",
+            "type": "query",
+            "description": "The number of item to retrieve"
+          },
+          {
+            "name": "offset",
+            "value": "",
+            "type": "query",
+            "description": "The starting position to retrieve data from"
+          },
+          {
+            "name": "sort",
+            "value": "",
+            "type": "query",
+            "description": "The column name to sort"
+          },
+          {
+            "name": "order",
+            "value": "",
+            "type": "query",
+            "description": "The order of sort"
+          }
+        ]
+      }
+    },
+    {
+      "info": {
+        "name": "QuotePatchByInternalKey",
+        "type": "http"
+      },
+      "http": {
+        "method": "PATCH",
+        "url": "{{baseUrl}}/api/quotes/quotes/:id/updatebyinternalkey",
+        "params": [
+          {
+            "name": "id",
+            "value": "",
+            "type": "path"
+          }
+        ]
+      }
+    },
+    {
+      "info": {
+        "name": "QuoteValidate",
+        "type": "http"
+      },
+      "http": {
+        "method": "GET",
+        "url": "{{baseUrl}}/api/quotes/quotes/:id/validate",
+        "params": [
+          {
+            "name": "id",
+            "value": "",
+            "type": "path"
+          }
+        ]
+      }
+    },
+    {
+      "info": {
+        "name": "QuoteGetPrice",
+        "type": "http"
+      },
+      "http": {
+        "method": "GET",
+        "url": "{{baseUrl}}/api/quotes/quotes/:id/price",
+        "params": [
+          {
+            "name": "id",
+            "value": "",
+            "type": "path",
+            "description": "The id of the quote resource"
+          }
+        ]
+      }
+    },
+    {
+      "info": {
+        "name": "QuotePdf",
+        "type": "http"
+      },
+      "http": {
+        "method": "GET",
+        "url": "{{baseUrl}}/api/quotes/quotes/:id/pdf",
+        "params": [
+          {
+            "name": "id",
+            "value": "",
+            "type": "path",
+            "description": "The id of the quote resource"
+          }
+        ]
+      }
+    },
+    {
+      "info": {
+        "name": "QuoteConfirm",
+        "type": "http"
+      },
+      "http": {
+        "method": "GET",
+        "url": "{{baseUrl}}/api/quotes/quotes/confirm/:code",
+        "params": [
+          {
+            "name": "code",
+            "value": "",
+            "type": "path",
+            "description": "The confirmation code of the customer to activate"
+          }
+        ]
+      }
+    },
+    {
+      "info": {
+        "name": "QuoteConfirmed",
+        "type": "http"
+      },
+      "http": {
+        "method": "GET",
+        "url": "{{baseUrl}}/api/quotes/quotes/:id/confirmed",
+        "params": [
+          {
+            "name": "id",
+            "value": "",
+            "type": "path",
+            "description": "The id of the quote to check if is confirmed"
+          }
+        ]
+      }
+    },
+    {
+      "info": {
+        "name": "QuoteReconfirm",
+        "type": "http"
+      },
+      "http": {
+        "method": "POST",
+        "url": "{{baseUrl}}/api/quotes/quotes/:id/reconfirm",
+        "params": [
+          {
+            "name": "id",
+            "value": "",
+            "type": "path",
+            "description": "The id of the quote to reconfirm"
+          }
+        ]
+      }
+    },
+    {
+      "info": {
+        "name": "PublicQuoteGet",
+        "type": "http"
+      },
+      "http": {
+        "method": "GET",
+        "url": "{{baseUrl}}/api/quotes/public/quotes/:id",
+        "params": [
+          {
+            "name": "id",
+            "value": "",
+            "type": "path",
+            "description": "The id of the quote resource"
+          }
+        ]
+      }
+    },
+    {
+      "info": {
+        "name": "PublicQuotePatch",
+        "type": "http"
+      },
+      "http": {
+        "method": "PATCH",
+        "url": "{{baseUrl}}/api/quotes/public/quotes/:id",
+        "params": [
+          {
+            "name": "id",
+            "value": "",
+            "type": "path"
+          }
+        ]
+      }
+    },
+    {
+      "info": {
+        "name": "PublicQuotePost",
+        "type": "http"
+      },
+      "http": {
+        "method": "POST",
+        "url": "{{baseUrl}}/api/quotes/public/quotes"
+      }
+    },
+    {
+      "info": {
+        "name": "PublicQuotePatchByInternalKey",
+        "type": "http"
+      },
+      "http": {
+        "method": "PATCH",
+        "url": "{{baseUrl}}/api/quotes/public/quotes/:id/updatebyinternalkey",
+        "params": [
+          {
+            "name": "id",
+            "value": "",
+            "type": "path"
+          }
+        ]
+      }
+    },
+    {
+      "info": {
+        "name": "PublicQuoteValidate",
+        "type": "http"
+      },
+      "http": {
+        "method": "GET",
+        "url": "{{baseUrl}}/api/quotes/public/quotes/:id/validate",
+        "params": [
+          {
+            "name": "id",
+            "value": "",
+            "type": "path"
+          }
+        ]
+      }
+    },
+    {
+      "info": {
+        "name": "PublicQuoteGetPrice",
+        "type": "http"
+      },
+      "http": {
+        "method": "GET",
+        "url": "{{baseUrl}}/api/quotes/public/quotes/:id/price",
+        "params": [
+          {
+            "name": "id",
+            "value": "",
+            "type": "path",
+            "description": "The id of the quote resource"
+          }
+        ]
+      }
+    },
+    {
+      "info": {
+        "name": "PublicQuotePdf",
+        "type": "http"
+      },
+      "http": {
+        "method": "GET",
+        "url": "{{baseUrl}}/api/quotes/public/quotes/:id/pdf",
+        "params": [
+          {
+            "name": "id",
+            "value": "",
+            "type": "path",
+            "description": "The id of the quote resource"
+          }
+        ]
+      }
+    },
+    {
+      "info": {
+        "name": "PublicQuoteConfirm",
+        "type": "http"
+      },
+      "http": {
+        "method": "GET",
+        "url": "{{baseUrl}}/api/quotes/public/quotes/confirm/:code",
+        "params": [
+          {
+            "name": "code",
+            "value": "",
+            "type": "path",
+            "description": "The confirmation code of the customer to activate"
+          }
+        ]
+      }
+    },
+    {
+      "info": {
+        "name": "PublicQuoteConfirmed",
+        "type": "http"
+      },
+      "http": {
+        "method": "GET",
+        "url": "{{baseUrl}}/api/quotes/public/quotes/:id/confirmed",
+        "params": [
+          {
+            "name": "id",
+            "value": "",
+            "type": "path",
+            "description": "The id of the quote to check if is confirmed"
+          }
+        ]
+      }
+    },
+    {
+      "info": {
+        "name": "PublicQuoteReconfirm",
+        "type": "http"
+      },
+      "http": {
+        "method": "POST",
+        "url": "{{baseUrl}}/api/quotes/public/quotes/:id/reconfirm",
+        "params": [
+          {
+            "name": "id",
+            "value": "",
+            "type": "path",
+            "description": "The id of the quote to reconfirm"
+          }
+        ]
+      }
+    },
+    {
+      "info": {
+        "name": "PublicQuoteConfirmSMS",
+        "type": "http"
+      },
+      "http": {
+        "method": "POST",
+        "url": "{{baseUrl}}/api/quotes/public/quotes/:id/confirmSMS",
+        "params": [
+          {
+            "name": "id",
+            "value": "",
+            "type": "path",
+            "description": "The id of the quote to confirm"
+          }
+        ]
+      }
+    },
+    {
+      "info": {
+        "name": "PublicQuoteConfirmSMSCode",
+        "type": "http"
+      },
+      "http": {
+        "method": "POST",
+        "url": "{{baseUrl}}/api/quotes/public/quotes/:id/confirmSMS/:requestId",
+        "params": [
+          {
+            "name": "requestId",
+            "value": "",
+            "type": "path"
+          }
+        ]
+      }
+    },
+    {
+      "info": {
+        "name": "QuestionGet",
+        "type": "http"
+      },
+      "http": {
+        "method": "GET",
+        "url": "{{baseUrl}}/api/quotes/questions/:id",
+        "params": [
+          {
+            "name": "id",
+            "value": "",
+            "type": "path"
+          }
+        ]
+      }
+    },
+    {
+      "info": {
+        "name": "QuestionGetPublicQuestions",
+        "type": "http"
+      },
+      "http": {
+        "method": "GET",
+        "url": "{{baseUrl}}/api/quotes/public/questions/:id",
+        "params": [
+          {
+            "name": "id",
+            "value": "",
+            "type": "path"
+          }
+        ]
+      }
+    },
+    {
+      "info": {
+        "name": "QuestionGetByQuote",
+        "type": "http"
+      },
+      "http": {
+        "method": "GET",
+        "url": "{{baseUrl}}/api/quotes/quotes/:id/questions",
+        "params": [
+          {
+            "name": "id",
+            "value": "",
+            "type": "path"
+          }
+        ]
+      }
+    },
+    {
+      "info": {
+        "name": "QuestionGetPublicQuestionsByQuote",
+        "type": "http"
+      },
+      "http": {
+        "method": "GET",
+        "url": "{{baseUrl}}/api/quotes/public/quotes/:id/questions",
+        "params": [
+          {
+            "name": "id",
+            "value": "",
+            "type": "path"
+          }
+        ]
+      }
+    },
+    {
+      "info": {
+        "name": "AttachmentPost",
+        "type": "http"
+      },
+      "http": {
+        "method": "POST",
+        "url": "{{baseUrl}}/api/quotes/attachments"
+      }
+    },
+    {
+      "info": {
+        "name": "AttachmentGet",
+        "type": "http"
+      },
+      "http": {
+        "method": "GET",
+        "url": "{{baseUrl}}/api/quotes/attachments/:attachmentId/download",
+        "params": [
+          {
+            "name": "attachmentId",
+            "value": "",
+            "type": "path"
+          }
+        ]
+      }
+    },
+    {
+      "info": {
+        "name": "EndorsementGet",
+        "type": "http"
+      },
+      "http": {
+        "method": "GET",
+        "url": "{{baseUrl}}/api/quotes/endorsements/:id",
+        "params": [
+          {
+            "name": "id",
+            "value": "",
+            "type": "path"
+          }
+        ]
+      }
+    },
+    {
+      "info": {
+        "name": "EndorsementPatch",
+        "type": "http"
+      },
+      "http": {
+        "method": "PATCH",
+        "url": "{{baseUrl}}/api/quotes/endorsements/:id",
+        "params": [
+          {
+            "name": "id",
+            "value": "",
+            "type": "path"
+          }
+        ]
+      }
+    },
+    {
+      "info": {
+        "name": "EndorsementGetPrice",
+        "type": "http"
+      },
+      "http": {
+        "method": "GET",
+        "url": "{{baseUrl}}/api/quotes/endorsements/:id/price",
+        "params": [
+          {
+            "name": "id",
+            "value": "",
+            "type": "path",
+            "description": "The id of the quote resource"
+          }
+        ]
+      }
+    },
+    {
+      "info": {
+        "name": "EndorsementGetDiff",
+        "type": "http"
+      },
+      "http": {
+        "method": "GET",
+        "url": "{{baseUrl}}/api/quotes/endorsements/:id/diff",
+        "params": [
+          {
+            "name": "id",
+            "value": "",
+            "type": "path",
+            "description": "The id of the quote resource"
+          }
+        ]
+      }
+    },
+    {
+      "info": {
+        "name": "ReferredQuoteGetAll",
+        "type": "http"
+      },
+      "http": {
+        "method": "GET",
+        "url": "{{baseUrl}}/api/quotes/referred-quotes",
+        "params": [
+          {
+            "name": "limit",
+            "value": "",
+            "type": "query",
+            "description": "The number of items to retrieve"
+          },
+          {
+            "name": "offset",
+            "value": "",
+            "type": "query",
+            "description": "The starting position to retrieve data from"
+          },
+          {
+            "name": "sort",
+            "value": "",
+            "type": "query",
+            "description": "The column name to sort"
+          },
+          {
+            "name": "order",
+            "value": "",
+            "type": "query",
+            "description": "The order of sort"
+          },
+          {
+            "name": "status",
+            "value": "",
+            "type": "query"
+          }
+        ]
+      }
+    },
+    {
+      "info": {
+        "name": "ReferredQuoteGetAllByProduct",
+        "type": "http"
+      },
+      "http": {
+        "method": "GET",
+        "url": "{{baseUrl}}/api/quotes/products/:productId/referred-quotes",
+        "params": [
+          {
+            "name": "productId",
+            "value": "",
+            "type": "path"
+          },
+          {
+            "name": "limit",
+            "value": "",
+            "type": "query",
+            "description": "The number of items to retrieve"
+          },
+          {
+            "name": "offset",
+            "value": "",
+            "type": "query",
+            "description": "The starting position to retrieve data from"
+          },
+          {
+            "name": "sort",
+            "value": "",
+            "type": "query",
+            "description": "The column name to sort"
+          },
+          {
+            "name": "order",
+            "value": "",
+            "type": "query",
+            "description": "The order of sort"
+          },
+          {
+            "name": "status",
+            "value": "",
+            "type": "query"
+          }
+        ]
+      }
+    },
+    {
+      "info": {
+        "name": "ReferredQuoteSearch",
+        "type": "http"
+      },
+      "http": {
+        "method": "GET",
+        "url": "{{baseUrl}}/api/quotes/search/referred-quotes",
+        "params": [
+          {
+            "name": "q",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "offset",
+            "value": "",
+            "type": "query",
+            "description": "The starting position to retrieve data from"
+          },
+          {
+            "name": "limit",
+            "value": "",
+            "type": "query",
+            "description": "The number of item to retrieve"
+          },
+          {
+            "name": "sort",
+            "value": "",
+            "type": "query",
+            "description": "The column name to sort"
+          },
+          {
+            "name": "order",
+            "value": "",
+            "type": "query",
+            "description": "The order of sort"
+          }
+        ]
+      }
+    },
+    {
+      "info": {
+        "name": "ReferredQuoteGet",
+        "type": "http"
+      },
+      "http": {
+        "method": "GET",
+        "url": "{{baseUrl}}/api/quotes/referred-quotes/:id",
+        "params": [
+          {
+            "name": "id",
+            "value": "",
+            "type": "path"
+          }
+        ]
+      },
+      "docs": " @param id The id of the referred quote resource"
+    },
+    {
+      "info": {
+        "name": "ReferredQuoteUpdate",
+        "type": "http"
+      },
+      "http": {
+        "method": "PUT",
+        "url": "{{baseUrl}}/api/quotes/referred-quotes/:id",
+        "params": [
+          {
+            "name": "id",
+            "value": "",
+            "type": "path"
+          }
+        ]
+      },
+      "docs": " @param id The id of the referred quote resource to update"
+    },
+    {
+      "info": {
+        "name": "ReferredQuoteGetByQuoteId",
+        "type": "http"
+      },
+      "http": {
+        "method": "GET",
+        "url": "{{baseUrl}}/api/quotes/quotes/:quoteId/referred-quotes",
+        "params": [
+          {
+            "name": "quoteId",
+            "value": "",
+            "type": "path"
+          }
+        ]
+      },
+      "docs": " @quoteId quote resource"
+    },
+    {
+      "info": {
+        "name": "ReferredQuoteReferQuoteToUnderwriter",
+        "type": "http"
+      },
+      "http": {
+        "method": "POST",
+        "url": "{{baseUrl}}/api/quotes/referred-quotes/:referredQuoteId/refer-to-underwriter",
+        "params": [
+          {
+            "name": "referredQuoteId",
+            "value": "",
+            "type": "path"
+          }
+        ]
+      },
+      "docs": " @param referredQuoteId The id of the referred quote resource"
+    },
+    {
+      "info": {
+        "name": "ReferredQuoteGetAllNotes",
+        "type": "http"
+      },
+      "http": {
+        "method": "GET",
+        "url": "{{baseUrl}}/api/quotes/referred-quotes/:referredQuoteId/notes",
+        "params": [
+          {
+            "name": "referredQuoteId",
+            "value": "",
+            "type": "path"
+          }
+        ]
+      },
+      "docs": " @param referredQuoteId The id of the referred quote resource"
+    },
+    {
+      "info": {
+        "name": "ReferredQuoteCreateNote",
+        "type": "http"
+      },
+      "http": {
+        "method": "POST",
+        "url": "{{baseUrl}}/api/quotes/referred-quotes/:referredQuoteId/notes",
+        "params": [
+          {
+            "name": "referredQuoteId",
+            "value": "",
+            "type": "path"
+          }
+        ]
+      },
+      "docs": " @param referredQuoteId The id of the referred quote resource"
+    },
+    {
+      "info": {
+        "name": "ReferredQuoteGetNote",
+        "type": "http"
+      },
+      "http": {
+        "method": "GET",
+        "url": "{{baseUrl}}/api/quotes/referred-quotes/:referredQuoteId/notes/:id",
+        "params": [
+          {
+            "name": "referredQuoteId",
+            "value": "",
+            "type": "path"
+          },
+          {
+            "name": "id",
+            "value": "",
+            "type": "path"
+          }
+        ]
+      }
+    },
+    {
+      "info": {
+        "name": "QuoteDateConfigGet",
+        "type": "http"
+      },
+      "http": {
+        "method": "GET",
+        "url": "{{baseUrl}}/api/quotes/products/:id/quote-date-config",
+        "params": [
+          {
+            "name": "id",
+            "value": "",
+            "type": "path"
+          }
+        ]
+      }
+    },
+    {
+      "info": {
+        "name": "QuoteDateConfigPatch",
+        "type": "http"
+      },
+      "http": {
+        "method": "PATCH",
+        "url": "{{baseUrl}}/api/quotes/products/:id/quote-date-config",
+        "params": [
+          {
+            "name": "id",
+            "value": "",
+            "type": "path"
+          }
+        ]
+      }
+    },
+    {
+      "info": {
+        "name": "QuoteDateConfigGetPublicQuoteDateConfig",
+        "type": "http"
+      },
+      "http": {
+        "method": "GET",
+        "url": "{{baseUrl}}/api/quotes/public/products/:id/quote-date-config",
+        "params": [
+          {
+            "name": "id",
+            "value": "",
+            "type": "path"
+          }
+        ]
+      }
+    },
+    {
+      "info": {
+        "name": "PublicReferredQuoteReferQuoteToUnderwriter",
+        "type": "http"
+      },
+      "http": {
+        "method": "POST",
+        "url": "{{baseUrl}}/api/quotes/public/referred-quotes/:referredQuoteId/refer-to-underwriter",
+        "params": [
+          {
+            "name": "referredQuoteId",
+            "value": "",
+            "type": "path"
+          }
+        ]
+      },
+      "docs": " @param referredQuoteId The id of the referred quote resource"
+    },
+    {
+      "info": {
+        "name": "PublicReferredQuoteGet",
+        "type": "http"
+      },
+      "http": {
+        "method": "GET",
+        "url": "{{baseUrl}}/api/quotes/public/referred-quotes/:id",
+        "params": [
+          {
+            "name": "id",
+            "value": "",
+            "type": "path"
+          }
+        ]
+      },
+      "docs": " @param id The id of the referred quote resource"
+    },
+    {
+      "info": {
+        "name": "PublicReferredQuoteGetByQuoteId",
+        "type": "http"
+      },
+      "http": {
+        "method": "GET",
+        "url": "{{baseUrl}}/api/quotes/public/quotes/:quoteId/referred-quotes",
+        "params": [
+          {
+            "name": "quoteId",
+            "value": "",
+            "type": "path"
+          }
+        ]
+      },
+      "docs": " @quoteId quote resource"
+    }
+  ],
+  "bundled": true
+}
