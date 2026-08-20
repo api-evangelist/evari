@@ -32,6 +32,20 @@ tags:
 - Property and Casualty
 - Underwriting
 - Claims
+- Brokers
+- MGA
+- Artificial Intelligence
+- Quoting
+- Endorsements
+tags_raw:
+- Insurance
+- Australia
+- Insurtech
+- Policy Administration
+- Core Systems
+- Property and Casualty
+- Underwriting
+- Claims
 - Broker
 - MGA
 - Artificial Intelligence
@@ -56,6 +70,14 @@ apis:
   humanURL: https://www.npmjs.com/package/evari-quotes-api
   baseURL: https://api.cloudstream.evari.tech/
   tags:
+  - Insurance
+  - Quoting
+  - Underwriting
+  - Policy Administration
+  - Endorsements
+  - Referrals
+  - Pricing
+  tags_raw:
   - insurance
   - quoting
   - underwriting
