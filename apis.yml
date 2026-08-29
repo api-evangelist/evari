@@ -22,6 +22,18 @@ description: Evari is an insurance technology company founded in Sydney by Danie
   APIs, integrating into Socotra, Vertafore AMS360 and Sagitta, Applied Epic and
   Guidewire read access, and no ACORD, AL3 or IVANS reference appears anywhere on its
   site, in its help centre or in its data model.
+deliveryModel:
+  model: saas
+  open_source: false
+  commercial: true
+  callable_host: false
+  label: Hosted service · you call their endpoint
+  confidence: medium
+  source:
+  - openapi
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
 tags:
 - Insurance
