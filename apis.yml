@@ -121,6 +121,9 @@ apis:
   - type: SourceCode
     url: https://www.npmjs.com/package/evari-quotes-api
 common:
+- type: CapabilityMap
+  url: capabilities/evari-capability-edges.yml
+  name: Evari Business Capability Map
 - type: Website
   url: https://evari.tech/
 - type: Documentation

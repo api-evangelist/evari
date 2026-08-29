@@ -1,0 +1,26 @@
+slug: evari
+provider: Evari
+generated_by: planning/capability-mapping/scripts/classify_capabilities.py
+model: claude-opus-5
+frame:
+- Insurance
+min_confidence: 0.7
+capability_model:
+  source: https://github.com/vincentmakes/turbo-ea-capabilities
+  license: CC-BY-4.0
+  attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
+    CC BY 4.0
+  notice: NOTICE
+edge_count: 1
+edges:
+- tag: Quotes
+  spec_file: evari-quotes-api-openapi.yml
+  capability_id: BC-2110.60
+  capability_id_l1: BC-2110
+  capability_name: Quote & Submission Management
+  confidence: 0.82
+  evidence: POST /api/quotes/quotes  QuotePost; GET /api/quotes/products/{productId}/quotes  QuoteGetByProduct;
+    schemas QuotePrice, UnderwritingRule, ReferredQuoteCoverPriceOverride
+  reason: Insurance-technology vendor whose operations create, price, search and amend insurance quotes
+    per product and customer, including cover pricing and referral overrides — this is quote and submission
+    management. Some ambiguity versus underwriting pricing, hence 0.82.
