@@ -84,9 +84,9 @@ apis:
   tags:
   - Insurance
   - Quoting
-  - Underwriting
-  - Policy Administration
-  - Endorsements
+  - underwriting
+  - policy-administration
+  - endorsements
   - Referrals
   - Pricing
   tags_raw:
