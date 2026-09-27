@@ -1580,65 +1580,13 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    QuoteCoverRequest:
-      description: ''
-      properties:
-        id:
-          type: string
-          description: ''
-        coverId:
-          type: string
-          description: ''
-        internalKey:
-          type: string
-          description: ''
-        label:
-          type: string
-          description: ''
-        value:
-          type: boolean
-          description: ''
-        limits:
-          type: array
-          items:
-            $ref: '#/components/schemas/QuoteCoverLimit'
-          description: ''
-        isDeclined:
-          type: boolean
-          description: ''
-        isReferred:
-          type: boolean
-          description: ''
-        referredReason:
-          type: string
-          description: ''
-      type: object
-      required:
-      - id
-      - coverId
-      - internalKey
-      - label
-      - value
-      - limits
-    QuotePriceComponent:
+    QuotePriceError:
       description: ''
       properties:
         quote:
           $ref: '#/components/schemas/Quote'
-        name:
+        message:
           type: string
-          description: ''
-        type:
-          type: string
-          description: ''
-        value:
-          type: string
-          description: ''
-        source:
-          type: object
-          description: ''
-        target:
-          type: object
           description: ''
         id:
           type: string
@@ -1654,34 +1602,282 @@ components:
       type: object
       required:
       - quote
-      - name
-      - type
-      - value
-      - source
-      - target
+      - message
       - id
       - createdAt
       - updatedAt
-    EndorsementQuoteUpdateRequest:
+    AnswerDiff:
       description: ''
       properties:
-        acceptedDate:
+        question:
           type: string
           description: ''
-        scheduledApplyDate:
+        currentAnswer:
           type: string
           description: ''
-      type: object
-    HealthResponse:
-      description: ''
-      properties:
-        status:
+        endorsementAnswer:
           type: string
           description: ''
       type: object
       required:
+      - question
+      - currentAnswer
+      - endorsementAnswer
+    ConfirmSMS:
+      description: ''
+      properties:
+        number:
+          type: string
+          description: ''
+      type: object
+      required:
+      - number
+    QuoteUpdateByInternalKeyRequest:
+      description: ''
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/QuoteItemToUpdateByInternalKey'
+          description: ''
+      type: object
+      required:
+      - items
+    QuoteAnswerRequest:
+      description: ''
+      properties:
+        questionId:
+          type: string
+          description: ''
+        internalKey:
+          type: string
+          description: ''
+        attributeId:
+          type: object
+          description: ''
+        question:
+          type: string
+          description: ''
+        answer:
+          type: string
+          description: ''
+        answerLabel:
+          type: string
+          description: ''
+      type: object
+      required:
+      - questionId
+      - internalKey
+      - attributeId
+      - question
+      - answer
+    PartialLimitResponse:
+      description: ''
+      properties:
+        id:
+          type: string
+          description: ''
+        internalKey:
+          type: string
+          description: ''
+        value:
+          type: string
+          description: ''
+        label:
+          type: string
+          description: ''
+        originalValue:
+          type: string
+          description: ''
+      type: object
+      required:
+      - id
+      - internalKey
+    ReferredQuoteResponse:
+      description: ''
+      properties:
+        createdAt:
+          type: string
+          description: ''
+        updatedAt:
+          type: string
+          description: ''
+        outcomeText:
+          type: object
+          description: ''
+        overrideTotalPrice:
+          type: object
+          description: ''
+        quote:
+          $ref: '#/components/schemas/QuoteResponse'
+        notes:
+          type: array
+          items:
+            $ref: '#/components/schemas/ReferredQuoteNoteResponse'
+          description: ''
+        id:
+          type: string
+          description: ''
+        status:
+          enum:
+          - REFERRED
+          - ACCEPTED
+          - DECLINED
+          type: string
+          description: ''
+        contractText:
+          type: object
+          description: ''
+      type: object
+      required:
+      - createdAt
+      - updatedAt
+      - quote
+      - notes
+      - id
       - status
-    QuoteDateConfigResponse:
+    PriceComponent:
+      description: ''
+      properties:
+        name:
+          type: string
+          description: ''
+        value:
+          type: string
+          description: ''
+        type:
+          type: string
+          description: ''
+        source:
+          type: string
+          description: ''
+        target:
+          type: string
+          description: ''
+      type: object
+      required:
+      - name
+      - value
+      - type
+    ReferredQuoteNoteCreateRequest:
+      description: ''
+      properties:
+        content:
+          type: string
+          description: ''
+        subject:
+          type: string
+          description: ''
+      type: object
+      required:
+      - content
+      - subject
+    PriceSummary:
+      description: ''
+      properties:
+        premium:
+          type: string
+          description: ''
+        totalTaxes:
+          type: string
+          description: ''
+        totalFees:
+          type: string
+          description: ''
+        totalPayable:
+          type: string
+          description: ''
+      type: object
+      required:
+      - premium
+      - totalTaxes
+      - totalFees
+      - totalPayable
+      additionalProperties: {}
+    EndorsementPriceSummary:
+      description: ''
+      properties:
+        endorsement:
+          $ref: '#/components/schemas/Endorsement'
+        name:
+          type: string
+          description: ''
+        value:
+          type: string
+          description: ''
+        id:
+          type: string
+          description: ''
+        createdAt:
+          type: string
+          format: date-time
+          description: ''
+        updatedAt:
+          type: string
+          format: date-time
+          description: ''
+      type: object
+      required:
+      - endorsement
+      - name
+      - value
+      - id
+      - createdAt
+      - updatedAt
+    PartialCoverResponse:
+      description: ''
+      properties:
+        id:
+          type: string
+          description: ''
+        internalKey:
+          type: string
+          description: ''
+        limits:
+          type: array
+          items:
+            $ref: '#/components/schemas/PartialLimitResponse'
+          description: ''
+        label:
+          type: string
+          description: ''
+        value:
+          type: boolean
+          description: ''
+        isDeclined:
+          type: boolean
+          description: ''
+        declinedReason:
+          type: string
+          description: ''
+        isReferred:
+          type: boolean
+          description: ''
+        referredReason:
+          type: string
+          description: ''
+      type: object
+      required:
+      - id
+      - internalKey
+    DateDiff:
+      description: ''
+      properties:
+        name:
+          type: string
+          description: ''
+        currentDate:
+          type: string
+          description: ''
+        endorsementDate:
+          type: string
+          description: ''
+      type: object
+      required:
+      - name
+      - currentDate
+      - endorsementDate
+    QuoteDateConfigUpdateRequest:
       description: ''
       properties:
         date:
@@ -1722,473 +1918,16 @@ components:
               description: ''
           description: ''
       type: object
-      required:
-      - date
-      - timezone
-      - time
-    EndorsementCover:
+    QuoteItemToUpdateByInternalKey:
       description: ''
       properties:
-        cover:
-          $ref: '#/components/schemas/Cover'
-        endorsement:
-          $ref: '#/components/schemas/Endorsement'
-        priceComponents:
-          type: array
-          items:
-            $ref: '#/components/schemas/EndorsementCoverPriceComponent'
-          description: ''
-        priceSummaries:
-          type: array
-          items:
-            $ref: '#/components/schemas/EndorsementCoverPriceSummary'
-          description: ''
-        id:
-          type: string
-          description: ''
-        createdAt:
-          type: string
-          format: date-time
-          description: ''
-        updatedAt:
-          type: string
-          format: date-time
-          description: ''
-      type: object
-      required:
-      - cover
-      - endorsement
-      - priceComponents
-      - priceSummaries
-      - id
-      - createdAt
-      - updatedAt
-    EndorsementQuoteResponse:
-      description: ''
-      properties:
-        id:
-          type: string
-          description: ''
-        policyId:
-          type: string
-          description: ''
-        quote:
-          $ref: '#/components/schemas/QuoteResponse'
-        priceComponents:
-          type: array
-          items:
-            $ref: '#/components/schemas/QuotePriceComponent'
-          description: ''
-        priceSummary:
-          $ref: '#/components/schemas/QuotePrice'
-        acceptedDate:
-          type: string
-          description: ''
-        scheduledApplyDate:
-          type: string
-          description: ''
-        minApplyDate:
-          type: string
-          description: ''
-        diff:
-          $ref: '#/components/schemas/EndorsementDiffResponse'
-      type: object
-      required:
-      - id
-      - policyId
-      - quote
-      - priceComponents
-      - scheduledApplyDate
-    AttachmentResponse:
-      description: ''
-      properties:
-        id:
-          type: string
-          description: ''
-        fileName:
-          type: string
-          description: ''
-        description:
-          type: object
-          description: ''
-      type: object
-      required:
-      - id
-      - fileName
-      - description
-    LimitDiff:
-      description: ''
-      properties:
-        label:
-          type: string
-          description: ''
-        currentLimit:
-          type: string
-          description: ''
-        endorsementLimit:
-          type: string
-          description: ''
-      type: object
-      required:
-      - label
-      - currentLimit
-      - endorsementLimit
-    QuoteUpdateRequest:
-      description: ''
-      properties:
-        customer:
-          type: object
-          description: ''
-        product:
-          type: object
-          properties:
-            id:
-              type: string
-              description: ''
-          description: ''
-        answers:
-          type: array
-          items:
-            $ref: '#/components/schemas/QuoteAnswerRequest'
-          description: ''
-        covers:
-          type: array
-          items:
-            $ref: '#/components/schemas/QuoteCoverRequest'
-          description: ''
-        interestedParties:
-          type: array
-          items:
-            $ref: '#/components/schemas/QuoteInterestedParty'
-          description: ''
-        startDate:
-          type: string
-          description: ''
-        endDate:
-          type: string
-          description: ''
-        timezoneOffset:
-          type: string
-          description: ''
-        attestations:
-          type: object
-          description: ''
-        referredQuoteLocked:
-          type: boolean
-          description: ''
-        actAsCustomerProxy:
-          type: boolean
-          description: ''
-        duplicateGroupId:
-          type: string
-          description: ''
-        teamId:
-          type: string
-          description: ''
-      type: object
-    Product:
-      description: ''
-      properties:
-        id:
-          type: string
-          description: ''
-        name:
-          type: string
-          description: ''
-        locale:
-          type: string
-          description: ''
-        currency:
-          type: string
-          description: ''
-        quotes:
-          type: array
-          items:
-            $ref: '#/components/schemas/Quote'
-          description: ''
-        allowAgentsToProxy:
-          type: boolean
-          description: ''
-        isPublic:
-          type: boolean
-          description: ''
-        questionIds:
-          type: array
-          items:
-            type: string
-          description: ''
-        dateSettings:
-          type: array
-          items:
-            $ref: '#/components/schemas/QuoteDateSetting'
-          description: ''
-        timezoneSetting:
-          $ref: '#/components/schemas/QuoteTimezoneSetting'
-        timeSetting:
-          $ref: '#/components/schemas/QuoteTimeSetting'
-      type: object
-      required:
-      - id
-      - name
-      - locale
-      - currency
-      - quotes
-      - allowAgentsToProxy
-      - isPublic
-      - questionIds
-      - dateSettings
-      - timezoneSetting
-      - timeSetting
-    PartialCoverResponse:
-      description: ''
-      properties:
-        id:
-          type: string
-          description: ''
         internalKey:
           type: string
           description: ''
-        limits:
-          type: array
-          items:
-            $ref: '#/components/schemas/PartialLimitResponse'
-          description: ''
-        label:
-          type: string
-          description: ''
-        value:
-          type: boolean
-          description: ''
-        isDeclined:
-          type: boolean
-          description: ''
-        declinedReason:
-          type: string
-          description: ''
-        isReferred:
-          type: boolean
-          description: ''
-        referredReason:
-          type: string
-          description: ''
       type: object
       required:
-      - id
       - internalKey
-    Endorsement:
-      description: ''
-      properties:
-        quote:
-          $ref: '#/components/schemas/Quote'
-        policyId:
-          type: string
-          description: ''
-        covers:
-          type: array
-          items:
-            $ref: '#/components/schemas/EndorsementCover'
-          description: ''
-        priceComponents:
-          type: array
-          items:
-            $ref: '#/components/schemas/EndorsementPriceComponent'
-          description: ''
-        priceSummaries:
-          type: array
-          items:
-            $ref: '#/components/schemas/EndorsementPriceSummary'
-          description: ''
-        acceptedDate:
-          type: object
-          description: ''
-        priceStatus:
-          enum:
-          - NONE
-          - CALCULATING
-          - CALCULATED
-          type: string
-          description: ''
-        scheduledApplyDate:
-          type: string
-          format: date-time
-          description: ''
-        minApplyDate:
-          type: object
-          description: ''
-        diff:
-          type: object
-          description: ''
-        originalQuoteCreatedAt:
-          type: string
-          format: date-time
-          description: ''
-        id:
-          type: string
-          description: ''
-        createdAt:
-          type: string
-          format: date-time
-          description: ''
-        updatedAt:
-          type: string
-          format: date-time
-          description: ''
-      type: object
-      required:
-      - quote
-      - policyId
-      - covers
-      - priceComponents
-      - priceSummaries
-      - acceptedDate
-      - priceStatus
-      - scheduledApplyDate
-      - minApplyDate
-      - diff
-      - originalQuoteCreatedAt
-      - id
-      - createdAt
-      - updatedAt
-    ReferredQuoteNoteCreateRequest:
-      description: ''
-      properties:
-        content:
-          type: string
-          description: ''
-        subject:
-          type: string
-          description: ''
-      type: object
-      required:
-      - content
-      - subject
-    ReferredQuoteUpdateRequest:
-      description: ''
-      properties:
-        status:
-          enum:
-          - REFERRED
-          - ACCEPTED
-          - DECLINED
-          type: string
-          description: ''
-        outcomeText:
-          type: object
-          description: ''
-        contractText:
-          type: object
-          description: ''
-        coverPriceOverrides:
-          type: array
-          items:
-            $ref: '#/components/schemas/ReferredQuoteCoverPriceOverride'
-          description: ''
-        overrideTotalPrice:
-          type: object
-          description: ''
-      type: object
-      required:
-      - status
-      - outcomeText
-      - contractText
-      - overrideTotalPrice
-    QuoteTimeSetting:
-      description: ''
-      properties:
-        id:
-          type: string
-          description: ''
-        startTime:
-          type: string
-          description: ''
-        endTime:
-          type: string
-          description: ''
-        useCurrentTimeWhenInceptionToday:
-          type: boolean
-          description: ''
-        product:
-          $ref: '#/components/schemas/Product'
-      type: object
-      required:
-      - id
-      - startTime
-      - endTime
-      - useCurrentTimeWhenInceptionToday
-      - product
-    EndorsementCoverPriceComponent:
-      description: ''
-      properties:
-        cover:
-          $ref: '#/components/schemas/EndorsementCover'
-        name:
-          type: string
-          description: ''
-        type:
-          type: string
-          description: ''
-        value:
-          type: string
-          description: ''
-        source:
-          type: object
-          description: ''
-        target:
-          type: object
-          description: ''
-        id:
-          type: string
-          description: ''
-        createdAt:
-          type: string
-          format: date-time
-          description: ''
-        updatedAt:
-          type: string
-          format: date-time
-          description: ''
-      type: object
-      required:
-      - cover
-      - name
-      - type
-      - value
-      - source
-      - target
-      - id
-      - createdAt
-      - updatedAt
-    PartialAnswerResponse:
-      description: ''
-      properties:
-        questionId:
-          type: string
-          description: ''
-        internalKey:
-          type: string
-          description: ''
-        isDeclined:
-          type: boolean
-          description: ''
-        originalAnswer:
-          type: object
-          description: ''
-        attributeId:
-          type: object
-          description: ''
-        question:
-          type: string
-          description: ''
-        answer:
-          type: string
-          description: ''
-        answerLabel:
-          type: string
-          description: ''
-      type: object
-      required:
-      - questionId
-      - internalKey
+      additionalProperties: {}
     QuoteSummary:
       description: ''
       properties:
@@ -2224,6 +1963,72 @@ components:
       - product
       - answers
       - priceComponents
+    HealthResponse:
+      description: ''
+      properties:
+        status:
+          type: string
+          description: ''
+      type: object
+      required:
+      - status
+    QuoteCountResponse:
+      description: ''
+      properties:
+        count:
+          type: number
+          format: double
+          description: ''
+      type: object
+      required:
+      - count
+    CoverDiff:
+      description: ''
+      properties:
+        label:
+          type: string
+          description: ''
+        currentCover:
+          type: string
+          description: ''
+        endorsementCover:
+          type: string
+          description: ''
+      type: object
+      required:
+      - label
+      - currentCover
+      - endorsementCover
+    QuotePriceSummary:
+      description: ''
+      properties:
+        quote:
+          $ref: '#/components/schemas/Quote'
+        name:
+          type: string
+          description: ''
+        value:
+          type: string
+          description: ''
+        id:
+          type: string
+          description: ''
+        createdAt:
+          type: string
+          format: date-time
+          description: ''
+        updatedAt:
+          type: string
+          format: date-time
+          description: ''
+      type: object
+      required:
+      - quote
+      - name
+      - value
+      - id
+      - createdAt
+      - updatedAt
     Cover:
       description: ''
       properties:
@@ -2308,23 +2113,629 @@ components:
       - id
       - createdAt
       - updatedAt
-    CoverDiff:
+    DependencyStatusResponse:
       description: ''
       properties:
-        label:
+        name:
           type: string
           description: ''
-        currentCover:
-          type: string
+        ok:
+          type: boolean
           description: ''
-        endorsementCover:
+        message:
           type: string
           description: ''
       type: object
       required:
+      - name
+      - ok
+      - message
+    QuotePriceComponent:
+      description: ''
+      properties:
+        quote:
+          $ref: '#/components/schemas/Quote'
+        name:
+          type: string
+          description: ''
+        type:
+          type: string
+          description: ''
+        value:
+          type: string
+          description: ''
+        source:
+          type: object
+          description: ''
+        target:
+          type: object
+          description: ''
+        id:
+          type: string
+          description: ''
+        createdAt:
+          type: string
+          format: date-time
+          description: ''
+        updatedAt:
+          type: string
+          format: date-time
+          description: ''
+      type: object
+      required:
+      - quote
+      - name
+      - type
+      - value
+      - source
+      - target
+      - id
+      - createdAt
+      - updatedAt
+    EndorsementDiffResponse:
+      description: ''
+      properties:
+        answers:
+          type: array
+          items:
+            $ref: '#/components/schemas/AnswerDiff'
+          description: ''
+        covers:
+          type: array
+          items:
+            $ref: '#/components/schemas/CoverDiff'
+          description: ''
+        limits:
+          type: array
+          items:
+            $ref: '#/components/schemas/LimitDiff'
+          description: ''
+        interestedParties:
+          type: array
+          items:
+            $ref: '#/components/schemas/InterestedPartyDiff'
+          description: ''
+        startDate:
+          $ref: '#/components/schemas/DateDiff'
+        endDate:
+          $ref: '#/components/schemas/DateDiff'
+      type: object
+    QuoteInterestedParty:
+      description: ''
+      properties:
+        name:
+          type: string
+          description: ''
+        type:
+          type: string
+          description: ''
+        loanId:
+          type: object
+          description: ''
+        mailingAddress:
+          type: object
+          description: ''
+        email:
+          type: object
+          description: ''
+        sendEmail:
+          type: object
+          description: ''
+        description:
+          type: object
+          description: ''
+      type: object
+      required:
+      - name
+      - type
+    QuoteProduct:
+      description: ''
+      properties:
+        id:
+          type: string
+          description: ''
+        name:
+          type: string
+          description: ''
+        locale:
+          type: string
+          description: ''
+        currency:
+          type: string
+          description: ''
+        allowAgentsToProxy:
+          type: boolean
+          description: ''
+      type: object
+      required:
+      - id
+      - name
+      - locale
+      - currency
+      - allowAgentsToProxy
+    CoverPriceComponent:
+      description: ''
+      properties:
+        cover:
+          $ref: '#/components/schemas/Cover'
+        name:
+          type: string
+          description: ''
+        type:
+          type: string
+          description: ''
+        value:
+          type: string
+          description: ''
+        source:
+          type: object
+          description: ''
+        target:
+          type: object
+          description: ''
+        id:
+          type: string
+          description: ''
+        createdAt:
+          type: string
+          format: date-time
+          description: ''
+        updatedAt:
+          type: string
+          format: date-time
+          description: ''
+      type: object
+      required:
+      - cover
+      - name
+      - type
+      - value
+      - source
+      - target
+      - id
+      - createdAt
+      - updatedAt
+    Endorsement:
+      description: ''
+      properties:
+        quote:
+          $ref: '#/components/schemas/Quote'
+        policyId:
+          type: string
+          description: ''
+        covers:
+          type: array
+          items:
+            $ref: '#/components/schemas/EndorsementCover'
+          description: ''
+        priceComponents:
+          type: array
+          items:
+            $ref: '#/components/schemas/EndorsementPriceComponent'
+          description: ''
+        priceSummaries:
+          type: array
+          items:
+            $ref: '#/components/schemas/EndorsementPriceSummary'
+          description: ''
+        acceptedDate:
+          type: object
+          description: ''
+        priceStatus:
+          enum:
+          - NONE
+          - CALCULATING
+          - CALCULATED
+          type: string
+          description: ''
+        scheduledApplyDate:
+          type: string
+          format: date-time
+          description: ''
+        minApplyDate:
+          type: object
+          description: ''
+        diff:
+          type: object
+          description: ''
+        originalQuoteCreatedAt:
+          type: string
+          format: date-time
+          description: ''
+        id:
+          type: string
+          description: ''
+        createdAt:
+          type: string
+          format: date-time
+          description: ''
+        updatedAt:
+          type: string
+          format: date-time
+          description: ''
+      type: object
+      required:
+      - quote
+      - policyId
+      - covers
+      - priceComponents
+      - priceSummaries
+      - acceptedDate
+      - priceStatus
+      - scheduledApplyDate
+      - minApplyDate
+      - diff
+      - originalQuoteCreatedAt
+      - id
+      - createdAt
+      - updatedAt
+    UnderwritingRule:
+      description: ''
+      properties:
+        id:
+          type: string
+          description: ''
+        ruleId:
+          type: string
+          description: ''
+        quote:
+          $ref: '#/components/schemas/Quote'
+      type: object
+      required:
+      - id
+      - ruleId
+      - quote
+    Product:
+      description: ''
+      properties:
+        id:
+          type: string
+          description: ''
+        name:
+          type: string
+          description: ''
+        locale:
+          type: string
+          description: ''
+        currency:
+          type: string
+          description: ''
+        quotes:
+          type: array
+          items:
+            $ref: '#/components/schemas/Quote'
+          description: ''
+        allowAgentsToProxy:
+          type: boolean
+          description: ''
+        isPublic:
+          type: boolean
+          description: ''
+        questionIds:
+          type: array
+          items:
+            type: string
+          description: ''
+        dateSettings:
+          type: array
+          items:
+            $ref: '#/components/schemas/QuoteDateSetting'
+          description: ''
+        timezoneSetting:
+          $ref: '#/components/schemas/QuoteTimezoneSetting'
+        timeSetting:
+          $ref: '#/components/schemas/QuoteTimeSetting'
+      type: object
+      required:
+      - id
+      - name
+      - locale
+      - currency
+      - quotes
+      - allowAgentsToProxy
+      - isPublic
+      - questionIds
+      - dateSettings
+      - timezoneSetting
+      - timeSetting
+    ReferredQuoteUpdateRequest:
+      description: ''
+      properties:
+        status:
+          enum:
+          - REFERRED
+          - ACCEPTED
+          - DECLINED
+          type: string
+          description: ''
+        outcomeText:
+          type: object
+          description: ''
+        contractText:
+          type: object
+          description: ''
+        coverPriceOverrides:
+          type: array
+          items:
+            $ref: '#/components/schemas/ReferredQuoteCoverPriceOverride'
+          description: ''
+        overrideTotalPrice:
+          type: object
+          description: ''
+      type: object
+      required:
+      - status
+      - outcomeText
+      - contractText
+      - overrideTotalPrice
+    QuestionResponseList:
+      description: ''
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/QuestionResponse'
+          description: ''
+      type: object
+      required:
+      - items
+    CoverLimit:
+      description: ''
+      properties:
+        limitId:
+          type: string
+          description: ''
+        value:
+          type: string
+          description: ''
+        originalValue:
+          type: string
+          description: ''
+        label:
+          type: string
+          description: ''
+        internalKey:
+          type: string
+          description: ''
+        cover:
+          $ref: '#/components/schemas/Cover'
+        id:
+          type: string
+          description: ''
+        createdAt:
+          type: string
+          format: date-time
+          description: ''
+        updatedAt:
+          type: string
+          format: date-time
+          description: ''
+      type: object
+      required:
+      - limitId
+      - value
+      - originalValue
       - label
-      - currentCover
-      - endorsementCover
+      - internalKey
+      - cover
+      - id
+      - createdAt
+      - updatedAt
+    QuoteUpdateByInternalKeyResponse:
+      description: ''
+      properties:
+        id:
+          type: string
+          description: ''
+        updatedAt:
+          type: string
+          description: ''
+        customer:
+          type: object
+          description: ''
+        product:
+          $ref: '#/components/schemas/QuoteProduct'
+        interestedParties:
+          type: array
+          items:
+            $ref: '#/components/schemas/QuoteInterestedParty'
+          description: ''
+        startDate:
+          type: string
+          description: ''
+        endDate:
+          type: string
+          description: ''
+        timezoneOffset:
+          type: string
+          description: ''
+        expiryDate:
+          type: string
+          description: ''
+        customerConfirmed:
+          type: boolean
+          description: ''
+        attestations:
+          type: object
+          description: ''
+        agentId:
+          type: object
+          description: ''
+        locked:
+          type: boolean
+          description: ''
+        origin:
+          enum:
+          - POLICY_NEW
+          - POLICY_ENDORSEMENT
+          type: string
+          description: ''
+        referred:
+          type: boolean
+          description: ''
+        referredQuote:
+          type: object
+          description: ''
+        status:
+          type: string
+          description: ''
+        referredQuoteLocked:
+          type: boolean
+          description: ''
+        customerProxy:
+          type: object
+          description: ''
+        answers:
+          type: array
+          items:
+            $ref: '#/components/schemas/PartialAnswerResponse'
+          description: ''
+        covers:
+          type: array
+          items:
+            $ref: '#/components/schemas/PartialCoverResponse'
+          description: ''
+        triggeredUnderwritingRule:
+          type: object
+          description: ''
+      type: object
+      required:
+      - id
+      - updatedAt
+    QuoteDateSetting:
+      description: ''
+      properties:
+        id:
+          type: string
+          description: ''
+        period:
+          type: number
+          format: double
+          description: ''
+        unit:
+          enum:
+          - DAY
+          - MONTH
+          - YEAR
+          type: string
+          description: ''
+        type:
+          enum:
+          - DEFAULT
+          - MINIMUM
+          - MAXIMUM
+          - VALIDITY
+          - MAXFUTURESTART
+          type: string
+          description: ''
+        product:
+          $ref: '#/components/schemas/Product'
+      type: object
+      required:
+      - id
+      - period
+      - unit
+      - type
+      - product
+    DiagnosticsResponse:
+      description: ''
+      properties:
+        description:
+          type: string
+          description: ''
+        status:
+          type: string
+          description: ''
+        version:
+          type: string
+          description: ''
+        dependencies:
+          type: array
+          items:
+            $ref: '#/components/schemas/DependencyStatusResponse'
+          description: ''
+      type: object
+      required:
+      - description
+      - status
+      - version
+      - dependencies
+    QuotePrice:
+      description: ''
+      properties:
+        premium:
+          type: string
+          description: ''
+        totalFees:
+          type: string
+          description: ''
+        totalTaxes:
+          type: string
+          description: ''
+        totalPayable:
+          type: string
+          description: ''
+      type: object
+      required:
+      - premium
+      - totalFees
+      - totalTaxes
+      - totalPayable
+      additionalProperties: {}
+    Answer:
+      description: ''
+      properties:
+        id:
+          type: string
+          description: ''
+        value:
+          type: string
+          description: ''
+        valueLabel:
+          type: object
+          description: ''
+        originalValue:
+          type: object
+          description: ''
+        questionId:
+          type: string
+          description: ''
+        internalKey:
+          type: string
+          description: ''
+        question:
+          type: string
+          description: ''
+        attributeId:
+          type: object
+          description: ''
+        createdAt:
+          type: string
+          format: date-time
+          description: ''
+        updatedAt:
+          type: string
+          format: date-time
+          description: ''
+        isDeclined:
+          type: boolean
+          description: ''
+        quote:
+          $ref: '#/components/schemas/Quote'
+      type: object
+      required:
+      - id
+      - value
+      - valueLabel
+      - originalValue
+      - questionId
+      - internalKey
+      - question
+      - attributeId
+      - createdAt
+      - updatedAt
+      - isDeclined
+      - quote
     Quote:
       description: ''
       properties:
@@ -2517,184 +2928,78 @@ components:
       - id
       - createdAt
       - updatedAt
-    EndorsementCoverPriceSummary:
+    QuoteCreateRequest:
       description: ''
       properties:
-        cover:
-          $ref: '#/components/schemas/EndorsementCover'
-        name:
+        customer:
+          type: object
+          description: ''
+        product:
+          type: object
+          properties:
+            id:
+              type: string
+              description: ''
+          description: ''
+        answers:
+          type: array
+          items:
+            $ref: '#/components/schemas/QuoteAnswerRequest'
+          description: ''
+        covers:
+          type: array
+          items:
+            $ref: '#/components/schemas/QuoteCoverRequest'
+          description: ''
+        interestedParties:
+          type: array
+          items:
+            $ref: '#/components/schemas/QuoteInterestedParty'
+          description: ''
+        startDate:
           type: string
           description: ''
-        value:
+        endDate:
           type: string
           description: ''
-        id:
+        timezoneOffset:
           type: string
           description: ''
-        createdAt:
-          type: string
-          format: date-time
+        attestations:
+          type: object
           description: ''
-        updatedAt:
+        actAsCustomerProxy:
+          type: boolean
+          description: ''
+        duplicateGroupId:
           type: string
-          format: date-time
+          description: ''
+        teamId:
+          type: string
           description: ''
       type: object
       required:
-      - cover
-      - name
-      - value
-      - id
-      - createdAt
-      - updatedAt
-    InterestedParty:
+      - product
+      - answers
+      - covers
+    LimitDiff:
       description: ''
       properties:
-        id:
-          type: string
-          description: ''
-        name:
-          type: string
-          description: ''
-        type:
-          type: string
-          description: ''
-        loanId:
-          type: object
-          description: ''
-        mailingAddress:
-          type: object
-          description: ''
-        email:
-          type: object
-          description: ''
-        sendEmail:
-          type: object
-          description: ''
-        description:
-          type: object
-          description: ''
-        quote:
-          $ref: '#/components/schemas/Quote'
-      type: object
-      required:
-      - id
-      - name
-      - type
-      - loanId
-      - mailingAddress
-      - email
-      - sendEmail
-      - description
-      - quote
-    CoverLimit:
-      description: ''
-      properties:
-        limitId:
-          type: string
-          description: ''
-        value:
-          type: string
-          description: ''
-        originalValue:
-          type: string
-          description: ''
         label:
           type: string
           description: ''
-        internalKey:
+        currentLimit:
           type: string
           description: ''
-        cover:
-          $ref: '#/components/schemas/Cover'
-        id:
+        endorsementLimit:
           type: string
-          description: ''
-        createdAt:
-          type: string
-          format: date-time
-          description: ''
-        updatedAt:
-          type: string
-          format: date-time
           description: ''
       type: object
       required:
-      - limitId
-      - value
-      - originalValue
       - label
-      - internalKey
-      - cover
-      - id
-      - createdAt
-      - updatedAt
-    PriceSummary:
-      description: ''
-      properties:
-        premium:
-          type: string
-          description: ''
-        totalTaxes:
-          type: string
-          description: ''
-        totalFees:
-          type: string
-          description: ''
-        totalPayable:
-          type: string
-          description: ''
-      type: object
-      required:
-      - premium
-      - totalTaxes
-      - totalFees
-      - totalPayable
-      additionalProperties: {}
-    ReferredQuoteResponse:
-      description: ''
-      properties:
-        createdAt:
-          type: string
-          description: ''
-        updatedAt:
-          type: string
-          description: ''
-        outcomeText:
-          type: object
-          description: ''
-        overrideTotalPrice:
-          type: object
-          description: ''
-        quote:
-          $ref: '#/components/schemas/QuoteResponse'
-        notes:
-          type: array
-          items:
-            $ref: '#/components/schemas/ReferredQuoteNoteResponse'
-          description: ''
-        id:
-          type: string
-          description: ''
-        status:
-          enum:
-          - REFERRED
-          - ACCEPTED
-          - DECLINED
-          type: string
-          description: ''
-        contractText:
-          type: object
-          description: ''
-      type: object
-      required:
-      - createdAt
-      - updatedAt
-      - quote
-      - notes
-      - id
-      - status
-    EndorsementPriceSummary:
+      - currentLimit
+      - endorsementLimit
+    EndorsementPriceComponent:
       description: ''
       properties:
         endorsement:
@@ -2702,8 +3007,17 @@ components:
         name:
           type: string
           description: ''
+        type:
+          type: string
+          description: ''
         value:
           type: string
+          description: ''
+        source:
+          type: object
+          description: ''
+        target:
+          type: object
           description: ''
         id:
           type: string
@@ -2720,30 +3034,131 @@ components:
       required:
       - endorsement
       - name
+      - type
       - value
+      - source
+      - target
       - id
       - createdAt
       - updatedAt
-    QuestionResponseList:
+    EndorsementQuoteUpdateRequest:
+      description: ''
+      properties:
+        acceptedDate:
+          type: string
+          description: ''
+        scheduledApplyDate:
+          type: string
+          description: ''
+      type: object
+    QuoteDateConfigResponse:
+      description: ''
+      properties:
+        date:
+          type: object
+          properties:
+            defaultPolicy:
+              $ref: '#/components/schemas/QuoteDatePeriod'
+            minimumPolicy:
+              $ref: '#/components/schemas/QuoteDatePeriod'
+            maximumPolicy:
+              $ref: '#/components/schemas/QuoteDatePeriod'
+            maximumQuoteValidity:
+              $ref: '#/components/schemas/QuoteDatePeriod'
+            maximumFuturePolicyInception:
+              $ref: '#/components/schemas/QuoteDatePeriod'
+          description: ''
+        timezone:
+          type: object
+          properties:
+            defaultTimezone:
+              type: object
+              description: ''
+            timezoneUpdatable:
+              type: boolean
+              description: ''
+          description: ''
+        time:
+          type: object
+          properties:
+            startTime:
+              type: string
+              description: ''
+            endTime:
+              type: string
+              description: ''
+            useCurrentTimeWhenInceptionToday:
+              type: boolean
+              description: ''
+          description: ''
+      type: object
+      required:
+      - date
+      - timezone
+      - time
+    PartialAnswerResponse:
+      description: ''
+      properties:
+        questionId:
+          type: string
+          description: ''
+        internalKey:
+          type: string
+          description: ''
+        isDeclined:
+          type: boolean
+          description: ''
+        originalAnswer:
+          type: object
+          description: ''
+        attributeId:
+          type: object
+          description: ''
+        question:
+          type: string
+          description: ''
+        answer:
+          type: string
+          description: ''
+        answerLabel:
+          type: string
+          description: ''
+      type: object
+      required:
+      - questionId
+      - internalKey
+    QuoteListResponse:
       description: ''
       properties:
         items:
           type: array
           items:
-            $ref: '#/components/schemas/QuestionResponse'
+            $ref: '#/components/schemas/QuoteResponse'
+          description: ''
+        limit:
+          type: number
+          format: double
+          description: ''
+        offset:
+          type: number
+          format: double
+          description: ''
+        total:
+          type: number
+          format: double
           description: ''
       type: object
       required:
       - items
-    CoverPriceSummary:
+      - limit
+      - offset
+      - total
+    CoverPriceError:
       description: ''
       properties:
         cover:
           $ref: '#/components/schemas/Cover'
-        name:
-          type: string
-          description: ''
-        value:
+        message:
           type: string
           description: ''
         id:
@@ -2760,26 +3175,55 @@ components:
       type: object
       required:
       - cover
-      - name
-      - value
+      - message
       - id
       - createdAt
       - updatedAt
-    QuoteCoverResponse:
+    EndorsementCoverPriceComponent:
       description: ''
       properties:
-        isDeclined:
-          type: boolean
-          description: ''
-        declinedReason:
+        cover:
+          $ref: '#/components/schemas/EndorsementCover'
+        name:
           type: string
           description: ''
-        isReferred:
-          type: boolean
-          description: ''
-        referredReason:
+        type:
           type: string
           description: ''
+        value:
+          type: string
+          description: ''
+        source:
+          type: object
+          description: ''
+        target:
+          type: object
+          description: ''
+        id:
+          type: string
+          description: ''
+        createdAt:
+          type: string
+          format: date-time
+          description: ''
+        updatedAt:
+          type: string
+          format: date-time
+          description: ''
+      type: object
+      required:
+      - cover
+      - name
+      - type
+      - value
+      - source
+      - target
+      - id
+      - createdAt
+      - updatedAt
+    QuoteCoverRequest:
+      description: ''
+      properties:
         id:
           type: string
           description: ''
@@ -2800,17 +3244,14 @@ components:
           items:
             $ref: '#/components/schemas/QuoteCoverLimit'
           description: ''
-        priceComponents:
-          type: array
-          items:
-            $ref: '#/components/schemas/PriceComponent'
+        isDeclined:
+          type: boolean
           description: ''
-        price:
-          $ref: '#/components/schemas/PriceSummary'
-        errors:
-          type: array
-          items:
-            $ref: '#/components/schemas/PriceError'
+        isReferred:
+          type: boolean
+          description: ''
+        referredReason:
+          type: string
           description: ''
       type: object
       required:
@@ -2820,7 +3261,59 @@ components:
       - label
       - value
       - limits
+    EndorsementQuoteResponse:
+      description: ''
+      properties:
+        id:
+          type: string
+          description: ''
+        policyId:
+          type: string
+          description: ''
+        quote:
+          $ref: '#/components/schemas/QuoteResponse'
+        priceComponents:
+          type: array
+          items:
+            $ref: '#/components/schemas/QuotePriceComponent'
+          description: ''
+        priceSummary:
+          $ref: '#/components/schemas/QuotePrice'
+        acceptedDate:
+          type: string
+          description: ''
+        scheduledApplyDate:
+          type: string
+          description: ''
+        minApplyDate:
+          type: string
+          description: ''
+        diff:
+          $ref: '#/components/schemas/EndorsementDiffResponse'
+      type: object
+      required:
+      - id
+      - policyId
+      - quote
       - priceComponents
+      - scheduledApplyDate
+    AttachmentResponse:
+      description: ''
+      properties:
+        id:
+          type: string
+          description: ''
+        fileName:
+          type: string
+          description: ''
+        description:
+          type: object
+          description: ''
+      type: object
+      required:
+      - id
+      - fileName
+      - description
     ReferredQuoteListItem:
       description: ''
       properties:
@@ -2858,40 +3351,433 @@ components:
       - updatedAt
       - quote
       - status
-    QuoteDateSetting:
+    QuoteTimeSetting:
       description: ''
       properties:
         id:
           type: string
           description: ''
-        period:
-          type: number
-          format: double
-          description: ''
-        unit:
-          enum:
-          - DAY
-          - MONTH
-          - YEAR
+        startTime:
           type: string
           description: ''
-        type:
-          enum:
-          - DEFAULT
-          - MINIMUM
-          - MAXIMUM
-          - VALIDITY
-          - MAXFUTURESTART
+        endTime:
           type: string
+          description: ''
+        useCurrentTimeWhenInceptionToday:
+          type: boolean
           description: ''
         product:
           $ref: '#/components/schemas/Product'
       type: object
       required:
       - id
-      - period
-      - unit
-      - type
+      - startTime
+      - endTime
+      - useCurrentTimeWhenInceptionToday
+      - product
+    EndorsementCoverPriceSummary:
+      description: ''
+      properties:
+        cover:
+          $ref: '#/components/schemas/EndorsementCover'
+        name:
+          type: string
+          description: ''
+        value:
+          type: string
+          description: ''
+        id:
+          type: string
+          description: ''
+        createdAt:
+          type: string
+          format: date-time
+          description: ''
+        updatedAt:
+          type: string
+          format: date-time
+          description: ''
+      type: object
+      required:
+      - cover
+      - name
+      - value
+      - id
+      - createdAt
+      - updatedAt
+    CoverPriceSummary:
+      description: ''
+      properties:
+        cover:
+          $ref: '#/components/schemas/Cover'
+        name:
+          type: string
+          description: ''
+        value:
+          type: string
+          description: ''
+        id:
+          type: string
+          description: ''
+        createdAt:
+          type: string
+          format: date-time
+          description: ''
+        updatedAt:
+          type: string
+          format: date-time
+          description: ''
+      type: object
+      required:
+      - cover
+      - name
+      - value
+      - id
+      - createdAt
+      - updatedAt
+    QuestionResponse:
+      description: ''
+      properties:
+        id:
+          type: string
+          description: ''
+        internalDescription:
+          type: object
+          description: ''
+        internalKey:
+          type: string
+          description: ''
+        label:
+          type: string
+          description: ''
+        dataType:
+          type: string
+          description: ''
+        dataSource:
+          type: object
+          description: ''
+        dataLookupKey:
+          type: object
+          description: ''
+        dataSourceType:
+          type: object
+          description: ''
+        required:
+          type: boolean
+          description: ''
+        minValue:
+          type: object
+          description: ''
+        maxValue:
+          type: object
+          description: ''
+        placeholder:
+          type: string
+          description: ''
+        value:
+          type: string
+          description: ''
+        options:
+          type: object
+          description: ''
+        group:
+          type: object
+          description: ''
+        styling:
+          type: object
+          description: ''
+        dependencies:
+          type: object
+          description: ''
+        helpText:
+          type: object
+          description: ''
+        parentKey:
+          type: object
+          description: ''
+        isCoversTrigger:
+          type: boolean
+          description: ''
+        attributeId:
+          type: object
+          description: ''
+        isVisible:
+          type: boolean
+          description: ''
+        isParent:
+          type: boolean
+          description: ''
+        isEndorsable:
+          type: boolean
+          description: ''
+        isLocked:
+          type: boolean
+          description: ''
+        rules:
+          type: object
+          description: ''
+        dataSourceConfiguration:
+          type: object
+          description: ''
+      type: object
+      required:
+      - id
+      - internalDescription
+      - internalKey
+      - label
+      - dataType
+      - dataSource
+      - dataLookupKey
+      - dataSourceType
+      - required
+      - minValue
+      - maxValue
+      - placeholder
+      - value
+      - options
+      - group
+      - styling
+      - dependencies
+      - helpText
+      - parentKey
+      - isCoversTrigger
+      - attributeId
+      - isVisible
+      - isParent
+      - isEndorsable
+      - isLocked
+      - rules
+      - dataSourceConfiguration
+    QuoteAnswerResponse:
+      description: ''
+      properties:
+        isDeclined:
+          type: boolean
+          description: ''
+        originalAnswer:
+          type: object
+          description: ''
+        questionId:
+          type: string
+          description: ''
+        internalKey:
+          type: string
+          description: ''
+        attributeId:
+          type: object
+          description: ''
+        question:
+          type: string
+          description: ''
+        answer:
+          type: string
+          description: ''
+        answerLabel:
+          type: string
+          description: ''
+      type: object
+      required:
+      - isDeclined
+      - originalAnswer
+      - questionId
+      - internalKey
+      - attributeId
+      - question
+      - answer
+    EndorsementCover:
+      description: ''
+      properties:
+        cover:
+          $ref: '#/components/schemas/Cover'
+        endorsement:
+          $ref: '#/components/schemas/Endorsement'
+        priceComponents:
+          type: array
+          items:
+            $ref: '#/components/schemas/EndorsementCoverPriceComponent'
+          description: ''
+        priceSummaries:
+          type: array
+          items:
+            $ref: '#/components/schemas/EndorsementCoverPriceSummary'
+          description: ''
+        id:
+          type: string
+          description: ''
+        createdAt:
+          type: string
+          format: date-time
+          description: ''
+        updatedAt:
+          type: string
+          format: date-time
+          description: ''
+      type: object
+      required:
+      - cover
+      - endorsement
+      - priceComponents
+      - priceSummaries
+      - id
+      - createdAt
+      - updatedAt
+    QuoteCoverLimit:
+      description: ''
+      properties:
+        id:
+          type: string
+          description: ''
+        value:
+          type: string
+          description: ''
+        label:
+          type: string
+          description: ''
+        internalKey:
+          type: string
+          description: ''
+        originalValue:
+          type: string
+          description: ''
+      type: object
+      required:
+      - id
+      - value
+      - label
+      - internalKey
+      - originalValue
+    ReferredQuoteNoteResponse:
+      description: ''
+      properties:
+        id:
+          type: string
+          description: ''
+        createdAt:
+          type: string
+          description: ''
+        updatedAt:
+          type: string
+          description: ''
+        agentId:
+          type: string
+          description: ''
+        subject:
+          type: string
+          description: ''
+        content:
+          type: string
+          description: ''
+      type: object
+      required:
+      - id
+      - createdAt
+      - updatedAt
+      - agentId
+      - subject
+      - content
+    PriceError:
+      description: ''
+      properties:
+        message:
+          type: string
+          description: ''
+      type: object
+      required:
+      - message
+    InterestedPartyDiff:
+      description: ''
+      properties:
+        operation:
+          enum:
+          - ADD
+          - DELETE
+          type: string
+          description: ''
+        name:
+          type: string
+          description: ''
+        currentInterestedParty:
+          type: string
+          description: ''
+        endorsementInterestedParty:
+          type: string
+          description: ''
+      type: object
+      required:
+      - operation
+      - name
+    QuoteUpdateRequest:
+      description: ''
+      properties:
+        customer:
+          type: object
+          description: ''
+        product:
+          type: object
+          properties:
+            id:
+              type: string
+              description: ''
+          description: ''
+        answers:
+          type: array
+          items:
+            $ref: '#/components/schemas/QuoteAnswerRequest'
+          description: ''
+        covers:
+          type: array
+          items:
+            $ref: '#/components/schemas/QuoteCoverRequest'
+          description: ''
+        interestedParties:
+          type: array
+          items:
+            $ref: '#/components/schemas/QuoteInterestedParty'
+          description: ''
+        startDate:
+          type: string
+          description: ''
+        endDate:
+          type: string
+          description: ''
+        timezoneOffset:
+          type: string
+          description: ''
+        attestations:
+          type: object
+          description: ''
+        referredQuoteLocked:
+          type: boolean
+          description: ''
+        actAsCustomerProxy:
+          type: boolean
+          description: ''
+        duplicateGroupId:
+          type: string
+          description: ''
+        teamId:
+          type: string
+          description: ''
+      type: object
+    QuoteTimezoneSetting:
+      description: ''
+      properties:
+        id:
+          type: string
+          description: ''
+        defaultTimezone:
+          type: object
+          description: ''
+        timezoneUpdatable:
+          type: boolean
+          description: ''
+        product:
+          $ref: '#/components/schemas/Product'
+      type: object
+      required:
+      - id
+      - defaultTimezone
+      - timezoneUpdatable
       - product
     QuoteResponse:
       description: ''
@@ -3018,38 +3904,46 @@ components:
       - duplicateGroupId
       - triggeredUnderwritingRule
       - priceComponents
-    ConfirmSMS:
+    InterestedParty:
       description: ''
       properties:
-        number:
+        id:
           type: string
           description: ''
-      type: object
-      required:
-      - number
-    DiagnosticsResponse:
-      description: ''
-      properties:
+        name:
+          type: string
+          description: ''
+        type:
+          type: string
+          description: ''
+        loanId:
+          type: object
+          description: ''
+        mailingAddress:
+          type: object
+          description: ''
+        email:
+          type: object
+          description: ''
+        sendEmail:
+          type: object
+          description: ''
         description:
-          type: string
+          type: object
           description: ''
-        status:
-          type: string
-          description: ''
-        version:
-          type: string
-          description: ''
-        dependencies:
-          type: array
-          items:
-            $ref: '#/components/schemas/DependencyStatusResponse'
-          description: ''
+        quote:
+          $ref: '#/components/schemas/Quote'
       type: object
       required:
+      - id
+      - name
+      - type
+      - loanId
+      - mailingAddress
+      - email
+      - sendEmail
       - description
-      - status
-      - version
-      - dependencies
+      - quote
     QuoteDatePeriod:
       description: ''
       properties:
@@ -3068,305 +3962,82 @@ components:
       required:
       - period
       - unit
-    QuoteItemToUpdateByInternalKey:
+    ReferredQuoteCoverPriceOverride:
       description: ''
       properties:
-        internalKey:
+        coverId:
+          type: string
+          description: ''
+        overrideType:
+          enum:
+          - NO_OVERRIDE
+          - PREMIUM_OVERRIDE_FIXED
+          - PREMIUM_OVERRIDE_PERCENTAGE
+          type: string
+          description: ''
+        overrideValue:
           type: string
           description: ''
       type: object
       required:
-      - internalKey
-      additionalProperties: {}
-    ReferredQuoteNoteResponse:
-      description: ''
-      properties:
-        id:
-          type: string
-          description: ''
-        createdAt:
-          type: string
-          description: ''
-        updatedAt:
-          type: string
-          description: ''
-        agentId:
-          type: string
-          description: ''
-        subject:
-          type: string
-          description: ''
-        content:
-          type: string
-          description: ''
-      type: object
-      required:
-      - id
-      - createdAt
-      - updatedAt
-      - agentId
-      - subject
-      - content
-    QuoteAnswerRequest:
-      description: ''
-      properties:
-        questionId:
-          type: string
-          description: ''
-        internalKey:
-          type: string
-          description: ''
-        attributeId:
-          type: object
-          description: ''
-        question:
-          type: string
-          description: ''
-        answer:
-          type: string
-          description: ''
-        answerLabel:
-          type: string
-          description: ''
-      type: object
-      required:
-      - questionId
-      - internalKey
-      - attributeId
-      - question
-      - answer
-    PartialLimitResponse:
-      description: ''
-      properties:
-        id:
-          type: string
-          description: ''
-        internalKey:
-          type: string
-          description: ''
-        value:
-          type: string
-          description: ''
-        label:
-          type: string
-          description: ''
-        originalValue:
-          type: string
-          description: ''
-      type: object
-      required:
-      - id
-      - internalKey
-    CoverPriceComponent:
-      description: ''
-      properties:
-        cover:
-          $ref: '#/components/schemas/Cover'
-        name:
-          type: string
-          description: ''
-        type:
-          type: string
-          description: ''
-        value:
-          type: string
-          description: ''
-        source:
-          type: object
-          description: ''
-        target:
-          type: object
-          description: ''
-        id:
-          type: string
-          description: ''
-        createdAt:
-          type: string
-          format: date-time
-          description: ''
-        updatedAt:
-          type: string
-          format: date-time
-          description: ''
-      type: object
-      required:
-      - cover
-      - name
-      - type
-      - value
-      - source
-      - target
-      - id
-      - createdAt
-      - updatedAt
-    QuotePriceError:
-      description: ''
-      properties:
-        quote:
-          $ref: '#/components/schemas/Quote'
-        message:
-          type: string
-          description: ''
-        id:
-          type: string
-          description: ''
-        createdAt:
-          type: string
-          format: date-time
-          description: ''
-        updatedAt:
-          type: string
-          format: date-time
-          description: ''
-      type: object
-      required:
-      - quote
-      - message
-      - id
-      - createdAt
-      - updatedAt
-    CoverPriceError:
-      description: ''
-      properties:
-        cover:
-          $ref: '#/components/schemas/Cover'
-        message:
-          type: string
-          description: ''
-        id:
-          type: string
-          description: ''
-        createdAt:
-          type: string
-          format: date-time
-          description: ''
-        updatedAt:
-          type: string
-          format: date-time
-          description: ''
-      type: object
-      required:
-      - cover
-      - message
-      - id
-      - createdAt
-      - updatedAt
-    DependencyStatusResponse:
-      description: ''
-      properties:
-        name:
-          type: string
-          description: ''
-        ok:
-          type: boolean
-          description: ''
-        message:
-          type: string
-          description: ''
-      type: object
-      required:
-      - name
-      - ok
-      - message
-    QuoteAnswerResponse:
+      - coverId
+      - overrideType
+    QuoteCoverResponse:
       description: ''
       properties:
         isDeclined:
           type: boolean
           description: ''
-        originalAnswer:
-          type: object
+        declinedReason:
+          type: string
           description: ''
-        questionId:
+        isReferred:
+          type: boolean
+          description: ''
+        referredReason:
+          type: string
+          description: ''
+        id:
+          type: string
+          description: ''
+        coverId:
           type: string
           description: ''
         internalKey:
           type: string
           description: ''
-        attributeId:
-          type: object
-          description: ''
-        question:
+        label:
           type: string
           description: ''
-        answer:
-          type: string
-          description: ''
-        answerLabel:
-          type: string
-          description: ''
-      type: object
-      required:
-      - isDeclined
-      - originalAnswer
-      - questionId
-      - internalKey
-      - attributeId
-      - question
-      - answer
-    QuoteCreateRequest:
-      description: ''
-      properties:
-        customer:
-          type: object
-          description: ''
-        product:
-          type: object
-          properties:
-            id:
-              type: string
-              description: ''
-          description: ''
-        answers:
-          type: array
-          items:
-            $ref: '#/components/schemas/QuoteAnswerRequest'
-          description: ''
-        covers:
-          type: array
-          items:
-            $ref: '#/components/schemas/QuoteCoverRequest'
-          description: ''
-        interestedParties:
-          type: array
-          items:
-            $ref: '#/components/schemas/QuoteInterestedParty'
-          description: ''
-        startDate:
-          type: string
-          description: ''
-        endDate:
-          type: string
-          description: ''
-        timezoneOffset:
-          type: string
-          description: ''
-        attestations:
-          type: object
-          description: ''
-        actAsCustomerProxy:
+        value:
           type: boolean
           description: ''
-        duplicateGroupId:
-          type: string
+        limits:
+          type: array
+          items:
+            $ref: '#/components/schemas/QuoteCoverLimit'
           description: ''
-        teamId:
-          type: string
+        priceComponents:
+          type: array
+          items:
+            $ref: '#/components/schemas/PriceComponent'
+          description: ''
+        price:
+          $ref: '#/components/schemas/PriceSummary'
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/PriceError'
           description: ''
       type: object
       required:
-      - product
-      - answers
-      - covers
-    PriceError:
-      description: ''
-      properties:
-        message:
-          type: string
-          description: ''
-      type: object
-      required:
-      - message
+      - id
+      - coverId
+      - internalKey
+      - label
+      - value
+      - limits
+      - priceComponents
     ReferredQuoteListResponse:
       description: ''
       properties:
@@ -3393,677 +4064,6 @@ components:
       - limit
       - offset
       - total
-    QuotePrice:
-      description: ''
-      properties:
-        premium:
-          type: string
-          description: ''
-        totalFees:
-          type: string
-          description: ''
-        totalTaxes:
-          type: string
-          description: ''
-        totalPayable:
-          type: string
-          description: ''
-      type: object
-      required:
-      - premium
-      - totalFees
-      - totalTaxes
-      - totalPayable
-      additionalProperties: {}
-    EndorsementDiffResponse:
-      description: ''
-      properties:
-        answers:
-          type: array
-          items:
-            $ref: '#/components/schemas/AnswerDiff'
-          description: ''
-        covers:
-          type: array
-          items:
-            $ref: '#/components/schemas/CoverDiff'
-          description: ''
-        limits:
-          type: array
-          items:
-            $ref: '#/components/schemas/LimitDiff'
-          description: ''
-        interestedParties:
-          type: array
-          items:
-            $ref: '#/components/schemas/InterestedPartyDiff'
-          description: ''
-        startDate:
-          $ref: '#/components/schemas/DateDiff'
-        endDate:
-          $ref: '#/components/schemas/DateDiff'
-      type: object
-    QuoteCountResponse:
-      description: ''
-      properties:
-        count:
-          type: number
-          format: double
-          description: ''
-      type: object
-      required:
-      - count
-    InterestedPartyDiff:
-      description: ''
-      properties:
-        operation:
-          enum:
-          - ADD
-          - DELETE
-          type: string
-          description: ''
-        name:
-          type: string
-          description: ''
-        currentInterestedParty:
-          type: string
-          description: ''
-        endorsementInterestedParty:
-          type: string
-          description: ''
-      type: object
-      required:
-      - operation
-      - name
-    Answer:
-      description: ''
-      properties:
-        id:
-          type: string
-          description: ''
-        value:
-          type: string
-          description: ''
-        valueLabel:
-          type: object
-          description: ''
-        originalValue:
-          type: object
-          description: ''
-        questionId:
-          type: string
-          description: ''
-        internalKey:
-          type: string
-          description: ''
-        question:
-          type: string
-          description: ''
-        attributeId:
-          type: object
-          description: ''
-        createdAt:
-          type: string
-          format: date-time
-          description: ''
-        updatedAt:
-          type: string
-          format: date-time
-          description: ''
-        isDeclined:
-          type: boolean
-          description: ''
-        quote:
-          $ref: '#/components/schemas/Quote'
-      type: object
-      required:
-      - id
-      - value
-      - valueLabel
-      - originalValue
-      - questionId
-      - internalKey
-      - question
-      - attributeId
-      - createdAt
-      - updatedAt
-      - isDeclined
-      - quote
-    AnswerDiff:
-      description: ''
-      properties:
-        question:
-          type: string
-          description: ''
-        currentAnswer:
-          type: string
-          description: ''
-        endorsementAnswer:
-          type: string
-          description: ''
-      type: object
-      required:
-      - question
-      - currentAnswer
-      - endorsementAnswer
-    QuoteCoverLimit:
-      description: ''
-      properties:
-        id:
-          type: string
-          description: ''
-        value:
-          type: string
-          description: ''
-        label:
-          type: string
-          description: ''
-        internalKey:
-          type: string
-          description: ''
-        originalValue:
-          type: string
-          description: ''
-      type: object
-      required:
-      - id
-      - value
-      - label
-      - internalKey
-      - originalValue
-    EndorsementPriceComponent:
-      description: ''
-      properties:
-        endorsement:
-          $ref: '#/components/schemas/Endorsement'
-        name:
-          type: string
-          description: ''
-        type:
-          type: string
-          description: ''
-        value:
-          type: string
-          description: ''
-        source:
-          type: object
-          description: ''
-        target:
-          type: object
-          description: ''
-        id:
-          type: string
-          description: ''
-        createdAt:
-          type: string
-          format: date-time
-          description: ''
-        updatedAt:
-          type: string
-          format: date-time
-          description: ''
-      type: object
-      required:
-      - endorsement
-      - name
-      - type
-      - value
-      - source
-      - target
-      - id
-      - createdAt
-      - updatedAt
-    QuoteUpdateByInternalKeyRequest:
-      description: ''
-      properties:
-        items:
-          type: array
-          items:
-            $ref: '#/components/schemas/QuoteItemToUpdateByInternalKey'
-          description: ''
-      type: object
-      required:
-      - items
-    ReferredQuoteCoverPriceOverride:
-      description: ''
-      properties:
-        coverId:
-          type: string
-          description: ''
-        overrideType:
-          enum:
-          - NO_OVERRIDE
-          - PREMIUM_OVERRIDE_FIXED
-          - PREMIUM_OVERRIDE_PERCENTAGE
-          type: string
-          description: ''
-        overrideValue:
-          type: string
-          description: ''
-      type: object
-      required:
-      - coverId
-      - overrideType
-    QuestionResponse:
-      description: ''
-      properties:
-        id:
-          type: string
-          description: ''
-        internalDescription:
-          type: object
-          description: ''
-        internalKey:
-          type: string
-          description: ''
-        label:
-          type: string
-          description: ''
-        dataType:
-          type: string
-          description: ''
-        dataSource:
-          type: object
-          description: ''
-        dataLookupKey:
-          type: object
-          description: ''
-        dataSourceType:
-          type: object
-          description: ''
-        required:
-          type: boolean
-          description: ''
-        minValue:
-          type: object
-          description: ''
-        maxValue:
-          type: object
-          description: ''
-        placeholder:
-          type: string
-          description: ''
-        value:
-          type: string
-          description: ''
-        options:
-          type: object
-          description: ''
-        group:
-          type: object
-          description: ''
-        styling:
-          type: object
-          description: ''
-        dependencies:
-          type: object
-          description: ''
-        helpText:
-          type: object
-          description: ''
-        parentKey:
-          type: object
-          description: ''
-        isCoversTrigger:
-          type: boolean
-          description: ''
-        attributeId:
-          type: object
-          description: ''
-        isVisible:
-          type: boolean
-          description: ''
-        isParent:
-          type: boolean
-          description: ''
-        isEndorsable:
-          type: boolean
-          description: ''
-        isLocked:
-          type: boolean
-          description: ''
-        rules:
-          type: object
-          description: ''
-        dataSourceConfiguration:
-          type: object
-          description: ''
-      type: object
-      required:
-      - id
-      - internalDescription
-      - internalKey
-      - label
-      - dataType
-      - dataSource
-      - dataLookupKey
-      - dataSourceType
-      - required
-      - minValue
-      - maxValue
-      - placeholder
-      - value
-      - options
-      - group
-      - styling
-      - dependencies
-      - helpText
-      - parentKey
-      - isCoversTrigger
-      - attributeId
-      - isVisible
-      - isParent
-      - isEndorsable
-      - isLocked
-      - rules
-      - dataSourceConfiguration
-    UnderwritingRule:
-      description: ''
-      properties:
-        id:
-          type: string
-          description: ''
-        ruleId:
-          type: string
-          description: ''
-        quote:
-          $ref: '#/components/schemas/Quote'
-      type: object
-      required:
-      - id
-      - ruleId
-      - quote
-    QuoteUpdateByInternalKeyResponse:
-      description: ''
-      properties:
-        id:
-          type: string
-          description: ''
-        updatedAt:
-          type: string
-          description: ''
-        customer:
-          type: object
-          description: ''
-        product:
-          $ref: '#/components/schemas/QuoteProduct'
-        interestedParties:
-          type: array
-          items:
-            $ref: '#/components/schemas/QuoteInterestedParty'
-          description: ''
-        startDate:
-          type: string
-          description: ''
-        endDate:
-          type: string
-          description: ''
-        timezoneOffset:
-          type: string
-          description: ''
-        expiryDate:
-          type: string
-          description: ''
-        customerConfirmed:
-          type: boolean
-          description: ''
-        attestations:
-          type: object
-          description: ''
-        agentId:
-          type: object
-          description: ''
-        locked:
-          type: boolean
-          description: ''
-        origin:
-          enum:
-          - POLICY_NEW
-          - POLICY_ENDORSEMENT
-          type: string
-          description: ''
-        referred:
-          type: boolean
-          description: ''
-        referredQuote:
-          type: object
-          description: ''
-        status:
-          type: string
-          description: ''
-        referredQuoteLocked:
-          type: boolean
-          description: ''
-        customerProxy:
-          type: object
-          description: ''
-        answers:
-          type: array
-          items:
-            $ref: '#/components/schemas/PartialAnswerResponse'
-          description: ''
-        covers:
-          type: array
-          items:
-            $ref: '#/components/schemas/PartialCoverResponse'
-          description: ''
-        triggeredUnderwritingRule:
-          type: object
-          description: ''
-      type: object
-      required:
-      - id
-      - updatedAt
-    PriceComponent:
-      description: ''
-      properties:
-        name:
-          type: string
-          description: ''
-        value:
-          type: string
-          description: ''
-        type:
-          type: string
-          description: ''
-        source:
-          type: string
-          description: ''
-        target:
-          type: string
-          description: ''
-      type: object
-      required:
-      - name
-      - value
-      - type
-    QuotePriceSummary:
-      description: ''
-      properties:
-        quote:
-          $ref: '#/components/schemas/Quote'
-        name:
-          type: string
-          description: ''
-        value:
-          type: string
-          description: ''
-        id:
-          type: string
-          description: ''
-        createdAt:
-          type: string
-          format: date-time
-          description: ''
-        updatedAt:
-          type: string
-          format: date-time
-          description: ''
-      type: object
-      required:
-      - quote
-      - name
-      - value
-      - id
-      - createdAt
-      - updatedAt
-    DateDiff:
-      description: ''
-      properties:
-        name:
-          type: string
-          description: ''
-        currentDate:
-          type: string
-          description: ''
-        endorsementDate:
-          type: string
-          description: ''
-      type: object
-      required:
-      - name
-      - currentDate
-      - endorsementDate
-    QuoteTimezoneSetting:
-      description: ''
-      properties:
-        id:
-          type: string
-          description: ''
-        defaultTimezone:
-          type: object
-          description: ''
-        timezoneUpdatable:
-          type: boolean
-          description: ''
-        product:
-          $ref: '#/components/schemas/Product'
-      type: object
-      required:
-      - id
-      - defaultTimezone
-      - timezoneUpdatable
-      - product
-    QuoteListResponse:
-      description: ''
-      properties:
-        items:
-          type: array
-          items:
-            $ref: '#/components/schemas/QuoteResponse'
-          description: ''
-        limit:
-          type: number
-          format: double
-          description: ''
-        offset:
-          type: number
-          format: double
-          description: ''
-        total:
-          type: number
-          format: double
-          description: ''
-      type: object
-      required:
-      - items
-      - limit
-      - offset
-      - total
-    QuoteInterestedParty:
-      description: ''
-      properties:
-        name:
-          type: string
-          description: ''
-        type:
-          type: string
-          description: ''
-        loanId:
-          type: object
-          description: ''
-        mailingAddress:
-          type: object
-          description: ''
-        email:
-          type: object
-          description: ''
-        sendEmail:
-          type: object
-          description: ''
-        description:
-          type: object
-          description: ''
-      type: object
-      required:
-      - name
-      - type
-    QuoteDateConfigUpdateRequest:
-      description: ''
-      properties:
-        date:
-          type: object
-          properties:
-            defaultPolicy:
-              $ref: '#/components/schemas/QuoteDatePeriod'
-            minimumPolicy:
-              $ref: '#/components/schemas/QuoteDatePeriod'
-            maximumPolicy:
-              $ref: '#/components/schemas/QuoteDatePeriod'
-            maximumQuoteValidity:
-              $ref: '#/components/schemas/QuoteDatePeriod'
-            maximumFuturePolicyInception:
-              $ref: '#/components/schemas/QuoteDatePeriod'
-          description: ''
-        timezone:
-          type: object
-          properties:
-            defaultTimezone:
-              type: object
-              description: ''
-            timezoneUpdatable:
-              type: boolean
-              description: ''
-          description: ''
-        time:
-          type: object
-          properties:
-            startTime:
-              type: string
-              description: ''
-            endTime:
-              type: string
-              description: ''
-            useCurrentTimeWhenInceptionToday:
-              type: boolean
-              description: ''
-          description: ''
-      type: object
-    QuoteProduct:
-      description: ''
-      properties:
-        id:
-          type: string
-          description: ''
-        name:
-          type: string
-          description: ''
-        locale:
-          type: string
-          description: ''
-        currency:
-          type: string
-          description: ''
-        allowAgentsToProxy:
-          type: boolean
-          description: ''
-      type: object
-      required:
-      - id
-      - name
-      - locale
-      - currency
-      - allowAgentsToProxy
   securitySchemes:
     undefined:
       type: apiKey
