@@ -104,3 +104,53 @@ sales_motion:
     sign-ups to the platform partner, not to an Evari-hosted console.
   enterprise: https://evari.tech/enterprise (SSO, custom contracts, dedicated
     onboarding)
+x-canonical:
+  generated: '2026-10-08'
+  vocabulary: all/0-working/economics/plans-canonical.yml
+  models:
+  - subscription
+  units:
+  - period
+  plans:
+  - name: Proof of Concept
+    access: other
+    model: subscription
+    model_how: derived
+    units:
+    - other
+    periods: []
+  - name: Process Transformation
+    access: other
+    model: subscription
+    model_how: derived
+    units:
+    - other
+    periods: []
+  - name: Multi-Process Rollout
+    access: other
+    model: subscription
+    model_how: derived
+    units:
+    - other
+    periods: []
+  - name: Small
+    access: other
+    model: subscription
+    model_how: derived
+    units:
+    - period
+    periods: []
+  - name: Growth
+    access: other
+    model: subscription
+    model_how: derived
+    units:
+    - period
+    periods: []
+  - name: Scale
+    access: other
+    model: subscription
+    model_how: derived
+    units:
+    - period
+    periods: []
